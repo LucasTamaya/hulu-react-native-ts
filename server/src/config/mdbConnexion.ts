@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Connection to MDB
-const mdbConnexion = (): void => {
+export const mdbConnexion = (): void => {
   mongoose.connect(process.env.MONGODB_URI + "&w=majority");
   mongoose.connection.once("open", () => console.log("MONGODB connected"));
 };
 
-module.exports = mdbConnexion;
+// module.exports = mdbConnexion;

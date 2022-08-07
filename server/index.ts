@@ -1,13 +1,10 @@
 require("dotenv").config();
 
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
-const mongoDbConnection = require("./src/config/mdbConnexion");
-// const connexionRoute = require("./src/routes/connexionRoute");
-// const createAccountRoute = require("./src/routes/createAccountRoute");
-// const collaboratorsRoute = require("./src/routes/collaboratorsRoute");
-// const emailsRoute = require("./src/routes/emailsRoute");
+import { mdbConnexion } from "./src/config/mdbConnexion";
+import { router as authRoutes } from "./src/routes/authRoutes";
 
 const PORT = process.env.PORT || 4000;
 
@@ -16,12 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoDbConnection();
+mdbConnexion();
 
-// app.use(connexionRoute);
-// app.use(createAccountRoute);
-// app.use(collaboratorsRoute);
-// app.use(emailsRoute);
+app.use(authRoutes);
 
 app.get("/", (req: any, res: any) => {
   return res.json({ message: "Hello world" });
