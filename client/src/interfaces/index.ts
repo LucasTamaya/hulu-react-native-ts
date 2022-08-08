@@ -17,10 +17,10 @@ interface ILoginFormValues {
   password: string;
 }
 
-interface ILoginRegisterValues {
-  email: string;
+interface IRegisterFormValues {
   name: string;
+  email: string;
   password: string;
 }
 
-export { ICover, IEvent, ILoginFormValues, ILoginRegisterValues };
+export { ICover, IEvent, ILoginFormValues, IRegisterFormValues };

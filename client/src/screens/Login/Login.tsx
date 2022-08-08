@@ -23,9 +23,7 @@ import { urlTemplate } from "../../utils/urlTemplate";
 //   import SuccessMessage from "../components/StateMessages/SuccessMessage";
 //   import ErrorMessage from "../components/StateMessages/ErrorMessage";
 
-interface Props {}
-
-export const Login: React.FC<Props> = ({}) => {
+export const Login: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -38,18 +36,26 @@ export const Login: React.FC<Props> = ({}) => {
     resolver: yupResolver(loginValidationSchema),
   });
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (input): Promise<void> => {
     Keyboard.dismiss();
-
     try {
-      // fetch vers mon backend
-      const res = axios.post(`${BASE_URL}/login`, {
-        email: data.email,
-        password: data.password,
+      const { data } = await axios.post(`${BASE_URL}/login`, {
+        email: input.email,
+        password: input.password,
       });
 
-      console.log(res);
-    } catch (error: unknown) {
+      // si l'email ou le mot de passe est invalide
+      if (data.error) {
+        console.log("Email ou mot de passe invalide");
+      }
+
+      // si l'email et le mot de sont valides
+      if (!data.error) {
+        console.log("Email et mot de passe valide");
+        // redirige l'utilisateur vers le dashboard
+        navigation.navigate("Dashboard");
+      }
+    } catch (error: any) {
       console.log(error);
     }
   });

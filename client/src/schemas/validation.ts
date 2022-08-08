@@ -15,7 +15,7 @@ const registerValidationSchema = Yup.object({
   email: Yup.string()
     .email("Cette adresse email est invalide")
     .required("Ce champ est obligatoire"),
-  username: Yup.string()
+  name: Yup.string()
     .min(2, "Ce nom est invalide")
     .required("Ce champ est obligatoire"),
   password: Yup.string()

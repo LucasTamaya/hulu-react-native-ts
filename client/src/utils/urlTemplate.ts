@@ -1,1 +1,1 @@
-export const urlTemplate = "http://localhost:4000";
+export const urlTemplate = "http://10.0.2.2:4000";

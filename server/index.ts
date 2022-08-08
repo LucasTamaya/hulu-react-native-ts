@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 
 import { mdbConnexion } from "./src/config/mdbConnexion";
@@ -11,13 +11,13 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 mdbConnexion();
 
 app.use(authRoutes);
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (req: Request, res: Response) => {
   return res.json({ message: "Hello world" });
 });
 
