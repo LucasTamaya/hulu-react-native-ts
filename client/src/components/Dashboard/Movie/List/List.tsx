@@ -1,18 +1,23 @@
-import { ScrollView } from "react-native";
-import React, { useEffect, useState } from "react";
+import { ScrollView, Text } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MotiView } from "moti";
 
-import requests from "../../utils/movieRequests";
-import MovieCard from "./MovieCard";
-import DataLoader from "../Loaders/DataLoader";
+import requests from "../../../../utils/movieRequests";
+import Card from "../Card";
+import { UserIdContext } from "../../../../Contexts/UserIdContext";
+import { IMovieData } from "../../../../interfaces";
+// import DataLoader from "../Loaders/DataLoader";
 
-const MovieList = ({ index, docRef }) => {
+export const List: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
+  const { index } = useContext(UserIdContext);
+
   const getData = async () => {
+    // réinitialise les états à zéro
     setData([]);
     setLoading(true);
     setError("");
@@ -41,10 +46,11 @@ const MovieList = ({ index, docRef }) => {
 
   return (
     <ScrollView className="mb-14">
-      {loading && <DataLoader />}
+      {/* {loading && <DataLoader />} */}
+      {loading && <Text>Loading ...</Text>}
 
-      {data.map((x) => (
-        <MovieCard key={x.id} data={x} docRef={docRef} />
+      {data.map((x: IMovieData) => (
+        <Card key={x.id} data={x} />
       ))}
 
       {error ? (
@@ -55,5 +61,3 @@ const MovieList = ({ index, docRef }) => {
     </ScrollView>
   );
 };
-
-export default MovieList;

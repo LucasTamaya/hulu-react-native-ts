@@ -1,7 +1,11 @@
 import { ScrollView, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 
-const Nav = ({ setIndex }) => {
+import { UserIdContext } from "../../../Contexts/UserIdContext";
+
+export const Nav: React.FC = () => {
+  const { setIndex } = useContext(UserIdContext);
+
   return (
     <ScrollView horizontal={true} className="flex-row gap-x-10">
       <TouchableOpacity onPress={() => setIndex(0)}>
@@ -40,5 +44,3 @@ const Nav = ({ setIndex }) => {
     </ScrollView>
   );
 };
-
-export default Nav;

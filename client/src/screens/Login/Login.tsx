@@ -52,6 +52,10 @@ export const Login: React.FC = () => {
       // si l'email et le mot de sont valides
       if (!data.error) {
         console.log("Email et mot de passe valide");
+
+        // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
+        await setUserId(data.userId);
+
         // redirige l'utilisateur vers le dashboard
         navigation.navigate("Dashboard");
       }

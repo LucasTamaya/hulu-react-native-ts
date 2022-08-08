@@ -1,26 +1,33 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import { arrayRemove, arrayUnion, updateDoc } from "firebase/firestore";
 
-const MovieDetails = ({ data, save, setSave, docRef }) => {
+import { IMovieData } from "../../../../interfaces";
+
+interface Props {
+  data: IMovieData;
+  save: boolean;
+  setSave: (state: boolean) => void;
+}
+
+export const Details: React.FC<Props> = ({ data, save, setSave }) => {
   // ajoute l'id du film dans la liste d'ids de films sauvegardés au niveau de firebase
-  const saveFilm = async () => {
-    try {
-      await updateDoc(docRef, { moviesList: arrayUnion(data.id) });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // const saveFilm = async () => {
+  //   try {
+  //     await updateDoc(docRef, { moviesList: arrayUnion(data.id) });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   // supprime l'id du film dans la liste d'ids de films sauvegardés au niveau de firebase
-  const unsaveFilm = async () => {
-    try {
-      await updateDoc(docRef, { moviesList: arrayRemove(data.id) });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // const unsaveFilm = async () => {
+  //   try {
+  //     await updateDoc(docRef, { moviesList: arrayRemove(data.id) });
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   return (
     <View className="absolute top-0 left-0 bg-[#2e2e30]/90 w-full h-full p-4">
@@ -47,23 +54,22 @@ const MovieDetails = ({ data, save, setSave, docRef }) => {
         onPress={() => {
           if (save) {
             setSave(!save);
-            unsaveFilm();
+            // unsaveFilm();
           } else {
             setSave(!save);
-            saveFilm();
+            // saveFilm();
           }
         }}
-        className="w-[30px] h-[30px] flex-row justify-center items-center"
       >
-        {/* si film sauvegardé, coeur plein, sinon coeur vide */}
-        {save ? (
-          <FontAwesome name="heart" size={25} color="#fff" />
-        ) : (
-          <FontAwesome name="heart-o" size={25} color="#fff" />
-        )}
+        <View className="w-[30px] h-[30px] flex-row justify-center items-center">
+          {/* si film sauvegardé, coeur plein, sinon coeur vide */}
+          {save ? (
+            <FontAwesome name="heart" size={25} color="#fff" />
+          ) : (
+            <FontAwesome name="heart-o" size={25} color="#fff" />
+          )}
+        </View>
       </TouchableOpacity>
     </View>
   );
 };
-
-export default MovieDetails;

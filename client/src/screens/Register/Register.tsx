@@ -54,6 +54,10 @@ export const Register: React.FC = () => {
       if (!data.error) {
         console.log("Nouvel utilisateur crée");
         // redirige l'utilisateur vers le dashboard
+
+        // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
+        await setUserId(data.userId);
+
         navigation.navigate("Dashboard");
       }
     } catch (error: any) {

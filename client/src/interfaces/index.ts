@@ -23,4 +23,15 @@ interface IRegisterFormValues {
   password: string;
 }
 
-export { ICover, IEvent, ILoginFormValues, IRegisterFormValues };
+interface IMovieData {
+  id?: string;
+  poster_path: string;
+  original_title?: string;
+  original_name?: string;
+  overview?: string;
+  release_date?: string;
+  first_air_date?: string;
+  vote_count?: number;
+}
+
+export { ICover, IEvent, ILoginFormValues, IRegisterFormValues, IMovieData };

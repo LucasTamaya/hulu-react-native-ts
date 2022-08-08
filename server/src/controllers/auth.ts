@@ -37,6 +37,7 @@ const LoginController = async (req: Request, res: Response) => {
   return res.json({
     error: false,
     details: "Connexion réussi",
+    userId: user[0]._id,
   });
 };
 
@@ -66,7 +67,11 @@ const RegisterController = async (req: Request, res: Response) => {
   // sauvegarde du nouvel utilisateur dans la BDD
   newUser.save();
   console.log("Nouvel utilisateur crée");
-  return res.json({ error: false, details: "Nouvel utilisateur crée" });
+  return res.json({
+    error: false,
+    details: "Nouvel utilisateur crée",
+    userId: user[0]._id,
+  });
 };
 
 export { LoginController, RegisterController };

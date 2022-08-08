@@ -11,10 +11,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 
 import { TMDB_API_KEY } from "@env";
-import MovieCard from "./MovieCard";
-import DataLoader from "../Loaders/DataLoader";
+import Card from "../Movie/Card";
+// import DataLoader from "../Loaders/DataLoader";
+import { IMovieData } from "../../../interfaces";
 
-const SearchBar = ({ docRef }) => {
+export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -43,7 +44,7 @@ const SearchBar = ({ docRef }) => {
         }, 1800);
       }
       // si erreur pendant la requête, on affiche un message d'erreur
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
       setError("Une erreur au niveau du serveur est survenue...");
     }
@@ -68,10 +69,10 @@ const SearchBar = ({ docRef }) => {
         />
       </KeyboardAvoidingView>
 
-      {loading && <DataLoader />}
+      {/* {loading && <DataLoader />} */}
 
-      {data.map((x) => (
-        <MovieCard key={x.id} data={x} docRef={docRef} />
+      {data.map((x: IMovieData) => (
+        <Card key={x.id} data={x} />
       ))}
 
       {error ? (
@@ -82,5 +83,3 @@ const SearchBar = ({ docRef }) => {
     </ScrollView>
   );
 };
-
-export default SearchBar;
