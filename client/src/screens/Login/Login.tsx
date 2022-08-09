@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
@@ -19,7 +19,8 @@ import { setUserId } from "../../utils/asyncStorage";
 import { loginValidationSchema } from "../../schemas/validation";
 import { ILoginFormValues } from "../../interfaces/index";
 import { RouteParams } from "../../navigation/RootNavigator";
-import { urlTemplate } from "../../utils/urlTemplate";
+import { BASE_URL } from "../../utils/urlTemplate";
+import { AppContext, AppContextType } from "../../contexts/AppContext";
 //   import SuccessMessage from "../components/StateMessages/SuccessMessage";
 //   import ErrorMessage from "../components/StateMessages/ErrorMessage";
 
@@ -27,7 +28,7 @@ export const Login: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const BASE_URL = urlTemplate;
+  const { setSavedFilmIds } = useContext(AppContext) as AppContextType;
 
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
@@ -55,6 +56,9 @@ export const Login: React.FC = () => {
 
         // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
         await setUserId(data.userId);
+
+        // on enregistre la liste d'ids des films
+        setSavedFilmIds(data.savedFilmIds);
 
         // redirige l'utilisateur vers le dashboard
         navigation.navigate("Dashboard");

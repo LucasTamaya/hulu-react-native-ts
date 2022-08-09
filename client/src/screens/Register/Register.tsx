@@ -19,15 +19,13 @@ import { setUserId } from "../../utils/asyncStorage";
 import { registerValidationSchema } from "../../schemas/validation";
 import { IRegisterFormValues } from "../../interfaces/index";
 import { RouteParams } from "../../navigation/RootNavigator";
-import { urlTemplate } from "../../utils/urlTemplate";
+import { BASE_URL } from "../../utils/urlTemplate";
 //   import SuccessMessage from "../components/StateMessages/SuccessMessage";
 //   import ErrorMessage from "../components/StateMessages/ErrorMessage";
 
 export const Register: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
-  const BASE_URL = urlTemplate;
 
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 

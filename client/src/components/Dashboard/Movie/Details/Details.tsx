@@ -1,8 +1,11 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import axios from "axios";
 
 import { IMovieData } from "../../../../interfaces";
+import { BASE_URL } from "../../../../utils/urlTemplate";
+import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 
 interface Props {
   data: IMovieData;
@@ -11,23 +14,41 @@ interface Props {
 }
 
 export const Details: React.FC<Props> = ({ data, save, setSave }) => {
-  // ajoute l'id du film dans la liste d'ids de films sauvegardés au niveau de firebase
-  // const saveFilm = async () => {
-  //   try {
-  //     await updateDoc(docRef, { moviesList: arrayUnion(data.id) });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  const { userId, savedFilmIds, setSavedFilmIds } = useContext(
+    AppContext
+  ) as AppContextType;
 
-  // supprime l'id du film dans la liste d'ids de films sauvegardés au niveau de firebase
-  // const unsaveFilm = async () => {
-  //   try {
-  //     await updateDoc(docRef, { moviesList: arrayRemove(data.id) });
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  // sauvegarde le film
+  const saveFilm = async () => {
+    // update rapide côté frontend, pour voir les modifications casi instantannément
+    setSavedFilmIds([...savedFilmIds, data.id]);
+    // update côté backend qui prend un peu plus de temps
+    try {
+      const res = await axios.post(`${BASE_URL}/movie/save/${userId}`, {
+        filmId: data.id,
+      });
+      console.log(res);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  // supprime la sauvegarde du film
+  const unsaveFilm = async () => {
+    // crée un nouveau tableau en filtrant uniquement les ids qui sont différents du film
+    const savedFilmIdsUpdate = savedFilmIds.filter((id) => {
+      return id !== data.id;
+    });
+    setSavedFilmIds([...savedFilmIdsUpdate]);
+    try {
+      const res = await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
+        filmId: data.id,
+      });
+      console.log(res);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <View className="absolute top-0 left-0 bg-[#2e2e30]/90 w-full h-full p-4">
@@ -54,10 +75,10 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
         onPress={() => {
           if (save) {
             setSave(!save);
-            // unsaveFilm();
+            unsaveFilm();
           } else {
             setSave(!save);
-            // saveFilm();
+            saveFilm();
           }
         }}
       >

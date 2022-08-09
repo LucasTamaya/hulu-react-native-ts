@@ -36,8 +36,8 @@ const LoginController = async (req: Request, res: Response) => {
 
   return res.json({
     error: false,
-    details: "Connexion réussi",
     userId: user[0]._id,
+    savedFilmIds: user[0].savedFilmIds,
   });
 };
 

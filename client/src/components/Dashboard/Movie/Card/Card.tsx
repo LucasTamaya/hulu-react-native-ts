@@ -1,7 +1,8 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 
-import { UserIdContext } from "../../../../Contexts/UserIdContext";
+import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";
 import Details from "../Details";
 
@@ -13,21 +14,22 @@ export const Card: React.FC<Props> = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [save, setSave] = useState(false);
 
-  const { userId } = useContext(UserIdContext);
+  const { savedFilmIds } = useContext(AppContext) as AppContextType;
 
   const TMDB_IMG_URL = "https://image.tmdb.org/t/p/original";
 
-  // récupération de la liste d'IDS des films sauvegardés
-  // fetch ers mon api
-  // si liste non vide
-  // on compare l'id du film qu'on observe avec celui de la liste dans firebase, afin de voir si il a été sauvegardé ou non, pour adapter l'icon Heart dans MovieDetails
-  
-  
-  // si le document n'existe pas
+  console.log(savedFilmIds);
 
-  // useEffect(() => {
-  //   getSavedFilmIds();
-  // }, []);
+  useEffect(() => {
+    // on compare l'id du film qu'on observe avec celui de la liste récupérée au préalable, afin de voir si il a été sauvegardé ou non, pour adapter l'icon Heart dans MovieDetails
+    savedFilmIds.map((id) => {
+      if (id === data.id) {
+        console.log(data.id);
+        setSave((prev) => !prev);
+        return;
+      }
+    });
+  }, []);
 
   return (
     <View>

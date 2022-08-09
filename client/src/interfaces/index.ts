@@ -24,7 +24,7 @@ interface IRegisterFormValues {
 }
 
 interface IMovieData {
-  id?: string;
+  id?: number;
   poster_path: string;
   original_title?: string;
   original_name?: string;

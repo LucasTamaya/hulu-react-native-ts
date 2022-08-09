@@ -5,18 +5,19 @@ import { MotiView } from "moti";
 
 import requests from "../../../../utils/movieRequests";
 import Card from "../Card";
-import { UserIdContext } from "../../../../Contexts/UserIdContext";
+import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";
 // import DataLoader from "../Loaders/DataLoader";
+import { BASE_URL } from "../../../../utils/urlTemplate";
 
 export const List: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
-  const { index } = useContext(UserIdContext);
+  const { index } = useContext(AppContext) as AppContextType;
 
-  const getData = async () => {
+  const getMovieData = async () => {
     // réinitialise les états à zéro
     setData([]);
     setLoading(true);
@@ -40,8 +41,13 @@ export const List: React.FC = () => {
     }
   };
 
+  // const getAllData = async () => {
+  //   await getSavedMovieIds();
+  //   // await getMovieData();
+  // };
+
   useEffect(() => {
-    getData();
+    getMovieData();
   }, [index]);
 
   return (
@@ -49,9 +55,7 @@ export const List: React.FC = () => {
       {/* {loading && <DataLoader />} */}
       {loading && <Text>Loading ...</Text>}
 
-      {data.map((x: IMovieData) => (
-        <Card key={x.id} data={x} />
-      ))}
+      {data && data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
 
       {error ? (
         <Text className="text-white text-2xl mt-10">{error}</Text>

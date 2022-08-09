@@ -19,8 +19,8 @@ import { MotiView, AnimatePresence } from "moti";
 
 import { auth } from "../../../firebase-config";
 import { updatePwdValidationSchema } from "../../../utils/validationSchemas";
-import SuccessMessage from "../../StateMessages/SuccessMessage";
-import ErrorMessage from "../../StateMessages/ErrorMessage";
+import SuccessMessage from "../StateMessages/SuccessMessage";
+import ErrorMessage from "../StateMessages/ErrorMessage";
 
 const ChangePassword = ({ setChangePasswordPopUp }) => {
   const windowHeight = Dimensions.get("window").height;
