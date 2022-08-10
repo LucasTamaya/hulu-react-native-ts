@@ -14,15 +14,13 @@ export const Card: React.FC<Props> = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [save, setSave] = useState(false);
 
-  const { savedFilmIds } = useContext(AppContext) as AppContextType;
+  const { savedMovieIds } = useContext(AppContext) as AppContextType;
 
   const TMDB_IMG_URL = "https://image.tmdb.org/t/p/original";
 
-  console.log(savedFilmIds);
-
   useEffect(() => {
     // on compare l'id du film qu'on observe avec celui de la liste récupérée au préalable, afin de voir si il a été sauvegardé ou non, pour adapter l'icon Heart dans MovieDetails
-    savedFilmIds.map((id) => {
+    savedMovieIds.map((id) => {
       if (id === data.id) {
         console.log(data.id);
         setSave((prev) => !prev);

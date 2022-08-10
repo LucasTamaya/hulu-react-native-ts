@@ -14,37 +14,35 @@ interface Props {
 }
 
 export const Details: React.FC<Props> = ({ data, save, setSave }) => {
-  const { userId, savedFilmIds, setSavedFilmIds } = useContext(
+  const { userId, savedMovieIds, setSavedMovieIds } = useContext(
     AppContext
   ) as AppContextType;
 
   // sauvegarde le film
-  const saveFilm = async () => {
+  const saveMovie = async () => {
     // update rapide côté frontend, pour voir les modifications casi instantannément
-    setSavedFilmIds([...savedFilmIds, data.id]);
+    setSavedMovieIds([...savedMovieIds, data.id]);
     // update côté backend qui prend un peu plus de temps
     try {
       const res = await axios.post(`${BASE_URL}/movie/save/${userId}`, {
         filmId: data.id,
       });
-      console.log(res);
     } catch (error: any) {
       console.log(error.message);
     }
   };
 
   // supprime la sauvegarde du film
-  const unsaveFilm = async () => {
+  const unsaveMovie = async () => {
     // crée un nouveau tableau en filtrant uniquement les ids qui sont différents du film
-    const savedFilmIdsUpdate = savedFilmIds.filter((id) => {
+    const savedFilmIdsUpdate = savedMovieIds.filter((id) => {
       return id !== data.id;
     });
-    setSavedFilmIds([...savedFilmIdsUpdate]);
+    setSavedMovieIds([...savedFilmIdsUpdate]);
     try {
       const res = await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
         filmId: data.id,
       });
-      console.log(res);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -75,10 +73,10 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
         onPress={() => {
           if (save) {
             setSave(!save);
-            unsaveFilm();
+            unsaveMovie();
           } else {
             setSave(!save);
-            saveFilm();
+            saveMovie();
           }
         }}
       >

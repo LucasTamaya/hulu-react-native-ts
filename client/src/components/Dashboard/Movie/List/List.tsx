@@ -8,12 +8,11 @@ import Card from "../Card";
 import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";
 // import DataLoader from "../Loaders/DataLoader";
-import { BASE_URL } from "../../../../utils/urlTemplate";
 
 export const List: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<IMovieData[]>([]);
+  const [error, setError] = useState<string>("");
 
   const { index } = useContext(AppContext) as AppContextType;
 
@@ -40,11 +39,6 @@ export const List: React.FC = () => {
       console.error(error);
     }
   };
-
-  // const getAllData = async () => {
-  //   await getSavedMovieIds();
-  //   // await getMovieData();
-  // };
 
   useEffect(() => {
     getMovieData();

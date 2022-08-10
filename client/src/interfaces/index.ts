@@ -24,7 +24,7 @@ interface IRegisterFormValues {
 }
 
 interface IMovieData {
-  id?: number;
+  id: number;
   poster_path: string;
   original_title?: string;
   original_name?: string;
@@ -34,4 +34,16 @@ interface IMovieData {
   vote_count?: number;
 }
 
-export { ICover, IEvent, ILoginFormValues, IRegisterFormValues, IMovieData };
+interface IUpdatePasswordFormValues {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export {
+  ICover,
+  IEvent,
+  ILoginFormValues,
+  IRegisterFormValues,
+  IMovieData,
+  IUpdatePasswordFormValues,
+};

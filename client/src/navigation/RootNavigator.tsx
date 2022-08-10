@@ -1,16 +1,18 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "../screens/Home";
+import Legal from "../screens/Legal";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import Dashboard from "../screens/Dashboard";
+import { UserLogged } from "../screens/UserLogged/UserLogged";
 
 // toutes les routes disponibles dans mon appli
 export type RouteParams = {
   Home: undefined;
   Login: undefined;
   Register: undefined;
-  Dashboard: undefined;
+  UserLogged: undefined;
+  Legal: undefined;
 };
 
 const Stack = createNativeStackNavigator<RouteParams>();
@@ -45,9 +47,19 @@ export const RootNavigator = () => {
           }}
         />
         <Stack.Screen
-          name="Dashboard"
-          component={Dashboard}
+          name="UserLogged"
+          component={UserLogged}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Legal"
+          component={Legal}
+          options={{
+            title: "Mentions légales",
+            headerBackTitle: "Paramètres",
+            headerStyle: { backgroundColor: "#151516" },
+            headerTintColor: "#FFF",
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>

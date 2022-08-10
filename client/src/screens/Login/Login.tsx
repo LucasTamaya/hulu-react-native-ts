@@ -28,7 +28,7 @@ export const Login: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const { setSavedFilmIds } = useContext(AppContext) as AppContextType;
+  const { setSavedMovieIds } = useContext(AppContext) as AppContextType;
 
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
@@ -37,12 +37,12 @@ export const Login: React.FC = () => {
     resolver: yupResolver(loginValidationSchema),
   });
 
-  const onSubmit = handleSubmit(async (input): Promise<void> => {
+  const onSubmit = handleSubmit(async ({ email, password }): Promise<void> => {
     Keyboard.dismiss();
     try {
       const { data } = await axios.post(`${BASE_URL}/login`, {
-        email: input.email,
-        password: input.password,
+        email,
+        password,
       });
 
       // si l'email ou le mot de passe est invalide
@@ -58,10 +58,10 @@ export const Login: React.FC = () => {
         await setUserId(data.userId);
 
         // on enregistre la liste d'ids des films
-        setSavedFilmIds(data.savedFilmIds);
+        setSavedMovieIds(data.savedFilmIds);
 
         // redirige l'utilisateur vers le dashboard
-        navigation.navigate("Dashboard");
+        navigation.navigate("UserLogged");
       }
     } catch (error: any) {
       console.log(error);

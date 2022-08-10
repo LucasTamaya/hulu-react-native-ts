@@ -12,8 +12,8 @@ interface Props {}
 export const App: React.FC<Props> = ({}) => {
   // index afin de changer de catégorie pour afficher différents types de films
   const [index, setIndex] = useState<number>(0);
-  const [userId, setUserId] = useState<string | any>("");
-  const [savedFilmIds, setSavedFilmIds] = useState<any[]>([]);
+  const [userId, setUserId] = useState<string | undefined>("");
+  const [savedMovieIds, setSavedMovieIds] = useState<number[]>([]);
 
   return (
     <TailwindProvider>
@@ -22,10 +22,10 @@ export const App: React.FC<Props> = ({}) => {
           value={{
             index,
             userId,
-            savedFilmIds,
+            savedMovieIds,
             setIndex,
             setUserId,
-            setSavedFilmIds,
+            setSavedMovieIds,
           }}
         >
           <NavigationContainer>

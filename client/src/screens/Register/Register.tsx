@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
@@ -20,12 +20,15 @@ import { registerValidationSchema } from "../../schemas/validation";
 import { IRegisterFormValues } from "../../interfaces/index";
 import { RouteParams } from "../../navigation/RootNavigator";
 import { BASE_URL } from "../../utils/urlTemplate";
+import { AppContext, AppContextType } from "../../contexts/AppContext";
 //   import SuccessMessage from "../components/StateMessages/SuccessMessage";
 //   import ErrorMessage from "../components/StateMessages/ErrorMessage";
 
 export const Register: React.FC = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const { setSavedMovieIds } = useContext(AppContext) as AppContextType;
 
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
@@ -34,34 +37,39 @@ export const Register: React.FC = () => {
     resolver: yupResolver(registerValidationSchema),
   });
 
-  const onSubmit = handleSubmit(async (input): Promise<void> => {
-    Keyboard.dismiss();
-    try {
-      const { data } = await axios.post(`${BASE_URL}/register`, {
-        email: input.email,
-        name: input.name,
-        password: input.password,
-      });
+  const onSubmit = handleSubmit(
+    async ({ email, name, password }): Promise<void> => {
+      Keyboard.dismiss();
+      try {
+        const { data } = await axios.post(`${BASE_URL}/register`, {
+          email,
+          name,
+          password,
+        });
 
-      // si l'email ou le mot de passe est invalide
-      if (data.error) {
-        console.log("Email déjà utilisé");
+        // si l'email ou le mot de passe est invalide
+        if (data.error) {
+          console.log("Email déjà utilisé");
+        }
+
+        // si l'email et le mot de sont valides
+        if (!data.error) {
+          console.log("Nouvel utilisateur crée");
+          // redirige l'utilisateur vers le dashboard
+
+          // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
+          await setUserId(data.userId);
+
+          // on enregistre la liste d'ids des films
+          setSavedMovieIds(data.savedFilmIds);
+
+          navigation.navigate("UserLogged");
+        }
+      } catch (error: any) {
+        console.log(error);
       }
-
-      // si l'email et le mot de sont valides
-      if (!data.error) {
-        console.log("Nouvel utilisateur crée");
-        // redirige l'utilisateur vers le dashboard
-
-        // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
-        await setUserId(data.userId);
-
-        navigation.navigate("Dashboard");
-      }
-    } catch (error: any) {
-      console.log(error);
     }
-  });
+  );
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
