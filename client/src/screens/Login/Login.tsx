@@ -39,6 +39,7 @@ export const Login: React.FC = () => {
 
   const onSubmit = handleSubmit(async ({ email, password }): Promise<void> => {
     Keyboard.dismiss();
+    console.log(BASE_URL)
     try {
       const { data } = await axios.post(`${BASE_URL}/login`, {
         email,

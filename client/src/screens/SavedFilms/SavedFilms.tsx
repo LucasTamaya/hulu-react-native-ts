@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TMDB_API_KEY } from "@env";
 import axios from "axios";
@@ -8,6 +8,7 @@ import Header from "../../components/Dashboard/Header";
 import Card from "../../components/Dashboard/Movie/Card";
 import { AppContext, AppContextType } from "../../contexts/AppContext";
 import { IMovieData } from "../../interfaces";
+import Loader from "../../components/Animations/Loader";
 
 export const SavedFilms: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,7 +38,7 @@ export const SavedFilms: React.FC = () => {
 
   useEffect(() => {
     getSavedMoviesData();
-    // clean up funtion pour réinitialiser le tableau lorsqu'on démonte le composant
+    // clean up funtion lorsqu'on démonte le composant
     return () => {
       setData([]);
     };
@@ -51,7 +52,7 @@ export const SavedFilms: React.FC = () => {
           Films sauvegardés
         </Text>
 
-        {/* {loading && <DataLoader />} */}
+        {loading && <Loader />}
 
         {data.map((x: IMovieData) => (
           <Card key={x.id} data={x} />

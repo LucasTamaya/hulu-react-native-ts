@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MotiView } from "moti";
 
-import requests from "../../../../utils/movieRequests";
+import requests from "../../../../../assets/data/movieRequests";
 import Card from "../Card";
 import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";
-// import DataLoader from "../Loaders/DataLoader";
+import Loader from "../../../Animations/Loader";
 
 export const List: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,20 +34,23 @@ export const List: React.FC = () => {
         setLoading(false);
       }, 1800);
       // si erreur pendant la requête, on affiche un message d'erreur
-    } catch (error) {
+    } catch (error: any) {
       setError("Une erreur inconnue est survenue");
-      console.error(error);
+      console.error(error.message);
     }
   };
 
   useEffect(() => {
     getMovieData();
+    // clean up funtion lorsqu'on démonte le composant
+    return () => {
+      setData([]);
+    };
   }, [index]);
 
   return (
     <ScrollView className="mb-14">
-      {/* {loading && <DataLoader />} */}
-      {loading && <Text>Loading ...</Text>}
+      {loading && <Loader />}
 
       {data && data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
 

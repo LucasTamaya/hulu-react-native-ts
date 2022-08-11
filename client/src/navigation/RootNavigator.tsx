@@ -59,6 +59,7 @@ export const RootNavigator = () => {
             headerBackTitle: "Paramètres",
             headerStyle: { backgroundColor: "#151516" },
             headerTintColor: "#FFF",
+            animation: "slide_from_right"
           }}
         />
       </Stack.Group>

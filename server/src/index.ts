@@ -3,9 +3,9 @@ require("dotenv").config();
 import express, { Request, Response } from "express";
 import cors from "cors";
 
-import { mdbConnexion } from "./src/config/mdbConnexion";
-import { router as authRoutes } from "./src/routes/authRoutes";
-import { router as movieRoutes } from "./src/routes/movieRoutes";
+import { mdbConnexion } from "./config/mdbConnexion";
+import { router as authRoutes } from "./routes/authRoutes";
+import { router as movieRoutes } from "./routes/movieRoutes";
 
 const PORT = process.env.PORT || 4000;
 

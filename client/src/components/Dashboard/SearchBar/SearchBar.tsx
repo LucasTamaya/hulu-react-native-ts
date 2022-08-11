@@ -6,14 +6,14 @@ import {
   View,
   Text,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
-
 import { TMDB_API_KEY } from "@env";
+
 import Card from "../Movie/Card";
-// import DataLoader from "../Loaders/DataLoader";
 import { IMovieData } from "../../../interfaces";
+import Loader from "../../Animations/Loader";
 
 export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -50,6 +50,12 @@ export const SearchBar: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      setData([]);
+    };
+  }, []);
+
   return (
     <ScrollView>
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
@@ -69,7 +75,7 @@ export const SearchBar: React.FC = () => {
         />
       </KeyboardAvoidingView>
 
-      {/* {loading && <DataLoader />} */}
+      {loading && <Loader />}
 
       {data.map((x: IMovieData) => (
         <Card key={x.id} data={x} />

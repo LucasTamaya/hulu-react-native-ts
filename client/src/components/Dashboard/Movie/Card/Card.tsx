@@ -22,7 +22,6 @@ export const Card: React.FC<Props> = ({ data }) => {
     // on compare l'id du film qu'on observe avec celui de la liste récupérée au préalable, afin de voir si il a été sauvegardé ou non, pour adapter l'icon Heart dans MovieDetails
     savedMovieIds.map((id) => {
       if (id === data.id) {
-        console.log(data.id);
         setSave((prev) => !prev);
         return;
       }

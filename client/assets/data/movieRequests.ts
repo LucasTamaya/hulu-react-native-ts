@@ -2,7 +2,7 @@ import { TMDB_API_KEY } from "@env";
 
 // ensemble des requêtes API utilisables par mon appli. Source de l'API: https://www.themoviedb.org/?language=en-US
 
-const requests = [
+const requests: string[] = [
   `https://api.themoviedb.org/3/trending/all/week?api_key=${TMDB_API_KEY}&language=fr-FR`,
   `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=fr-FR`,
   `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_genres=28&language=fr-FR`,
