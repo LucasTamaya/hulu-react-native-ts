@@ -14,53 +14,38 @@ import { TMDB_API_KEY } from "@env";
 import Card from "../Movie/Card";
 import { IMovieData } from "../../../interfaces";
 import Loader from "../../Animations/Loader";
+import { useMutation } from "@tanstack/react-query";
 
 export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [error, setError] = useState("");
 
-  // lance la recherche du film via l'api TMDB
   const handleSearch = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const data = await axios.get(
-        `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${searchInput}&page=1&include_adult=false`
-      );
-      // si aucune donnée ne corresponde à la recherche, on affiche un message d'erreur
-      if (data.data.results.length === 0) {
-        setError(`Nous n'avons rien trouvé à propos de ${searchInput}...`);
-        setLoading(false);
-        setData([]);
-      }
-      // si des données ont été trouvées
-      if (data.data.results.length > 0) {
-        setData(data.data.results);
-        // marque un petit temps d'arrêt le temps que la data arrive
-        setTimeout(() => {
-          setLoading(false);
-        }, 1800);
-      }
-      // si erreur pendant la requête, on affiche un message d'erreur
-    } catch (error: any) {
-      console.log(error.message);
-      setError("Une erreur au niveau du serveur est survenue...");
-    }
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${searchInput}&page=1&include_adult=false`
+    );
+    return data.results;
   };
 
-  useEffect(() => {
-    return () => {
-      setData([]);
-    };
-  }, []);
+  const {
+    isLoading,
+    error,
+    data: searchMovies,
+    mutate,
+  } = useMutation(handleSearch);
+
+  if (!isLoading) {
+    console.log("Je ne charge pas");
+  }
+
+  if (isLoading) {
+    console.log("je charge en ce moment");
+  }
 
   return (
     <ScrollView>
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
         <View className="h-full border-r border-white p-4">
-          <TouchableOpacity onPress={handleSearch}>
+          <TouchableOpacity onPress={() => mutate()}>
             <FontAwesome name="search" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -71,18 +56,20 @@ export const SearchBar: React.FC = () => {
           keyboardType="web-search"
           value={searchInput}
           onChangeText={(text) => setSearchInput(text)}
-          onSubmitEditing={handleSearch}
+          onSubmitEditing={() => mutate()}
         />
       </KeyboardAvoidingView>
 
-      {loading && <Loader />}
+      {isLoading ? <Loader /> : <></>}
 
-      {data.map((x: IMovieData) => (
+      {searchMovies?.map((x: IMovieData) => (
         <Card key={x.id} data={x} />
       ))}
 
       {error ? (
-        <Text className="text-white text-2xl mt-10">{error}</Text>
+        <Text className="text-white text-2xl mt-10">
+          Une erreur est survenue
+        </Text>
       ) : (
         <></>
       )}

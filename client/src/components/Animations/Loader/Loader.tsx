@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { View, Dimensions } from "react-native";
 import { SkypeIndicator } from "react-native-indicators";
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 export const Loader: React.FC = () => {
   return (

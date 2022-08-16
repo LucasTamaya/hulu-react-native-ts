@@ -1,64 +1,54 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MotiView } from "moti";
+import { useQuery } from "@tanstack/react-query";
 
-import requests from "../../../../../assets/data/movieRequests";
 import Card from "../Card";
+import Loader from "../../../Animations/Loader";
+import requests from "../../../../../assets/data/movieRequests";
 import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";
-import Loader from "../../../Animations/Loader";
 
 export const List: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<IMovieData[]>([]);
-  const [error, setError] = useState<string>("");
-
   const { index } = useContext(AppContext) as AppContextType;
 
-  const getMovieData = async () => {
-    // réinitialise les états à zéro
-    setData([]);
-    setLoading(true);
-    setError("");
+  // récupère l'url dans la liste des requêtes, à l'index correspondant, par défault index = 0. La navigation va nous permettre de varier l'index selon la catégorie de films qu'on souhaite afficher
+  const url = requests[index];
 
-    // récupère l'url dans la liste des requêtes, à l'index correspondant, par défault index = 0. La navigation va nous permettre de varier l'index selon la catégorie de films qu'on souhaite afficher
-    const url = requests[index];
+  const {
+    isLoading,
+    error,
+    data: movies,
+  } = useQuery(["allMovies"], async () => {
+    const { data } = await axios.get(url);
+    return data.results;
+  });
 
-    // si aucune erreur dans la requête, on récupère la data dans un tableau
-    try {
-      const data = await axios.get(url);
-      setData(data.data.results);
-      // marque un petit temps d'arrêt le temps que la data arrive
-      setTimeout(() => {
-        setLoading(false);
-      }, 1800);
-      // si erreur pendant la requête, on affiche un message d'erreur
-    } catch (error: any) {
-      setError("Une erreur inconnue est survenue");
-      console.error(error.message);
-    }
-  };
+  // pendant le chargement de la data, on affiche un loader
+  if (isLoading) {
+    return (
+      <View className="mb-14">
+        <Loader />
+      </View>
+    );
+  }
 
-  useEffect(() => {
-    getMovieData();
-    // clean up funtion lorsqu'on démonte le composant
-    return () => {
-      setData([]);
-    };
-  }, [index]);
+  // si il y a une erreur lors de la requête, on affiche un message d'erreur
+  if (error) {
+    return (
+      <View className="mb-14">
+        <Text className="text-white text-2xl mt-10 ml-10">
+          Une erreur est survenue
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView className="mb-14">
-      {loading && <Loader />}
-
-      {data && data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
-
-      {error ? (
-        <Text className="text-white text-2xl mt-10">{error}</Text>
-      ) : (
-        <></>
-      )}
+      {movies &&
+        movies.map((movie: IMovieData) => <Card key={movie.id} data={movie} />)}
     </ScrollView>
   );
 };
