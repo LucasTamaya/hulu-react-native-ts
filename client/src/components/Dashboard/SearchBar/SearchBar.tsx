@@ -6,15 +6,15 @@ import {
   View,
   Text,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
-import { TMDB_API_KEY } from "@env";
+import { useMutation } from "@tanstack/react-query";
 
 import Card from "../Movie/Card";
-import { IMovieData } from "../../../interfaces";
 import Loader from "../../Animations/Loader";
-import { useMutation } from "@tanstack/react-query";
+import { IMovieData } from "../../../interfaces";
+import { TMDB_API_KEY } from "@env";
 
 export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -32,14 +32,6 @@ export const SearchBar: React.FC = () => {
     data: searchMovies,
     mutate,
   } = useMutation(handleSearch);
-
-  if (!isLoading) {
-    console.log("Je ne charge pas");
-  }
-
-  if (isLoading) {
-    console.log("je charge en ce moment");
-  }
 
   return (
     <ScrollView>

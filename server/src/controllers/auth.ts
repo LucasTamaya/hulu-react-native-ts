@@ -114,25 +114,3 @@ const UpdatePasswordController = async (req: Request, res: Response) => {
 };
 
 export { LoginController, RegisterController, UpdatePasswordController };
-
-/*
-// test la correspondance des mots de passes
-  const isMatch: boolean | undefined = await passwordValidation(
-    user[0].password,
-    password
-  );
-
-  // si mot de passe invalide
-  if (!isMatch) {
-    console.log("mot de passe invalide");
-    return res.json({ error: true, details: "Mot de passe invalide" });
-  }
-
-  console.log(user);
-
-  return res.json({
-    error: false,
-    userId: user[0]._id,
-    savedFilmIds: user[0].savedFilmIds,
-  });
-*/

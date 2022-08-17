@@ -9,14 +9,19 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import React, { useContext, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import {
+  Controller,
+  SubmitHandler,
+  useForm,
+  UseFormHandleSubmit,
+} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MotiView, AnimatePresence } from "moti";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 import { updatePasswordValidationSchema } from "../../../schemas/validation";
-import SuccessMessage from "../../StateMessages/SuccessMessage";
-import ErrorMessage from "../../StateMessages/ErrorMessage";
+import StateMessage from "../../StateMessage";
 import { IUpdatePasswordFormValues } from "../../../interfaces";
 import { BASE_URL } from "../../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../../contexts/AppContext";
@@ -35,26 +40,24 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
     resolver: yupResolver(updatePasswordValidationSchema),
   });
 
-  const onSubmit = handleSubmit(
-    async ({ currentPassword, newPassword }): Promise<void> => {
-      console.log("testtts");
-      Keyboard.dismiss();
+  const onSubmit = (data: IUpdatePasswordFormValues): void => {
+    Keyboard.dismiss();
+    mutate(data);
+  };
 
-      try {
-        const { data } = await axios.post(
-          `${BASE_URL}/update/password/${userId}`,
-          {
-            currentPassword,
-            newPassword,
-          }
-        );
+  const handleChangePassword = async ({
+    currentPassword,
+    newPassword,
+  }: IUpdatePasswordFormValues): Promise<any> => {
+    const { data } = await axios.post(`${BASE_URL}/update/password/${userId}`, {
+      currentPassword,
+      newPassword,
+    });
+    console.log(data);
+    return data;
+  };
 
-        console.log(data);
-      } catch (error: any) {
-        console.log(error.message);
-      }
-    }
-  );
+  const { isLoading, error, data, mutate } = useMutation(handleChangePassword);
 
   return (
     <MotiView
@@ -110,7 +113,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    onSubmitEditing={onSubmit}
+                    onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -123,7 +126,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={onSubmit}>
+          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
             <View className="w-full py-4 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               <Text className="uppercase text-black font-bold">Modifier</Text>
             </View>
@@ -135,16 +138,13 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
             </View>
           </TouchableOpacity>
         </View>
-        {/* Si aucune erreur lors de la requête */}
-        {/* <AnimatePresence className="mb-5">
-        {success ? <SuccessMessage message={success} /> : <></>}
-      </AnimatePresence> */}
-
-        {/* Si erreur lors de la requête */}
-        {/* <AnimatePresence>
-        {error ? <ErrorMessage message={error} /> : <></>}
-      </AnimatePresence> */}
       </TouchableWithoutFeedback>
+      {/* Message d'erreur ou de succès lors de la validation du formulaire */}
+      <AnimatePresence>
+        <View className="mb-5">
+          {data && <StateMessage message={data?.details} error={data?.error} />}
+        </View>
+      </AnimatePresence>
     </MotiView>
   );
 };

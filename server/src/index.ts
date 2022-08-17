@@ -7,7 +7,7 @@ import { mdbConnexion } from "./config/mdbConnexion";
 import { router as authRoutes } from "./routes/authRoutes";
 import { router as movieRoutes } from "./routes/movieRoutes";
 
-const PORT = process.env.PORT || 4000;
+const PORT: string | number = process.env.PORT || 4000;
 
 const app = express();
 
