@@ -39,18 +39,16 @@ export const SavedFilms: React.FC = () => {
           Films sauvegardés
         </Text>
 
-        {isLoading && <Loader />}
+        {isLoading && <Loader size={80} color="#00ed82" />}
 
         {savedMovies?.map((savedMovie: IMovieData) => (
           <Card key={savedMovie.id} data={savedMovie} />
         ))}
 
-        {error ? (
+        {error && (
           <Text className="text-white text-2xl mt-10 px-10">
             Une erreur est survenue
           </Text>
-        ) : (
-          <></>
         )}
       </ScrollView>
     </SafeAreaView>

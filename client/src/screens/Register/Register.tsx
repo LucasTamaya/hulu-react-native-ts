@@ -7,13 +7,14 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnimatePresence } from "moti";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 import { setUserId } from "../../utils/asyncStorage";
 import { registerValidationSchema } from "../../schemas/validation";
@@ -21,13 +22,10 @@ import { IRegisterFormValues } from "../../interfaces/index";
 import { RouteParams } from "../../navigation/RootNavigator";
 import { BASE_URL } from "../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../contexts/AppContext";
-//   import SuccessMessage from "../components/StateMessages/SuccessMessage";
-//   import ErrorMessage from "../components/StateMessages/ErrorMessage";
+import StateMessage from "../../components/StateMessage";
+import Loader from "../../components/Animations/Loader";
 
 export const Register: React.FC = () => {
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
   const { setSavedMovieIds } = useContext(AppContext) as AppContextType;
 
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
@@ -37,39 +35,42 @@ export const Register: React.FC = () => {
     resolver: yupResolver(registerValidationSchema),
   });
 
-  const onSubmit = handleSubmit(
-    async ({ email, name, password }): Promise<void> => {
-      Keyboard.dismiss();
-      try {
-        const { data } = await axios.post(`${BASE_URL}/register`, {
-          email,
-          name,
-          password,
-        });
+  const onSubmit = (data: IRegisterFormValues): void => {
+    Keyboard.dismiss();
+    mutate(data);
+  };
 
-        // si l'email ou le mot de passe est invalide
-        if (data.error) {
-          console.log("Email déjà utilisé");
-        }
+  const handleChangeRegister = async ({
+    name,
+    email,
+    password,
+  }: IRegisterFormValues): Promise<any> => {
+    const { data } = await axios.post(`${BASE_URL}/register`, {
+      email,
+      name,
+      password,
+    });
 
-        // si l'email et le mot de sont valides
-        if (!data.error) {
-          console.log("Nouvel utilisateur crée");
-          // redirige l'utilisateur vers le dashboard
+    // si l'email et le mot de passe sont valides
+    if (!data.error) {
+      console.log("Nouvel utilisateur crée");
+      // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
+      await setUserId(data.userId);
 
-          // on enregistre l'id de l'utilisateur dans le asyncStorage afin de pouvoir intéragir avec son document dans la BDD
-          await setUserId(data.userId);
+      // on enregistre la liste d'ids des films
+      setSavedMovieIds(data.savedFilmIds);
 
-          // on enregistre la liste d'ids des films
-          setSavedMovieIds(data.savedFilmIds);
-
-          navigation.navigate("UserLogged");
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
+      // fait une pause de 1.5 secondes pour afficher un message
+      setTimeout(() => {
+        // redirige l'utilisateur vers le dashboard
+        navigation.navigate("UserLogged");
+      }, 2000);
     }
-  );
+
+    return data;
+  };
+
+  const { isLoading, error, data, mutate } = useMutation(handleChangeRegister);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -142,7 +143,7 @@ export const Register: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    onSubmitEditing={onSubmit}
+                    onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -155,11 +156,15 @@ export const Register: React.FC = () => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={onSubmit}>
-            <View className="w-full py-4 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
-              <Text className="uppercase text-black font-bold">
-                Créer mon compte
-              </Text>
+          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+            <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
+              {isLoading ? (
+                <Loader size={30} color="black" />
+              ) : (
+                <Text className="uppercase text-black font-bold">
+                  Créer mon compte
+                </Text>
+              )}
             </View>
           </TouchableOpacity>
 
@@ -170,15 +175,17 @@ export const Register: React.FC = () => {
             </TouchableOpacity>
           </View>
         </View>
-        {/* Si aucune erreur lors de la requête */}
-        {/* <AnimatePresence>
-          {success ? <SuccessMessage message={success} /> : <></>}
-        </AnimatePresence> */}
-
-        {/* Si erreur lors de la requête */}
-        {/* <AnimatePresence>
-          {error ? <ErrorMessage message={error} /> : <></>}
-        </AnimatePresence> */}
+        {/* Message d'erreur ou de succès lors de la validation du formulaire */}
+        <AnimatePresence>
+          <View className="mb-5">
+            {data && (
+              <StateMessage message={data?.details} error={data?.error} />
+            )}
+            {error && (
+              <StateMessage message="Erreur du serveur interne" error={true} />
+            )}
+          </View>
+        </AnimatePresence>
       </View>
     </TouchableWithoutFeedback>
   );

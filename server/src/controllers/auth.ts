@@ -14,8 +14,8 @@ const LoginController = async (req: Request, res: Response) => {
 
   // si l'utilisateur n'existe pas
   if (user.length === 0) {
-    console.log("nom utilisateur invalide");
-    return res.json({ error: true, details: "Nom d'utilisateur invalide" });
+    console.log("email invalide");
+    return res.json({ error: true, details: "Email ou mot de passe invalide" });
   }
 
   console.log(user);
@@ -29,12 +29,13 @@ const LoginController = async (req: Request, res: Response) => {
   // si les mots de passes correspondent pas
   if (!isMatch) {
     console.log("mot de passe invalide");
-    return res.json({ error: true, details: "Mot de passe invalide" });
+    return res.json({ error: true, details: "Email ou mot de passe invalide" });
   }
 
   // si les mots de passe correspondent
   return res.json({
     error: false,
+    details: "Connexion réussie",
     userId: user[0]._id,
     savedFilmIds: user[0].savedFilmIds,
   });
@@ -68,8 +69,9 @@ const RegisterController = async (req: Request, res: Response) => {
   console.log("Nouvel utilisateur crée");
   return res.json({
     error: false,
-    userId: user[0]._id,
-    savedFilmIds: user[0].savedFilmIds,
+    details: "Compte crée avec succès",
+    userId: newUser._id,
+    savedFilmIds: newUser.savedFilmIds,
   });
 };
 

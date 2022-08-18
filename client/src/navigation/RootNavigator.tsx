@@ -56,7 +56,7 @@ export const RootNavigator = () => {
           component={Legal}
           options={{
             title: "Mentions légales",
-            headerBackTitle: "Paramètres",
+            headerBackTitle: "Retour",
             headerStyle: { backgroundColor: "#151516" },
             headerTintColor: "#FFF",
             animation: "slide_from_right"

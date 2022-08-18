@@ -8,13 +8,8 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import React, { useContext, useState } from "react";
-import {
-  Controller,
-  SubmitHandler,
-  useForm,
-  UseFormHandleSubmit,
-} from "react-hook-form";
+import React, { useContext } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MotiView, AnimatePresence } from "moti";
 import axios from "axios";
@@ -25,6 +20,7 @@ import StateMessage from "../../StateMessage";
 import { IUpdatePasswordFormValues } from "../../../interfaces";
 import { BASE_URL } from "../../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../../contexts/AppContext";
+import Loader from "../../Animations/Loader";
 
 interface Props {
   setChangePasswordPopUp: (state: boolean) => void;
@@ -127,13 +123,17 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
           </KeyboardAvoidingView>
 
           <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-            <View className="w-full py-4 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
-              <Text className="uppercase text-black font-bold">Modifier</Text>
+            <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
+              {isLoading ? (
+                <Loader size={30} color="black" />
+              ) : (
+                <Text className="uppercase text-black font-bold">Modifier</Text>
+              )}
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => setChangePasswordPopUp(false)}>
-            <View className="w-full py-4 flex flex-row justify-center items-center bg-[#2e2e30] rounded-md">
+            <View className="w-full h-12 flex flex-row justify-center items-center bg-[#2e2e30] rounded-md">
               <Text className="uppercase text-white font-bold">Annuler</Text>
             </View>
           </TouchableOpacity>
@@ -143,6 +143,9 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
       <AnimatePresence>
         <View className="mb-5">
           {data && <StateMessage message={data?.details} error={data?.error} />}
+          {error && (
+            <StateMessage message="Erreur du serveur interne" error={true} />
+          )}
         </View>
       </AnimatePresence>
     </MotiView>

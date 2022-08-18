@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   Text,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
@@ -18,6 +19,8 @@ import { TMDB_API_KEY } from "@env";
 
 export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
+
+  const windowHeight = Dimensions.get("window").height;
 
   const handleSearch = async () => {
     const { data } = await axios.get(
@@ -52,18 +55,23 @@ export const SearchBar: React.FC = () => {
         />
       </KeyboardAvoidingView>
 
-      {isLoading ? <Loader /> : <></>}
+      {isLoading && (
+        <View
+          className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
+          style={{ height: windowHeight / 2 }}
+        >
+          <Loader size={80} color="#00ed82" />
+        </View>
+      )}
 
       {searchMovies?.map((x: IMovieData) => (
         <Card key={x.id} data={x} />
       ))}
 
-      {error ? (
+      {error && (
         <Text className="text-white text-2xl mt-10">
           Une erreur est survenue
         </Text>
-      ) : (
-        <></>
       )}
     </ScrollView>
   );

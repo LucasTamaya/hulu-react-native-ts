@@ -5,6 +5,7 @@ import Dashboard from "../screens/Dashboard";
 import SavedFilms from "../screens/SavedFilms";
 import Search from "../screens/Search";
 import Settings from "../screens/Settings";
+import { View } from "react-native";
 
 // toutes les routes disponibles dans mon appli
 export type RouteParams = {
