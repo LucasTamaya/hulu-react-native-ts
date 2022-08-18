@@ -74,7 +74,7 @@ export const Login: React.FC = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View className="w-full h-full flex flex-col justify-center items-center px-5 bg-[#151516]">
-        <View className="bg-white w-full p-5 rounded-md">
+        <View className="bg-white w-full p-5 rounded-md mb-5">
           <Text className="text-black font-bold text-3xl mb-10">Connexion</Text>
           <KeyboardAvoidingView className="mb-10">
             <Text className="font-bold mb-2 uppercase">Email</Text>
@@ -153,7 +153,7 @@ export const Login: React.FC = () => {
 
         {/* Message d'erreur ou de succès lors de la validation du formulaire */}
         <AnimatePresence>
-          <View className="mb-5">
+          <View>
             {data && (
               <StateMessage message={data?.details} error={data?.error} />
             )}

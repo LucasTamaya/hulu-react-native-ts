@@ -1,7 +1,6 @@
 import { Dimensions, ScrollView, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
-import { MotiView } from "moti";
 import { useQuery } from "@tanstack/react-query";
 
 import Card from "../Card";

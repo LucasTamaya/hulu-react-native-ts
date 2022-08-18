@@ -177,7 +177,7 @@ export const Register: React.FC = () => {
         </View>
         {/* Message d'erreur ou de succès lors de la validation du formulaire */}
         <AnimatePresence>
-          <View className="mb-5">
+          <View className="mb-12">
             {data && (
               <StateMessage message={data?.details} error={data?.error} />
             )}
