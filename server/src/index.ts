@@ -19,7 +19,7 @@ mdbConnexion();
 app.use(authRoutes);
 app.use(movieRoutes);
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_, res: Response) => {
   return res.json({ message: "Hello world" });
 });
 

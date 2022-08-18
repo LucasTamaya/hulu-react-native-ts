@@ -7,6 +7,5 @@ import {
 
 export const router: Router = express.Router();
 
-// router.get("/movies/saved/:userId", SavedMovieIdsController);
 router.post("/movie/save/:userId", SaveMovieController);
 router.post("/movie/unsave/:userId", UnsaveMovieController);
