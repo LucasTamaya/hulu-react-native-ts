@@ -9,7 +9,7 @@ import Events from "../../components/Home/Events";
 
 export const Home: React.FC = () => {
   return (
-    <ScrollView className="bg-[#151516]">
+    <ScrollView className="bg-[#151516]" testID="home">
       <SafeAreaView className="h-full">
         <Header />
         <ScrollView>

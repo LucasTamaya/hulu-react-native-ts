@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   return (
-    <View>
+    <View testID="header">
       <ImageBackground
         source={require("../../../../assets/images/header.jpg")}
         resizeMode="cover"
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
           Obtenez un divertissement sans fin, des sports en direct, et les
           émissions et films que vous aimez.
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")} testID="btn">
           <View className="bg-[#01ED83] py-4 w-72 flex flex-row justify-center items-center rounded-md">
             <Text className="text-black font-bold uppercase">
               Connexion à mon compte

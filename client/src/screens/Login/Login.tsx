@@ -72,7 +72,11 @@ export const Login: React.FC = () => {
   const { isLoading, error, data, mutate } = useMutation(handleChangeLogin);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      accessible={false}
+      testID="login-screen"
+    >
       <View className="w-full h-full flex flex-col justify-center items-center px-5 bg-[#151516]">
         <View className="bg-white w-full p-5 rounded-md mb-5">
           <Text className="text-black font-bold text-3xl mb-10">Connexion</Text>
