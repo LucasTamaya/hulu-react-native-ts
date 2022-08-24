@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 export const LiveTvMakesItBetter: React.FC = () => {
   return (
-    <ScrollView className="bg-[#151516]">
+    <ScrollView className="bg-[#151516]" testID="liveTvMakesItBetter">
       <View className="flex flex-col items-center gap-y-6 pb-5 px-5">
         <Text className="text-[#00ed82] text-sm text-center font-bold uppercase">
           Hulu + live tv, maintenant avec disney+ and espn+
@@ -26,9 +26,9 @@ export const LiveTvMakesItBetter: React.FC = () => {
           <Text className="text-white text-center uppercase font-bold">
             Voir les chaînes dans votre région
           </Text>
-          <AntDesign name="arrowright" size={15} color="#fff" />
+          <AntDesign name="arrowright" size={15} color="#fff" testID="icon" />
         </View>
-        <AntDesign name="arrowdown" size={15} color="#fff" />
+        <AntDesign name="arrowdown" size={15} color="#fff" testID="icon" />
       </View>
     </ScrollView>
   );

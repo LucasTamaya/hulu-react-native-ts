@@ -6,7 +6,7 @@ import coversData from "../../../../assets/data/covers";
 
 export const AllTheTvYouLove: React.FC = () => {
   return (
-    <ScrollView className="bg-[#151516]">
+    <ScrollView className="bg-[#151516]" testID="allTheTvYouLove">
       <View className="flex flex-col items-center gap-y-5 px-5 mt-7">
         <Text className="text-[#00ed82] text-sm uppercase font-bold">
           Inclus dans tous les plans

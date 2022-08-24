@@ -2,7 +2,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StatusBar } from "expo-status-bar";
 import React, { ReactNode, useState } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TailwindProvider } from "tailwindcss-react-native";
 import { AppContext } from "../contexts/AppContext";
 
@@ -19,7 +18,18 @@ export const AppWrapper: React.FC<Props> = ({ children }) => {
   return (
     <QueryClientProvider client={client}>
       <TailwindProvider>
-        <NavigationContainer>{children}</NavigationContainer>
+        <AppContext.Provider
+          value={{
+            index,
+            userId,
+            savedMovieIds,
+            setIndex,
+            setUserId,
+            setSavedMovieIds,
+          }}
+        >
+          <NavigationContainer>{children}</NavigationContainer>
+        </AppContext.Provider>
         <StatusBar style="auto" />
       </TailwindProvider>
     </QueryClientProvider>

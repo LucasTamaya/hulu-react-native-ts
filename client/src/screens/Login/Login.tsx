@@ -75,7 +75,7 @@ export const Login: React.FC = () => {
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
       accessible={false}
-      testID="login-screen"
+      testID="login"
     >
       <View className="w-full h-full flex flex-col justify-center items-center px-5 bg-[#151516]">
         <View className="bg-white w-full p-5 rounded-md mb-5">
@@ -96,6 +96,7 @@ export const Login: React.FC = () => {
                     onChangeText={onChange}
                     keyboardType="email-address"
                     secureTextEntry={false}
+                    testID="login-emailInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -122,6 +123,7 @@ export const Login: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
+                    testID="login-passwordInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
@@ -135,7 +137,7 @@ export const Login: React.FC = () => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity onPress={handleSubmit(onSubmit)} testID="login-btn">
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
                 <Loader size={30} color="black" />
@@ -149,7 +151,7 @@ export const Login: React.FC = () => {
 
           <View className="flex-row items-center">
             <Text>Pas encore de compte? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")} testID="register-navBtn">
               <Text className="text-[#61AFFB] underline">Créer mon compte</Text>
             </TouchableOpacity>
           </View>

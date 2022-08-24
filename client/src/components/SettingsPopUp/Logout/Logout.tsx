@@ -23,19 +23,20 @@ export const Logout: React.FC<Props> = ({ setLogOutPopUp }) => {
       exit={{
         opacity: 0,
       }}
+      testID="logoutPopup"
     >
       <View className="w-full bg-white rounded-md p-5">
         <Text className="text-lg text-center font-bold mb-8">
           Vous nous quittez déjà ?
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")} testID="disconnect-btn">
           <View className="w-full py-4 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
             <Text className="uppercase text-black font-bold">
               Me déconnecter
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setLogOutPopUp(false)}>
+        <TouchableOpacity onPress={() => setLogOutPopUp(false)} testID="cancel-btn">
           <View className="w-full py-4 flex flex-row justify-center items-center bg-[#2e2e30] rounded-md">
             <Text className="uppercase text-white font-bold">Annuler</Text>
           </View>

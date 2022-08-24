@@ -32,7 +32,7 @@ export const SavedFilms: React.FC = () => {
   });
 
   return (
-    <SafeAreaView className="bg-[#151516] h-full">
+    <SafeAreaView className="bg-[#151516] h-full" testID="savedFilms">
       <Header />
       <ScrollView className="bg-[#151516] mt-10 mb-14">
         <Text className="text-white text-2xl font-bold ml-10">

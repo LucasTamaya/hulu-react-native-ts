@@ -73,7 +73,11 @@ export const Register: React.FC = () => {
   const { isLoading, error, data, mutate } = useMutation(handleChangeRegister);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      accessible={false}
+      testID="register"
+    >
       <View className="w-full h-full flex flex-col justify-center items-center px-5 bg-[#151516]">
         <View className="bg-white w-full p-5 rounded-md">
           <Text className="text-black font-bold text-3xl mb-10">Connexion</Text>
@@ -92,6 +96,7 @@ export const Register: React.FC = () => {
                     value={value || ""}
                     className="border-2 border-black px-4 py-2 rounded"
                     onChangeText={onChange}
+                    testID="register-nameInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -117,6 +122,7 @@ export const Register: React.FC = () => {
                     className="border-2 border-black px-4 py-2 rounded"
                     onChangeText={onChange}
                     keyboardType="email-address"
+                    testID="register-emailInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -143,6 +149,7 @@ export const Register: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
+                    testID="register-passwordInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
@@ -156,7 +163,10 @@ export const Register: React.FC = () => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity
+            onPress={handleSubmit(onSubmit)}
+            testID="register-btn"
+          >
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
                 <Loader size={30} color="black" />
@@ -170,7 +180,10 @@ export const Register: React.FC = () => {
 
           <View className="flex-row items-center">
             <Text>Déjà un compte ? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Login")}
+              testID="login-navBtn"
+            >
               <Text className="text-[#61AFFB] underline">Me connecter</Text>
             </TouchableOpacity>
           </View>
