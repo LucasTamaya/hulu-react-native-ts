@@ -1,7 +1,7 @@
 import React from "react";
 import { act, fireEvent, render } from "@testing-library/react-native";
 
-import { AppWrapper } from "../../../../Mock/AppWrapper";
+import { AppWrapper } from "../../../../Mocks/AppWrapper";
 import { ChangePassword } from "../ChangePassword";
 import { AnimatePresence } from "moti";
 

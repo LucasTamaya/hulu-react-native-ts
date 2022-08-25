@@ -7,7 +7,7 @@ interface Props {}
 
 export const Legal: React.FC<Props> = ({}) => {
   return (
-    <SafeAreaView className="bg-[#151516] h-full">
+    <SafeAreaView className="bg-[#151516] h-full" testID="legal">
       <ScrollView>
         <Header />
         <View className="px-7">

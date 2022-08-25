@@ -37,10 +37,10 @@ export const SearchBar: React.FC = () => {
   } = useMutation(handleSearch);
 
   return (
-    <ScrollView>
+    <ScrollView testID="searchBar">
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
         <View className="h-full border-r border-white p-4">
-          <TouchableOpacity onPress={() => mutate()}>
+          <TouchableOpacity onPress={() => mutate()} testID="search-btn">
             <FontAwesome name="search" size={20} color="#fff" />
           </TouchableOpacity>
         </View>

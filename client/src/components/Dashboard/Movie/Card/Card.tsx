@@ -29,7 +29,7 @@ export const Card: React.FC<Props> = ({ data }) => {
   }, []);
 
   return (
-    <View>
+    <View testID="movieCard">
       {/* Si le film reçu ne possède pas d'affiche de couverture, on ne l'affiche pas */}
       {!data.poster_path && <></>}
 
@@ -42,6 +42,7 @@ export const Card: React.FC<Props> = ({ data }) => {
                 <Image
                   source={{ uri: `${TMDB_IMG_URL}${data.poster_path}` }}
                   className="w-full h-full"
+                  testID="movieCard-img"
                 />
 
                 {/* Détails du film */}

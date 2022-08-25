@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 
-import { AppWrapper } from "../../../../Mock/AppWrapper";
+import { AppWrapper } from "../../../../Mocks/AppWrapper";
 import { Header } from "../Header";
 
 const MockComponent: React.FC = () => {

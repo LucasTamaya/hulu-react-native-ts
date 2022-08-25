@@ -2,19 +2,19 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 
 import { AppWrapper } from "../../../Mocks/AppWrapper";
-import { SavedFilms } from "../SavedFilms";
+import { Search } from "../Search";
 
 const MockComponent: React.FC = () => {
   return (
     <AppWrapper>
-      <SavedFilms />
+      <Search />
     </AppWrapper>
   );
 };
 
-describe("SavedFilms Screen", () => {
+describe("Search Screen", () => {
   it("should renders the screen", () => {
     const { getByTestId } = render(<MockComponent />);
-    expect(getByTestId("savedFilms")).toBeTruthy();
+    expect(getByTestId("search")).toBeTruthy();
   });
 });

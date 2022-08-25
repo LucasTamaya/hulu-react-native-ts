@@ -2,7 +2,7 @@ import React from "react";
 import { act, fireEvent, render } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 
-import { AppWrapper } from "../../../Mock/AppWrapper";
+import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { Settings } from "../Settings";
 
 // bloque l'erreur: 'ReferenceError: You are trying to `import` a file after the Jest environment has been torn down.'

@@ -8,7 +8,7 @@ interface Props {}
 
 export const Search: React.FC<Props> = ({}) => {
   return (
-    <SafeAreaView className="bg-[#151516] h-full">
+    <SafeAreaView className="bg-[#151516] h-full" testID="search">
       <ScrollView className="px-7 mb-14">
         <Header />
         <SearchBar />
