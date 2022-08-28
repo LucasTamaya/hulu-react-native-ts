@@ -14,8 +14,13 @@ const MockComponent: React.FC = () => {
 
 describe("AllTheTvYouLove Component", () => {
   it("should renders the component", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId, getByText } = render(<MockComponent />);
     expect(getByTestId("allTheTvYouLove")).toBeTruthy();
+    expect(getByText(/Inclus dans tous les plans/i)).toBeTruthy();
+    expect(getByText(/All The TV You Love/i)).toBeTruthy();
+    expect(
+      getByText(/Regardez en streaming des saisons complètes/i)
+    ).toBeTruthy();
   });
 
   it("should renders 4 covers", () => {

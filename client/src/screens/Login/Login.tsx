@@ -96,7 +96,7 @@ export const Login: React.FC = () => {
                     onChangeText={onChange}
                     keyboardType="email-address"
                     secureTextEntry={false}
-                    testID="login-emailInput"
+                    testID="loginEmailInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -123,7 +123,7 @@ export const Login: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    testID="login-passwordInput"
+                    testID="loginPasswordInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
@@ -137,7 +137,7 @@ export const Login: React.FC = () => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={handleSubmit(onSubmit)} testID="login-btn">
+          <TouchableOpacity onPress={handleSubmit(onSubmit)} testID="loginBtn">
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
                 <Loader size={30} color="black" />
@@ -151,7 +151,10 @@ export const Login: React.FC = () => {
 
           <View className="flex-row items-center">
             <Text>Pas encore de compte? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")} testID="register-navBtn">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Register")}
+              testID="registerNavBtn"
+            >
               <Text className="text-[#61AFFB] underline">Créer mon compte</Text>
             </TouchableOpacity>
           </View>

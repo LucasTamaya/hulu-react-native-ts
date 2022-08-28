@@ -20,7 +20,7 @@ import ChangePassword from "../../components/SettingsPopUp/ChangePassword";
 export const Settings: React.FC = ({}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
-  const [logOutPopUp, setLogOutPopUp] = useState<boolean>(false);
+  const [logoutPopUp, setLogoutPopUp] = useState<boolean>(false);
   const [changePasswordPopUp, setChangePasswordPopUp] =
     useState<boolean>(false);
 
@@ -33,7 +33,7 @@ export const Settings: React.FC = ({}) => {
         </Text>
         <View className="border-t border-b border-white mt-10">
           <TouchableOpacity
-            onPress={() => setLogOutPopUp(true)}
+            onPress={() => setLogoutPopUp(true)}
             testID="logout-btn"
           >
             <View className="flex-row justify-between items-center p-5">
@@ -117,7 +117,7 @@ export const Settings: React.FC = ({}) => {
       </ScrollView>
 
       <AnimatePresence>
-        {logOutPopUp && <Logout setLogOutPopUp={setLogOutPopUp} />}
+        {logoutPopUp && <Logout setLogoutPopUp={setLogoutPopUp} />}
       </AnimatePresence>
 
       <AnimatePresence>

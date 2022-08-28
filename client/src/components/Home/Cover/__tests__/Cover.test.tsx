@@ -19,6 +19,7 @@ const MockComponent: React.FC = () => {
 describe("Cover Component", () => {
   it("should renders the component", () => {
     const { getByTestId, getByText } = render(<MockComponent />);
+    expect(getByTestId("cover")).toBeTruthy();
     expect(getByTestId("cover").props.source).toBe(1);
     expect(getByText("Cover Details")).toBeTruthy();
     expect(getByText("Cover Category")).toBeTruthy();

@@ -76,6 +76,7 @@ describe("ChangePassword Screen", () => {
     await act(async () => {
       fireEvent.press(getByTestId("cancel-btn"));
     });
+    expect(setChangePasswordPopUpMock).toHaveBeenCalledTimes(1);
     expect(setChangePasswordPopUpMock).toHaveBeenCalledWith(false);
   });
 });

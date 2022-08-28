@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Feather, FontAwesome } from "@expo/vector-icons";
 
 import Dashboard from "../screens/Dashboard";
-import SavedFilms from "../screens/SavedFilms";
+import SavedMovies from "../screens/SavedMovies";
 import Search from "../screens/Search";
 import Settings from "../screens/Settings";
 import { View } from "react-native";
@@ -10,7 +10,7 @@ import { View } from "react-native";
 // toutes les routes disponibles dans mon appli
 export type RouteParams = {
   Dashboard: undefined;
-  SavedFilms: undefined;
+  SavedMovies: undefined;
   Search: undefined;
   Settings: undefined;
 };
@@ -31,7 +31,7 @@ export const TabNavigator = () => {
               />
             );
           }
-          if (route.name === "SavedFilms") {
+          if (route.name === "SavedMovies") {
             return (
               <FontAwesome
                 name="heart"
@@ -76,8 +76,8 @@ export const TabNavigator = () => {
       />
 
       <Tab.Screen
-        name="SavedFilms"
-        component={SavedFilms}
+        name="SavedMovies"
+        component={SavedMovies}
         options={{ unmountOnBlur: true }}
       />
       <Tab.Screen name="Search" component={Search} />

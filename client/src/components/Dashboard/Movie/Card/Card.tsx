@@ -1,6 +1,5 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 
 import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 import { IMovieData } from "../../../../interfaces";

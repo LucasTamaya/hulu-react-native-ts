@@ -96,7 +96,7 @@ export const Register: React.FC = () => {
                     value={value || ""}
                     className="border-2 border-black px-4 py-2 rounded"
                     onChangeText={onChange}
-                    testID="register-nameInput"
+                    testID="registerNameInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -122,7 +122,7 @@ export const Register: React.FC = () => {
                     className="border-2 border-black px-4 py-2 rounded"
                     onChangeText={onChange}
                     keyboardType="email-address"
-                    testID="register-emailInput"
+                    testID="registerEmailInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -149,7 +149,7 @@ export const Register: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    testID="register-passwordInput"
+                    testID="registerPwdInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
@@ -165,7 +165,7 @@ export const Register: React.FC = () => {
 
           <TouchableOpacity
             onPress={handleSubmit(onSubmit)}
-            testID="register-btn"
+            testID="registerBtn"
           >
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
@@ -182,7 +182,7 @@ export const Register: React.FC = () => {
             <Text>Déjà un compte ? </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("Login")}
-              testID="login-navBtn"
+              testID="loginNavBtn"
             >
               <Text className="text-[#61AFFB] underline">Me connecter</Text>
             </TouchableOpacity>

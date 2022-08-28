@@ -9,38 +9,28 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 
 import Card from "../Movie/Card";
 import Loader from "../../Animations/Loader";
 import { IMovieData } from "../../../interfaces";
 import { TMDB_API_KEY } from "@env";
+import { useSearchMovie } from "../../../hooks/useSearchMovie";
 
 export const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
 
   const windowHeight = Dimensions.get("window").height;
 
-  const handleSearch = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${searchInput}&page=1&include_adult=false`
-    );
-    return data.results;
-  };
-
-  const {
-    isLoading,
-    error,
-    data: searchMovies,
-    mutate,
-  } = useMutation(handleSearch);
+  const mutation = useSearchMovie(TMDB_API_KEY, searchInput);
 
   return (
     <ScrollView testID="searchBar">
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
         <View className="h-full border-r border-white p-4">
-          <TouchableOpacity onPress={() => mutate()} testID="search-btn">
+          <TouchableOpacity
+            onPress={() => mutation.mutate()}
+            testID="search-btn"
+          >
             <FontAwesome name="search" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -51,11 +41,11 @@ export const SearchBar: React.FC = () => {
           keyboardType="web-search"
           value={searchInput}
           onChangeText={(text) => setSearchInput(text)}
-          onSubmitEditing={() => mutate()}
+          onSubmitEditing={() => mutation.mutate()}
         />
       </KeyboardAvoidingView>
 
-      {isLoading && (
+      {mutation.isLoading && (
         <View
           className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
           style={{ height: windowHeight / 2 }}
@@ -64,13 +54,19 @@ export const SearchBar: React.FC = () => {
         </View>
       )}
 
-      {searchMovies?.map((x: IMovieData) => (
-        <Card key={x.id} data={x} />
-      ))}
-
-      {error && (
+      {mutation.isSuccess && mutation.data.length === 0 && (
         <Text className="text-white text-2xl mt-10">
-          Une erreur est survenue
+          Nous n'avons rien trouvé à propos de {searchInput}
+        </Text>
+      )}
+
+      {mutation.isSuccess &&
+        mutation.data.length > 0 &&
+        mutation.data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
+
+      {mutation.error && (
+        <Text className="text-white text-2xl mt-10">
+          Une erreur au niveau du serveur interne est survenue
         </Text>
       )}
     </ScrollView>

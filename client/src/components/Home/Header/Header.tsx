@@ -29,7 +29,10 @@ export const Header: React.FC = () => {
           source={require("../../../../assets/images/logo.png")}
           className="w-[60px] h-[20px]"
         />
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login")}
+          testID="loginNavBtn1"
+        >
           <Text className="text-white text-lg font-bold">LOG IN</Text>
         </TouchableOpacity>
       </View>
@@ -47,7 +50,10 @@ export const Header: React.FC = () => {
           Obtenez un divertissement sans fin, des sports en direct, et les
           émissions et films que vous aimez.
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")} testID="login-btn">
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login")}
+          testID="loginNavBtn2"
+        >
           <View className="bg-[#01ED83] py-4 w-72 flex flex-row justify-center items-center rounded-md">
             <Text className="text-black font-bold uppercase">
               Connexion à mon compte

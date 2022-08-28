@@ -28,9 +28,9 @@ export const StateMessage: React.FC<Props> = ({ message, error }) => {
       >
         <Text className="text-white font-bold">{message}</Text>
         {error === true ? (
-          <Entypo name="cross" size={20} color="#fff" />
+          <Entypo name="cross" size={20} color="#fff" testID="crossIcon" />
         ) : (
-          <AntDesign name="check" size={20} color="#fff" />
+          <AntDesign name="check" size={20} color="#fff" testID="checkIcon" />
         )}
       </View>
     </MotiView>

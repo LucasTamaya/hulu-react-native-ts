@@ -10,26 +10,32 @@ import Card from "../../components/Dashboard/Movie/Card";
 import Loader from "../../components/Animations/Loader";
 import { AppContext, AppContextType } from "../../contexts/AppContext";
 import { IMovieData } from "../../interfaces";
+import { useSavedMovies } from "../../hooks/useSavedMovies";
 
-export const SavedFilms: React.FC = () => {
+export const SavedMovies: React.FC = () => {
   const { savedMovieIds } = useContext(AppContext) as AppContextType;
 
-  const {
-    isLoading,
-    error,
-    data: savedMovies,
-  } = useQuery(["savedMovies"], async () => {
-    // pour chaque id dans la liste, on va faire une requête vers l'API de TMDB pour récupérer les données correspondant aux films sauvegardés
-    const allReq = await Promise.all(
-      savedMovieIds.map(async (id) => {
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`
-        );
-        return data;
-      })
-    );
-    return allReq;
-  });
+  // const {
+  //   isLoading,
+  //   error,
+  //   data: savedMovies,
+  // } = useQuery(["savedMovies"], async () => {
+  //   // pour chaque id dans la liste, on va faire une requête vers l'API de TMDB pour récupérer les données correspondant aux films sauvegardés
+  //   const allReq = await Promise.all(
+  //     savedMovieIds.map(async (id) => {
+  //       const { data } = await axios.get(
+  //         `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`
+  //       );
+  //       return data;
+  //     })
+  //   );
+  //   return allReq;
+  // });
+
+  const { isLoading, error, isSuccess, data } = useSavedMovies(
+    TMDB_API_KEY,
+    savedMovieIds
+  );
 
   return (
     <SafeAreaView className="bg-[#151516] h-full" testID="savedFilms">
@@ -41,9 +47,10 @@ export const SavedFilms: React.FC = () => {
 
         {isLoading && <Loader size={80} color="#00ed82" />}
 
-        {savedMovies?.map((savedMovie: IMovieData) => (
-          <Card key={savedMovie.id} data={savedMovie} />
-        ))}
+        {isSuccess &&
+          data.map((savedMovie: IMovieData) => (
+            <Card key={savedMovie.id} data={savedMovie} />
+          ))}
 
         {error && (
           <Text className="text-white text-2xl mt-10 px-10">

@@ -39,6 +39,11 @@ interface IUpdatePasswordFormValues {
   newPassword: string;
 }
 
+interface IAllMoviesFakeData {
+  id: number;
+  movieData: {};
+}
+
 export {
   ICover,
   IEvent,
@@ -46,4 +51,5 @@ export {
   IRegisterFormValues,
   IMovieData,
   IUpdatePasswordFormValues,
+  IAllMoviesFakeData,
 };

@@ -4,12 +4,10 @@ import { act, fireEvent, render } from "@testing-library/react-native";
 import { AppWrapper } from "../../../../Mocks/AppWrapper";
 import { SearchBar } from "../SearchBar";
 import { server } from "../../../../Mocks/server";
+import { renderWithClient } from "../../../../tests/utils";
+import { rest } from "msw";
 
-beforeAll(() =>
-  server.listen({
-    onUnhandledRequest: "error",
-  })
-);
+beforeAll(() => server.listen());
 
 afterEach(() => server.resetHandlers());
 
@@ -42,33 +40,68 @@ describe("SearchBar Component", () => {
   });
 
   it("should renders a movie card when I search for an existing movie", async () => {
-    const { getByPlaceholderText, getByTestId } = render(<MockComponent />);
+    const { getByPlaceholderText, getByTestId, debug } = renderWithClient(
+      <MockComponent />
+    );
     await act(async () => {
       fireEvent.changeText(
         getByPlaceholderText("Rechercher un film, une série..."),
-        "La soupe aux choux"
+        "A super film"
       );
       fireEvent.press(getByTestId("search-btn"));
     });
-    expect(getByTestId("movieCard")).toBeTruthy();
-    expect(getByTestId("movieCard-img")).toBeTruthy();
-    expect(getByTestId("movieCard-img").props.source.uri).toBe(
-      "https://image.tmdb.org/t/p/original/3Eym65PSArfU89O15Cct0JiaPHl.jpg"
+    expect(await getByTestId("movieCard")).toBeTruthy();
+    expect(await getByTestId("movieCard-img")).toBeTruthy();
+    expect(await getByTestId("movieCard-img").props.source.uri).toBe(
+      "https://image.tmdb.org/t/p/original/film_poster_path.jpg"
     );
   });
 
-  // it("should renders a loading animation during the fetch api", async () => {
-  //   const { getByPlaceholderText, getByTestId } = render(<MockComponent />);
-  //   await act(async () => {
-  //     fireEvent.changeText(
-  //       getByPlaceholderText("Rechercher un film, une série..."),
-  //       "La soupe aux choux"
-  //     );
-  //     fireEvent.press(getByTestId("search-btn"));
-  //   });
-  // });
+  it("should renders an error message if I search for an non existing movie", async () => {
+    server.use(
+      rest.get("*", (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            results: [],
+          })
+        );
+      })
+    );
+    const { getByPlaceholderText, getByTestId, getByText } = renderWithClient(
+      <MockComponent />
+    );
+    const SEARCH_INPUT = "faengaeghaehe";
+    await act(async () => {
+      fireEvent.changeText(
+        getByPlaceholderText("Rechercher un film, une série..."),
+        SEARCH_INPUT
+      );
+      fireEvent.press(getByTestId("search-btn"));
+    });
+    expect(
+      await getByText(`Nous n'avons rien trouvé à propos de ${SEARCH_INPUT}`)
+    ).toBeTruthy();
+  });
 
-  // should renders an error message if I search for an non existing movie
-
-  // should renders an error message if there is an error during the fetch api
+  it("should renders an error message if there is an error during the fetch request", async () => {
+    server.use(
+      rest.get("*", (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+    const { getByPlaceholderText, getByTestId, getByText } = renderWithClient(
+      <MockComponent />
+    );
+    await act(async () => {
+      fireEvent.changeText(
+        getByPlaceholderText("Rechercher un film, une série..."),
+        "some query"
+      );
+      fireEvent.press(getByTestId("search-btn"));
+    });
+    expect(
+      await getByText("Une erreur au niveau du serveur interne est survenue")
+    ).toBeTruthy();
+  });
 });

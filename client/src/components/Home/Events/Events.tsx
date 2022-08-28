@@ -27,7 +27,10 @@ export const Events = () => {
       >
         <View className="absolute top-0 left-0 w-full h-full flex flex-col items-center pt-8 bg-black/30">
           <View className="flex flex-row items-center gap-x-6 px-8">
-            <TouchableOpacity onPress={() => setIndex(0)} testID="liveSports-btn">
+            <TouchableOpacity
+              onPress={() => setIndex(0)}
+              testID="liveSportsBtn"
+            >
               <Text
                 className={`relative text-xs text-center uppercase font-bold cursor-pointer transition ${
                   index === 0 ? "text-white" : "text-[#cccccc]"
@@ -36,7 +39,10 @@ export const Events = () => {
                 Live sports
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setIndex(1)} testID="breakingNews-btn">
+            <TouchableOpacity
+              onPress={() => setIndex(1)}
+              testID="breakingNewsBtn"
+            >
               <Text
                 className={`relative text-xs text-center uppercase font-bold cursor-pointer transition ${
                   index === 1 ? "text-white" : "text-[#cccccc]"
@@ -45,7 +51,10 @@ export const Events = () => {
                 Breaking news
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setIndex(2)} testID="biggestEvents-btn">
+            <TouchableOpacity
+              onPress={() => setIndex(2)}
+              testID="biggestEventsBtn"
+            >
               <Text
                 className={`relative text-xs text-center uppercase font-bold cursor-pointer transition ${
                   index === 2 ? "text-white" : "text-[#cccccc]"
@@ -65,7 +74,10 @@ export const Events = () => {
               {eventsData[index].description}
             </Text>
 
-            <TouchableOpacity onPress={() => navigation.navigate("Login")} testID="login-btn">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Login")}
+              testID="loginNavBtn"
+            >
               <View className="bg-[#01ED83] py-4 w-72 flex flex-row justify-center items-center rounded-md">
                 <Text className="uppercase text-black font-bold">
                   Connexion à mon compte
