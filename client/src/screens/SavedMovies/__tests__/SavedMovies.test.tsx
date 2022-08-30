@@ -18,7 +18,7 @@ const MockComponent: React.FC = () => {
 
 describe("SavedFilms Screen", () => {
   it("should renders the screen", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("savedFilms")).toBeTruthy();
   });
   // it("should renders some movie cards if I have saved movies", async () => {
@@ -33,10 +33,8 @@ describe("SavedFilms Screen", () => {
   //     })
   //   );
   //   const { findByText, debug } = renderWithClient(<MockComponent />);
-  //   await act(async () => {
-  //     await debug();
-  //     const message = await findByText("Une erreur est survenue");
-  //     expect(message).toBeTruthy();
-  //   });
+  //   debug();
+  //   const message = await findByText("Une erreur est survenue");
+  //   expect(message).toBeTruthy();
   // });
 });

@@ -6,6 +6,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { allMovies } from "./fakeData";
 
 export const handlers = [
+  rest.get("*/3/movie/*", (req, res, ctx) => {
+    console.log("je suis dans le 3eme handler");
+    return res(
+      ctx.status(200),
+      ctx.json({
+        results: allMovies,
+      })
+    );
+  }),
   rest.get("*/trending*", (req, res, ctx) => {
     console.log("je suis dans le premier handler");
     return res(
@@ -49,15 +58,6 @@ export const handlers = [
     );
   }),
   // MODIFIDER MON PROJET ET FAIRE EN SORTE QUE CE SOIT MON BACKEND QUI FASSE LES REQUETES API VERS TMDB
-  // rest.get("*/3/movie/*", (req, res, ctx) => {
-  //   console.log("je suis dans le 3eme handler");
-  //   return res(
-  //     ctx.status(200),
-  //     ctx.json({
-  //       results: allMovies,
-  //     })
-  //   );
-  // }),
 ];
 
 const createTestQueryClient = () =>

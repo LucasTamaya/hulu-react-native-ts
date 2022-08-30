@@ -34,7 +34,7 @@ export const Settings: React.FC = ({}) => {
         <View className="border-t border-b border-white mt-10">
           <TouchableOpacity
             onPress={() => setLogoutPopUp(true)}
-            testID="logout-btn"
+            testID="logoutBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">
@@ -49,7 +49,7 @@ export const Settings: React.FC = ({}) => {
         <View className="border-t border-b border-white">
           <TouchableOpacity
             onPress={() => setChangePasswordPopUp(true)}
-            testID="changePassword-btn"
+            testID="changePasswordBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">
@@ -67,7 +67,7 @@ export const Settings: React.FC = ({}) => {
             onPress={() => {
               navigation.navigate("Legal");
             }}
-            testID="legal-navBtn"
+            testID="legalNavBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">
@@ -86,7 +86,7 @@ export const Settings: React.FC = ({}) => {
                 "https://www.linkedin.com/in/lucas-tamaya-41a09621b/"
               );
             }}
-            testID="linkedin-navBtn"
+            testID="linkedinNavBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">
@@ -103,7 +103,7 @@ export const Settings: React.FC = ({}) => {
             onPress={() => {
               Linking.openURL("https://github.com/LucasTamaya");
             }}
-            testID="github-navBtn"
+            testID="githubNavBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">

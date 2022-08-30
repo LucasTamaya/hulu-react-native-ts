@@ -61,16 +61,17 @@ export const Login: React.FC = () => {
       setSavedMovieIds(data.savedFilmIds);
 
       // fait une pause de 1.5 secondes pour afficher un message
-      setTimeout(() => {
-        // redirige l'utilisateur vers le dashboard
-        navigation.navigate("UserLogged");
-      }, 2000);
+      // setTimeout(() => {
+      // redirige l'utilisateur vers le dashboard
+      navigation.navigate("UserLogged");
+      // }, 2000);
     }
 
     return data;
   };
 
-  const { isLoading, error, data, mutate } = useMutation(handleLogin);
+  const { isLoading, isError, isSuccess, data, mutate } =
+    useMutation(handleLogin);
 
   // const { isLoading, error, data, mutate } = useLogin()
   return (
@@ -164,11 +165,11 @@ export const Login: React.FC = () => {
 
         {/* Message d'erreur ou de succès lors de la validation du formulaire */}
         <AnimatePresence>
-          <View>
-            {data && (
+          <View testID="stateMessage">
+            {isSuccess && (
               <StateMessage message={data?.details} error={data?.error} />
             )}
-            {error && (
+            {isError && (
               <StateMessage message="Erreur du serveur interne" error={true} />
             )}
           </View>

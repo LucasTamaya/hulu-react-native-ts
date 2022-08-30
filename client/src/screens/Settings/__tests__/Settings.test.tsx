@@ -1,19 +1,20 @@
 import React from "react";
-import { act, fireEvent, render } from "@testing-library/react-native";
+import { cleanup, fireEvent, render } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
+import { Linking } from "react-native";
 
 import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { Settings } from "../Settings";
 
+jest.mock("@react-navigation/native", () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual("@react-navigation/native"),
+  };
+});
+
 // bloque l'erreur: 'ReferenceError: You are trying to `import` a file after the Jest environment has been torn down.'
 jest.useFakeTimers();
-
-// const createTestProps = (props: Object) => ({
-//   navigation: {
-//     navigate: jest.fn(),
-//   },
-//   ...props,
-// });
 
 const MockComponent: React.FC = () => {
   return (
@@ -24,6 +25,8 @@ const MockComponent: React.FC = () => {
 };
 
 describe("Settings Screen", () => {
+  afterEach(cleanup);
+
   it("should renders the screen", () => {
     const { getByTestId } = render(<MockComponent />);
     expect(getByTestId("settings")).toBeTruthy();
@@ -31,38 +34,52 @@ describe("Settings Screen", () => {
 
   it("should renders 5 buttons", () => {
     const { getByTestId } = render(<MockComponent />);
-    expect(getByTestId("logout-btn")).toBeTruthy();
-    expect(getByTestId("changePassword-btn")).toBeTruthy();
-    expect(getByTestId("legal-navBtn")).toBeTruthy();
-    expect(getByTestId("linkedin-navBtn")).toBeTruthy();
-    expect(getByTestId("github-navBtn")).toBeTruthy();
+    expect(getByTestId("logoutBtn")).toBeTruthy();
+    expect(getByTestId("changePasswordBtn")).toBeTruthy();
+    expect(getByTestId("legalNavBtn")).toBeTruthy();
+    expect(getByTestId("linkedinNavBtn")).toBeTruthy();
+    expect(getByTestId("githubNavBtn")).toBeTruthy();
   });
 
-  it("should open the LogoutPopUp when I click on the Logout button", async () => {
-    const { getByTestId, queryByTestId } = render(<MockComponent />);
-    await act(async () => {
-      fireEvent.press(getByTestId("logout-btn"));
-    });
-    expect(queryByTestId("logoutPopup")).toBeTruthy();
+  it("should open the LogoutPopUp if I click on the corresponding button", async () => {
+    const { getByTestId, findByTestId } = render(<MockComponent />);
+    fireEvent.press(getByTestId("logoutBtn"));
+    expect(findByTestId("logoutPopUp")).toBeTruthy();
   });
 
-  it("should open the ChangePasswordPopUp when I click on the ChangePassword button", async () => {
-    const { getByTestId, queryByTestId } = render(<MockComponent />);
-    await act(async () => {
-      fireEvent.press(getByTestId("changePassword-btn"));
-    });
-    expect(queryByTestId("changePasswordPopUp")).toBeTruthy();
+  it("should open the ChangePasswordPopUp if I click on the corresponding button", async () => {
+    const { getByTestId, findByTestId } = render(<MockComponent />);
+    fireEvent.press(getByTestId("changePasswordBtn"));
+    expect(findByTestId("changePasswordPopUp")).toBeTruthy();
   });
 
-//   it("should renders a button to navigate to the Legal Screen", async () => {
-//     let props: any;
-//     beforeEach(() => {
-//       props = createTestProps({});
-//     });
-//     const { getByTestId, debug } = render(<MockComponent />);
-//     fireEvent.press(getByTestId("legal-navBtn"));
-//     // await act(async () => {});
-//     // expect(navigationMock.navigate).toHaveBeenCalledWith("Legal");
-//     expect(props.navigation.navigate).toHaveBeenCalledWith("Legal");
-//   });
+  it("should navigate to the Legal Screen if I click on the corresponding button", async () => {
+    const navigationMock = jest.fn();
+    jest
+      .spyOn(Navigation, "useNavigation")
+      .mockReturnValue({ navigate: navigationMock });
+    const { getByTestId } = render(<MockComponent />);
+    fireEvent.press(getByTestId("legalNavBtn"));
+    expect(navigationMock).toHaveBeenCalledWith("Legal");
+  });
+
+  // MOCKER LE LINKING DE REACT NATIVE
+
+  // it("should open my browser and navigate to my linkedin profile if I click on the corresponding button", async () => {
+  //   const { getByTestId } = render(<MockComponent />);
+  //   fireEvent.press(getByTestId("linkedinNavBtn"));
+  //   expect(Linking.openURL).toHaveBeenCalledTimes(1);
+  //   expect(Linking.openURL).toHaveBeenCalledWith(
+  //     "https://www.linkedin.com/in/lucas-tamaya-41a09621b/"
+  //   );
+  // });
+
+  // it("should open my browser and navigate to my github profile if I click on the corresponding button", async () => {
+  //   const { getByTestId } = render(<MockComponent />);
+  //   fireEvent.press(getByTestId("githubNavBtn"));
+  //   expect(Linking.openURL).toHaveBeenCalledTimes(1);
+  //   expect(Linking.openURL).toHaveBeenCalledWith(
+  //     "https://github.com/LucasTamaya"
+  //   );
+  // });
 });

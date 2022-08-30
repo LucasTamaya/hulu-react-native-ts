@@ -15,10 +15,8 @@ import { useSavedMovies } from "../../hooks/useSavedMovies";
 export const SavedMovies: React.FC = () => {
   const { savedMovieIds } = useContext(AppContext) as AppContextType;
 
-  const { isLoading, error, isSuccess, data } = useSavedMovies(
-    TMDB_API_KEY,
-    savedMovieIds
-  );
+  const { isLoading, isLoadingError, isError, isSuccess, data } =
+    useSavedMovies(TMDB_API_KEY, savedMovieIds);
 
   return (
     <SafeAreaView className="bg-[#151516] h-full" testID="savedFilms">
@@ -35,11 +33,12 @@ export const SavedMovies: React.FC = () => {
             <Card key={savedMovie.id} data={savedMovie} />
           ))}
 
-        {error && (
-          <Text className="text-white text-2xl mt-10 px-10">
-            Une erreur est survenue
-          </Text>
-        )}
+        {isError ||
+          (isLoadingError && (
+            <Text className="text-white text-2xl mt-10 px-10">
+              Une erreur est survenue
+            </Text>
+          ))}
       </ScrollView>
     </SafeAreaView>
   );

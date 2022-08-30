@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
-import { act, fireEvent, render } from "@testing-library/react-native";
+import React from "react";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { AppWrapper } from "../../../../Mocks/AppWrapper";
 import { Nav } from "../Nav";
-import { AppContext, AppContextType } from "../../../../contexts/AppContext";
 
-jest.useFakeTimers();
+const mockIndex = 0;
+const mockSetIndex = jest.fn();
 
 const MockComponent: React.FC = () => {
   return (
-    <AppWrapper>
+    <AppWrapper index={mockIndex} setIndex={mockSetIndex}>
       <Nav />
     </AppWrapper>
   );
@@ -37,12 +37,9 @@ describe("Nav Component", () => {
   });
 
   it("should call the setIndex function with the number 5 if I click on the 'Romance' navigation button", async () => {
-    const setStateMock = jest.fn();
-    const useStateMock: any = (useState: any) => [useState, setStateMock];
-    jest.spyOn(React, "useState").mockImplementation(useStateMock);
-
     const { getByTestId } = render(<MockComponent />);
-    // fireEvent.press(getByTestId("navBtn"));
-    expect(setStateMock).toHaveBeenCalledWith(5);
+    fireEvent.press(getByTestId("navBtn"));
+    expect(mockSetIndex).toHaveBeenCalledTimes(1);
+    expect(mockSetIndex).toHaveBeenCalledWith(5);
   });
 });

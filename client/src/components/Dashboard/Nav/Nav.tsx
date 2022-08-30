@@ -23,11 +23,9 @@ export const Nav: React.FC = () => {
       <TouchableOpacity onPress={() => setIndex(4)}>
         <Text className="text-white font-bold text-lg">Horreur</Text>
       </TouchableOpacity>
-      <View>
-        <TouchableOpacity testID="navBtn">
-          <Text className="text-white font-bold text-lg">Romance</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => setIndex(5)} testID="navBtn">
+        <Text className="text-white font-bold text-lg">Romance</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => setIndex(6)}>
         <Text className="text-white font-bold text-lg">Mystère</Text>
       </TouchableOpacity>

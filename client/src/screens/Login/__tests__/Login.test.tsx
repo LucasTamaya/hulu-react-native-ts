@@ -1,5 +1,5 @@
 import React from "react";
-import { act, fireEvent, render } from "@testing-library/react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 
 import { Login } from "../Login";
@@ -15,6 +15,14 @@ jest.mock("@react-navigation/native", () => {
   };
 });
 
+jest.useFakeTimers();
+
+beforeAll(() => server.listen());
+
+afterEach(() => server.resetHandlers());
+
+afterAll(() => server.close());
+
 const MockComponent: React.FC = () => {
   return (
     <AppWrapper>
@@ -25,23 +33,23 @@ const MockComponent: React.FC = () => {
 
 describe("Login Screen", () => {
   it("should renders the component", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("login")).toBeTruthy();
   });
 
   it("should renders 2 inputs", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("loginEmailInput")).toBeTruthy();
     expect(getByTestId("loginPasswordInput")).toBeTruthy();
   });
 
   it("should renders a 'Connexion' button", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("loginBtn")).toBeTruthy();
   });
 
   it("should renders 2 error messages if I submit the form with empty inputs", async () => {
-    const { getByTestId, queryAllByText } = render(<MockComponent />);
+    const { getByTestId, queryAllByText } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.press(getByTestId("loginBtn"));
     });
@@ -49,7 +57,7 @@ describe("Login Screen", () => {
   });
 
   it("should renders 2 error messages if I submit the form with invalid email and password", async () => {
-    const { getByTestId, queryByText } = render(<MockComponent />);
+    const { getByTestId, queryByText } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.changeText(getByTestId("loginEmailInput"), "john.doe.fr12");
       fireEvent.changeText(getByTestId("loginPasswordInput"), "123");
@@ -60,7 +68,7 @@ describe("Login Screen", () => {
   });
 
   it("should not renders error messages if I submit the form with valid email and password", async () => {
-    const { getByTestId, queryAllByText, queryByText } = render(
+    const { getByTestId, queryAllByText, queryByText } = renderWithClient(
       <MockComponent />
     );
     await act(async () => {
@@ -77,7 +85,7 @@ describe("Login Screen", () => {
   });
 
   it("should renders a button to navigate to the Register Screen", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("registerNavBtn")).toBeTruthy();
   });
 
@@ -86,7 +94,7 @@ describe("Login Screen", () => {
     jest
       .spyOn(Navigation, "useNavigation")
       .mockReturnValue({ navigate: navigationMock });
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.press(getByTestId("registerNavBtn"));
     });
@@ -94,38 +102,37 @@ describe("Login Screen", () => {
     expect(navigationMock).toHaveBeenCalledWith("Register");
   });
 
-  // it("should navigate to the UserLogged Screen if I submit the form with valid email and password", async () => {
-  //   server.use(
-  //     rest.post("*", (req, res, ctx) => {
-  //       console.log(req.text());
-  //       return res(
-  //         ctx.status(200),
-  //         ctx.json({
-  //           error: false,
-  //           details: "Connexion réussie",
-  //           userId: 1,
-  //           savedFilmIds: [],
-  //         })
-  //       );
-  //     })
-  //   );
+  it("should navigate to the UserLogged Screen if the user is authenticated", async () => {
+    // server.use(
+    //   rest.post("*", (req, res, ctx) => {
+    //     return res(
+    //       ctx.status(500)
+    //       // ctx.json({
+    //       //   error: false,
+    //       //   details: "Connexion réussie",
+    //       //   userId: 1,
+    //       //   savedFilmIds: [],
+    //       // })
+    //     );
+    //   })
+    // );
 
-  //   const navigationMock = jest.fn();
-  //   jest
-  //     .spyOn(Navigation, "useNavigation")
-  //     .mockReturnValue({ navigate: navigationMock });
+    const navigationMock = jest.fn();
+    jest
+      .spyOn(Navigation, "useNavigation")
+      .mockReturnValue({ navigate: navigationMock });
 
-  //   const { getByTestId, debug } = renderWithClient(<MockComponent />);
-  //   await act(async () => {
-  //     fireEvent.changeText(
-  //       getByTestId("loginEmailInput"),
-  //       "john.doe@orange.fr"
-  //     );
-  //     fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
-  //     fireEvent.press(getByTestId("loginBtn"));
-  //   });
-  //   debug();
-  //   expect(await navigationMock).toHaveBeenCalledWith("Register");
-  //   expect(await navigationMock).toHaveBeenCalledTimes(2);
-  // });
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+    await act(async () => {
+      fireEvent.changeText(
+        getByTestId("loginEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
+      fireEvent.press(getByTestId("loginBtn"));
+    });
+    expect(navigationMock).toHaveBeenCalledTimes(1);
+    expect(navigationMock).toHaveBeenCalledWith("UserLogged");
+    expect(await findByText("Connexion réussie")).toBeTruthy();
+  });
 });
