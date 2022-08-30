@@ -37,9 +37,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
       const res = await axios.post(`${BASE_URL}/movie/save/${userId}`, {
         filmId: data.id,
       });
-    } catch (error: any) {
-      console.log(error.message);
-    }
+    } catch (error: any) {}
   };
 
   // supprime la sauvegarde du film
@@ -53,9 +51,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
       const res = await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
         filmId: data.id,
       });
-    } catch (error: any) {
-      console.log(error.message);
-    }
+    } catch (error: any) {}
   };
 
   return (

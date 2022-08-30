@@ -33,12 +33,11 @@ export const SavedMovies: React.FC = () => {
             <Card key={savedMovie.id} data={savedMovie} />
           ))}
 
-        {isError ||
-          (isLoadingError && (
-            <Text className="text-white text-2xl mt-10 px-10">
-              Une erreur est survenue
-            </Text>
-          ))}
+        {isError && (
+          <Text className="text-white text-2xl mt-10 px-10">
+            Une erreur est survenue
+          </Text>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, View } from "react-native";
 import { SkypeIndicator } from "react-native-indicators";
 
 interface Props {

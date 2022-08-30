@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">8.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,43 +119,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ScrollView, Text, TouchableOpacity } from "react-native";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 &nbsp;
 import { AppContext, AppContextType } from "../../../contexts/AppContext";
@@ -165,37 +165,37 @@ export const Nav: React.FC = () =&gt; {
 &nbsp;
   return (
     &lt;ScrollView horizontal={true} className="flex-row gap-x-10" testID="nav"&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(0)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(0)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg pl-10"&gt;Tendance&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(1)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(1)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Mieux notés&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(2)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(2)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Action&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(3)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(3)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Comédie&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(4)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(4)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Horreur&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(5)}</span> testID="navBtn"&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(5)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Romance&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(6)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(6)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Mystère&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(7)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(7)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;SciFi&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(8)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(8)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Western&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(9)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(9)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Animation&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
-      &lt;TouchableOpacity onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setIndex(10)}</span>&gt;
+      &lt;TouchableOpacity onPress={() =&gt; setIndex(10)} testID="navBtn"&gt;
         &lt;Text className="text-white font-bold text-lg"&gt;Films TV&lt;/Text&gt;
       &lt;/TouchableOpacity&gt;
     &lt;/ScrollView&gt;
@@ -208,7 +208,7 @@ export const Nav: React.FC = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-30T03:31:27.437Z
+                at 2022-08-30T16:47:40.462Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

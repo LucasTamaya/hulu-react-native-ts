@@ -49,7 +49,6 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
       currentPassword,
       newPassword,
     });
-    console.log(data);
     return data;
   };
 
@@ -125,7 +124,10 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity onPress={handleSubmit(onSubmit)} testID="modify-btn">
+          <TouchableOpacity
+            onPress={handleSubmit(onSubmit)}
+            testID="modify-btn"
+          >
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
                 <Loader size={30} color="black" />
@@ -135,7 +137,10 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => setChangePasswordPopUp(false)} testID="cancel-btn">
+          <TouchableOpacity
+            onPress={() => setChangePasswordPopUp(false)}
+            testID="cancel-btn"
+          >
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#2e2e30] rounded-md">
               <Text className="uppercase text-white font-bold">Annuler</Text>
             </View>

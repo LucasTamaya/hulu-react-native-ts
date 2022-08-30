@@ -1,8 +1,8 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
 
 import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { Search } from "../Search";
+import { renderWithClient } from "../../../tests/utils";
 
 const MockComponent: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const MockComponent: React.FC = () => {
 
 describe("Search Screen", () => {
   it("should renders the screen", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("search")).toBeTruthy();
   });
 });

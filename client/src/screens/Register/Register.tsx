@@ -14,7 +14,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnimatePresence } from "moti";
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { isError, useMutation } from "@tanstack/react-query";
 
 import { setUserId } from "../../utils/asyncStorage";
 import { registerValidationSchema } from "../../schemas/validation";
@@ -61,16 +61,17 @@ export const Register: React.FC = () => {
       setSavedMovieIds(data.savedFilmIds);
 
       // fait une pause de 1.5 secondes pour afficher un message
-      setTimeout(() => {
-        // redirige l'utilisateur vers le dashboard
-        navigation.navigate("UserLogged");
-      }, 2000);
+      // setTimeout(() => {
+      // redirige l'utilisateur vers le dashboard
+      navigation.navigate("UserLogged");
+      // }, 2000);
     }
 
     return data;
   };
 
-  const { isLoading, error, data, mutate } = useMutation(handleChangeRegister);
+  const { isLoading, isError, isSuccess, data, mutate } =
+    useMutation(handleChangeRegister);
 
   return (
     <TouchableWithoutFeedback
@@ -191,10 +192,10 @@ export const Register: React.FC = () => {
         {/* Message d'erreur ou de succès lors de la validation du formulaire */}
         <AnimatePresence>
           <View className="mb-12">
-            {data && (
+            {isSuccess && (
               <StateMessage message={data?.details} error={data?.error} />
             )}
-            {error && (
+            {isError && (
               <StateMessage message="Erreur du serveur interne" error={true} />
             )}
           </View>

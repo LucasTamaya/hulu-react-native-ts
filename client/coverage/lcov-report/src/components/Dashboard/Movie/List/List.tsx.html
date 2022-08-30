@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -105,7 +105,13 @@
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,13 +121,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,7 +160,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Dimensions, ScrollView, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 &nbsp;
 import Card from "../Card";
 import Loader from "../../../Animations/Loader";
@@ -161,27 +173,33 @@ export const List: React.FC = () =&gt; {
 &nbsp;
   const windowHeight = Dimensions.get("window").height;
 &nbsp;
-  const { isLoading, isError, isSuccess, data } = useAllMovies(index);
+  const { data, refetch, isLoading, isError, isSuccess, isRefetching } =
+    useAllMovies(index);
+&nbsp;
+  useEffect(() =&gt; {
+    refetch();
+  }, [index]);
 &nbsp;
   return (
     &lt;ScrollView className="mb-14" testID="movieList"&gt;
       {/* si il y a une erreur lors de la requête, on affiche un message d'erreur */}
       {isError &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;Text className="text-white text-2xl mt-10 ml-10"&gt;</span>
+        &lt;Text className="text-white text-2xl mt-10 ml-10"&gt;
           Une erreur est survenue au niveau du serveur interne
         &lt;/Text&gt;
       )}
 &nbsp;
       {/* pendant le chargement de la data, on affiche un loader */}
-      {isLoading &amp;&amp; (
-        &lt;View
-          className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
-          style={{ height: windowHeight / 2 }}
-          testID="loading"
-        &gt;
-          &lt;Loader size={80} color="#00ed82" /&gt;
-        &lt;/View&gt;
-      )}
+      {isLoading ||
+        (isRefetching &amp;&amp; (
+<span class="branch-2 cbranch-no" title="branch not covered" >          &lt;View</span>
+            className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
+            style={{ height: windowHeight / 2 }}
+            testID="loading"
+          &gt;
+            &lt;Loader size={80} color="#00ed82" /&gt;
+          &lt;/View&gt;
+        ))}
 &nbsp;
       {/* lorsque la data est arrivé, on affiche les films */}
       {isSuccess &amp;&amp;
@@ -196,7 +214,7 @@ export const List: React.FC = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-30T03:31:27.437Z
+                at 2022-08-30T16:47:40.462Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

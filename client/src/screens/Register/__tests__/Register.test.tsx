@@ -1,16 +1,18 @@
 import React from "react";
-import { act, fireEvent, render } from "@testing-library/react-native";
+import { act, fireEvent } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
+import { rest } from "msw";
 
 import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { Register } from "../Register";
+import { renderWithClient } from "../../../tests/utils";
+import { server } from "../../../Mocks/server";
 
-jest.mock("@react-navigation/native", () => {
-  return {
-    __esModule: true,
-    ...jest.requireActual("@react-navigation/native"),
-  };
-});
+beforeAll(() => server.listen());
+
+afterEach(() => server.resetHandlers());
+
+afterAll(() => server.close());
 
 const MockComponent: React.FC = () => {
   return (
@@ -22,24 +24,24 @@ const MockComponent: React.FC = () => {
 
 describe("Register Screen", () => {
   it("should renders the component", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("register")).toBeTruthy();
   });
 
   it("should renders 3 inputs", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("registerNameInput")).toBeTruthy();
     expect(getByTestId("registerEmailInput")).toBeTruthy();
     expect(getByTestId("registerPwdInput")).toBeTruthy();
   });
 
   it("should renders a 'Créer mon compte' button", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("registerBtn")).toBeTruthy();
   });
 
   it("should renders 3 error messages if I submit the form with empty inputs", async () => {
-    const { getByTestId, queryAllByText } = render(<MockComponent />);
+    const { getByTestId, queryAllByText } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.press(getByTestId("registerBtn"));
     });
@@ -47,7 +49,7 @@ describe("Register Screen", () => {
   });
 
   it("should renders 3 error messages if I submit the form with invalid name, email and password", async () => {
-    const { getByTestId, queryByText } = render(<MockComponent />);
+    const { getByTestId, queryByText } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.changeText(getByTestId("registerNameInput"), "j");
       fireEvent.changeText(getByTestId("registerEmailInput"), "john.doe.fr12");
@@ -60,7 +62,7 @@ describe("Register Screen", () => {
   });
 
   it("should not renders error messages if I submit the form with valid name, email and password", async () => {
-    const { getByTestId, queryAllByText, queryByText } = render(
+    const { getByTestId, queryAllByText, queryByText } = renderWithClient(
       <MockComponent />
     );
     await act(async () => {
@@ -79,7 +81,7 @@ describe("Register Screen", () => {
   });
 
   it("should renders a button to navigate to the Login Screen", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("loginNavBtn")).toBeTruthy();
   });
 
@@ -88,11 +90,86 @@ describe("Register Screen", () => {
     jest
       .spyOn(Navigation, "useNavigation")
       .mockReturnValue({ navigate: navigationMock });
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.press(getByTestId("loginNavBtn"));
     });
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("Login");
+  });
+
+  it("should navigate to the UserLogged Screen if the user is authenticated", async () => {
+    const navigationMock = jest.fn();
+    jest
+      .spyOn(Navigation, "useNavigation")
+      .mockReturnValue({ navigate: navigationMock });
+
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
+    await act(async () => {
+      fireEvent.changeText(getByTestId("registerNameInput"), "john");
+      fireEvent.changeText(
+        getByTestId("registerEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("registerPwdInput"), "123456");
+      fireEvent.press(getByTestId("registerBtn"));
+    });
+
+    expect(navigationMock).toHaveBeenCalledTimes(1);
+    expect(navigationMock).toHaveBeenCalledWith("UserLogged");
+    expect(await findByText("Compte crée avec succès")).toBeTruthy();
+  });
+
+  it("should stays on the Register Screen and shows an error message if the user is not authenticated", async () => {
+    // simule l'utilisateur non authentifié au niveau de la réponse de l'api avec MSW
+    server.use(
+      rest.post("*", (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            error: true,
+            details: "Utilisateur déjà existant",
+          })
+        );
+      })
+    );
+
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
+    await act(async () => {
+      fireEvent.changeText(getByTestId("registerNameInput"), "john");
+      fireEvent.changeText(
+        getByTestId("registerEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("registerPwdInput"), "123456");
+      fireEvent.press(getByTestId("registerBtn"));
+    });
+
+    expect(await findByText("Utilisateur déjà existant")).toBeTruthy();
+  });
+
+  it("should stays on the Register Screen and shows an error message if the fetch request fails", async () => {
+    // simule l'utilisateur non authentifié au niveau de la réponse de l'api avec MSW
+    server.use(
+      rest.post("*", (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
+    await act(async () => {
+      fireEvent.changeText(getByTestId("registerNameInput"), "john");
+      fireEvent.changeText(
+        getByTestId("registerEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("registerPwdInput"), "123456");
+      fireEvent.press(getByTestId("registerBtn"));
+    });
+
+    expect(await findByText("Erreur du serveur interne")).toBeTruthy();
   });
 });

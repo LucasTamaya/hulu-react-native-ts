@@ -1,5 +1,5 @@
 import React from "react";
-import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+import { act, fireEvent } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 
 import { Login } from "../Login";
@@ -7,13 +7,6 @@ import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { renderWithClient } from "../../../tests/utils";
 import { server } from "../../../Mocks/server";
 import { rest } from "msw";
-
-jest.mock("@react-navigation/native", () => {
-  return {
-    __esModule: true,
-    ...jest.requireActual("@react-navigation/native"),
-  };
-});
 
 jest.useFakeTimers();
 
@@ -103,26 +96,13 @@ describe("Login Screen", () => {
   });
 
   it("should navigate to the UserLogged Screen if the user is authenticated", async () => {
-    // server.use(
-    //   rest.post("*", (req, res, ctx) => {
-    //     return res(
-    //       ctx.status(500)
-    //       // ctx.json({
-    //       //   error: false,
-    //       //   details: "Connexion réussie",
-    //       //   userId: 1,
-    //       //   savedFilmIds: [],
-    //       // })
-    //     );
-    //   })
-    // );
-
     const navigationMock = jest.fn();
     jest
       .spyOn(Navigation, "useNavigation")
       .mockReturnValue({ navigate: navigationMock });
 
     const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
     await act(async () => {
       fireEvent.changeText(
         getByTestId("loginEmailInput"),
@@ -131,8 +111,59 @@ describe("Login Screen", () => {
       fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
       fireEvent.press(getByTestId("loginBtn"));
     });
+
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("UserLogged");
     expect(await findByText("Connexion réussie")).toBeTruthy();
+  });
+
+  it("should stays on the Login Screen and shows an error message if the user is not authenticated", async () => {
+    // simule l'utilisateur non authentifié au niveau de la réponse de l'api avec MSW
+    server.use(
+      rest.post("*", (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            error: true,
+            details: "Email ou mot de passe invalide",
+          })
+        );
+      })
+    );
+
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
+    await act(async () => {
+      fireEvent.changeText(
+        getByTestId("loginEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("loginPasswordInput"), "wrongPassword");
+      fireEvent.press(getByTestId("loginBtn"));
+    });
+
+    expect(await findByText("Email ou mot de passe invalide")).toBeTruthy();
+  });
+
+  it("should stays on the Login Screen and shows an error message if the fetch request fails", async () => {
+    // simule l'utilisateur non authentifié au niveau de la réponse de l'api avec MSW
+    server.use(
+      rest.post("*", (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+
+    const { getByTestId, findByText } = renderWithClient(<MockComponent />);
+
+    await act(async () => {
+      fireEvent.changeText(
+        getByTestId("loginEmailInput"),
+        "john.doe@orange.fr"
+      );
+      fireEvent.changeText(getByTestId("loginPasswordInput"), "123abcd");
+      fireEvent.press(getByTestId("loginBtn"));
+    });
+
+    expect(await findByText("Erreur du serveur interne")).toBeTruthy();
   });
 });

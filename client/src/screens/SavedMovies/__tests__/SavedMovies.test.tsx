@@ -1,12 +1,17 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import { act } from "@testing-library/react-native";
+import { rest } from "msw";
 
 import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { SavedMovies } from "../SavedMovies";
 import { renderWithClient } from "../../../tests/utils";
 import { server } from "../../../Mocks/server";
-import { rest } from "msw";
-import { act } from "react-test-renderer";
+
+beforeAll(() => server.listen());
+
+afterEach(() => server.resetHandlers());
+
+afterAll(() => server.close());
 
 const MockComponent: React.FC = () => {
   return (
@@ -21,11 +26,12 @@ describe("SavedFilms Screen", () => {
     const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("savedFilms")).toBeTruthy();
   });
+
   // it("should renders some movie cards if I have saved movies", async () => {
-  //   const { findAllByTestId, debug } = renderWithClient(<MockComponent />);
-  //   debug();
+  //   const { findAllByTestId } = renderWithClient(<MockComponent />);
   //   expect(await findAllByTestId("movieCard")).toHaveLength(0);
   // });
+
   // it("should renders an error message if there is an error during the fetch request", async () => {
   //   server.use(
   //     rest.get("*", (req, res, ctx) => {

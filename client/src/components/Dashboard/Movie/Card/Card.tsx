@@ -35,7 +35,10 @@ export const Card: React.FC<Props> = ({ data }) => {
       {/* Sinon on l'affiche */}
       {data.poster_path && (
         <View className="mt-10 px-7">
-          <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
+          <TouchableOpacity
+            onPress={() => setShowDetails(!showDetails)}
+            testID="detailsBtn"
+          >
             <View className="flex-row justify-center">
               <View className="w-[300px] h-[450px] relative">
                 <Image

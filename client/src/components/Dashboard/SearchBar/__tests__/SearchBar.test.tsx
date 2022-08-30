@@ -1,11 +1,11 @@
 import React from "react";
-import { act, fireEvent, render } from "@testing-library/react-native";
+import { act, fireEvent } from "@testing-library/react-native";
+import { rest } from "msw";
 
 import { AppWrapper } from "../../../../Mocks/AppWrapper";
 import { SearchBar } from "../SearchBar";
 import { server } from "../../../../Mocks/server";
 import { renderWithClient } from "../../../../tests/utils";
-import { rest } from "msw";
 
 beforeAll(() => server.listen());
 
@@ -23,17 +23,17 @@ const MockComponent: React.FC = () => {
 
 describe("SearchBar Component", () => {
   it("should renders the component", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("searchBar")).toBeTruthy();
   });
 
   it("should renders a search button", () => {
-    const { getByTestId } = render(<MockComponent />);
+    const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("search-btn")).toBeTruthy();
   });
 
   it("should renders an input", () => {
-    const { getByPlaceholderText } = render(<MockComponent />);
+    const { getByPlaceholderText } = renderWithClient(<MockComponent />);
     expect(
       getByPlaceholderText("Rechercher un film, une série...")
     ).toBeTruthy();

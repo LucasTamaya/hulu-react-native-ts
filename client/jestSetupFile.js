@@ -17,6 +17,13 @@ jest.mock("react-native-reanimated", () => {
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 
+jest.mock("@react-navigation/native", () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual("@react-navigation/native"),
+  };
+});
+
 // Establish API mocking before all tests.
 // beforeAll(() => server.listen());
 // // Reset any request handlers that we may add during the tests,

@@ -22,24 +22,15 @@ describe("Nav Component", () => {
   });
 
   it("should renders 10 navigation elements", () => {
-    const { getByText } = render(<MockComponent />);
-    expect(getByText("Tendance")).toBeTruthy();
-    expect(getByText("Mieux notés")).toBeTruthy();
-    expect(getByText("Action")).toBeTruthy();
-    expect(getByText("Comédie")).toBeTruthy();
-    expect(getByText("Horreur")).toBeTruthy();
-    expect(getByText("Romance")).toBeTruthy();
-    expect(getByText("Mystère")).toBeTruthy();
-    expect(getByText("SciFi")).toBeTruthy();
-    expect(getByText("Western")).toBeTruthy();
-    expect(getByText("Animation")).toBeTruthy();
-    expect(getByText("Films TV")).toBeTruthy();
+    const { getAllByTestId } = render(<MockComponent />);
+    expect(getAllByTestId("navBtn")).toHaveLength(11);
   });
 
-  it("should call the setIndex function with the number 5 if I click on the 'Romance' navigation button", async () => {
-    const { getByTestId } = render(<MockComponent />);
-    fireEvent.press(getByTestId("navBtn"));
-    expect(mockSetIndex).toHaveBeenCalledTimes(1);
-    expect(mockSetIndex).toHaveBeenCalledWith(5);
+  it("should call the setIndex function with the appropriate number in parameter if I click on a navigation button", async () => {
+    const { getAllByTestId } = render(<MockComponent />);
+    getAllByTestId("navBtn").map((button, idx) => {
+      fireEvent.press(button);
+      expect(mockSetIndex).toHaveBeenCalledWith(idx);
+    });
   });
 });
