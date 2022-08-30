@@ -15,23 +15,6 @@ import { useSavedMovies } from "../../hooks/useSavedMovies";
 export const SavedMovies: React.FC = () => {
   const { savedMovieIds } = useContext(AppContext) as AppContextType;
 
-  // const {
-  //   isLoading,
-  //   error,
-  //   data: savedMovies,
-  // } = useQuery(["savedMovies"], async () => {
-  //   // pour chaque id dans la liste, on va faire une requête vers l'API de TMDB pour récupérer les données correspondant aux films sauvegardés
-  //   const allReq = await Promise.all(
-  //     savedMovieIds.map(async (id) => {
-  //       const { data } = await axios.get(
-  //         `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`
-  //       );
-  //       return data;
-  //     })
-  //   );
-  //   return allReq;
-  // });
-
   const { isLoading, error, isSuccess, data } = useSavedMovies(
     TMDB_API_KEY,
     savedMovieIds

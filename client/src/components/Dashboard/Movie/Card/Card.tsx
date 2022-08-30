@@ -9,13 +9,13 @@ interface Props {
   data: IMovieData;
 }
 
+export const TMDB_IMG_URL = "https://image.tmdb.org/t/p/original";
+
 export const Card: React.FC<Props> = ({ data }) => {
   const [showDetails, setShowDetails] = useState(false);
   const [save, setSave] = useState(false);
 
   const { savedMovieIds } = useContext(AppContext) as AppContextType;
-
-  const TMDB_IMG_URL = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
     // on compare l'id du film qu'on observe avec celui de la liste récupérée au préalable, afin de voir si il a été sauvegardé ou non, pour adapter l'icon Heart dans MovieDetails
@@ -41,7 +41,7 @@ export const Card: React.FC<Props> = ({ data }) => {
                 <Image
                   source={{ uri: `${TMDB_IMG_URL}${data.poster_path}` }}
                   className="w-full h-full"
-                  testID="movieCard-img"
+                  testID="movieCardImg"
                 />
 
                 {/* Détails du film */}

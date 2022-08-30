@@ -24,6 +24,7 @@ import { BASE_URL } from "../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../contexts/AppContext";
 import StateMessage from "../../components/StateMessage";
 import Loader from "../../components/Animations/Loader";
+// import { useLogin } from "../../hooks/useLogin";
 
 export const Login: React.FC = () => {
   const { setSavedMovieIds } = useContext(AppContext) as AppContextType;
@@ -40,7 +41,7 @@ export const Login: React.FC = () => {
     mutate(data);
   };
 
-  const handleChangeLogin = async ({
+  const handleLogin = async ({
     email,
     password,
   }: ILoginFormValues): Promise<any> => {
@@ -69,8 +70,9 @@ export const Login: React.FC = () => {
     return data;
   };
 
-  const { isLoading, error, data, mutate } = useMutation(handleChangeLogin);
+  const { isLoading, error, data, mutate } = useMutation(handleLogin);
 
+  // const { isLoading, error, data, mutate } = useLogin()
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}

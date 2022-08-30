@@ -16,7 +16,6 @@ const fetchSavedMovies = async (
       return data;
     })
   );
-  console.log(allReq);
   return allReq;
 };
 

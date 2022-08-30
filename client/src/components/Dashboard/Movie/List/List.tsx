@@ -1,5 +1,5 @@
 import { Dimensions, ScrollView, Text, View } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import Card from "../Card";
 import Loader from "../../../Animations/Loader";
@@ -12,33 +12,37 @@ export const List: React.FC = () => {
 
   const windowHeight = Dimensions.get("window").height;
 
-  const allMovies = useAllMovies(index);
+  const { data, refetch, isLoading, isError, isSuccess, isRefetching } =
+    useAllMovies(index);
+
+  useEffect(() => {
+    refetch();
+  }, [index]);
 
   return (
     <ScrollView className="mb-14" testID="movieList">
       {/* si il y a une erreur lors de la requête, on affiche un message d'erreur */}
-      {allMovies.error && (
+      {isError && (
         <Text className="text-white text-2xl mt-10 ml-10">
-          Une erreur au niveau du serveur interne est survenue
+          Une erreur est survenue au niveau du serveur interne
         </Text>
       )}
 
       {/* pendant le chargement de la data, on affiche un loader */}
-      {allMovies.isLoading && (
-        <View
-          className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
-          style={{ height: windowHeight / 2 }}
-          testID="loading"
-        >
-          <Loader size={80} color="#00ed82" />
-        </View>
-      )}
+      {isLoading ||
+        (isRefetching && (
+          <View
+            className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
+            style={{ height: windowHeight / 2 }}
+            testID="loading"
+          >
+            <Loader size={80} color="#00ed82" />
+          </View>
+        ))}
 
       {/* lorsque la data est arrivé, on affiche les films */}
-      {allMovies.isSuccess &&
-        allMovies.data.map((movie: IMovieData) => (
-          <Card key={movie.id} data={movie} />
-        ))}
+      {isSuccess &&
+        data.map((movie: IMovieData) => <Card key={movie.id} data={movie} />)}
     </ScrollView>
   );
 };

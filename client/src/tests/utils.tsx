@@ -3,11 +3,10 @@ import { rest } from "msw";
 import * as React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import requests from "../../assets/data/movieRequests";
 import { allMovies } from "./fakeData";
 
 export const handlers = [
-  rest.get("*/trending/*", (req, res, ctx) => {
+  rest.get("*/trending*", (req, res, ctx) => {
     console.log("je suis dans le premier handler");
     return res(
       ctx.status(200),
@@ -42,8 +41,10 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        email: "john.doe@orange.fr",
-        password: [],
+        error: false,
+        details: "Connexion réussie",
+        userId: 1,
+        savedFilmIds: [],
       })
     );
   }),

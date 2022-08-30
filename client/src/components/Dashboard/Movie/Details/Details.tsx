@@ -18,6 +18,16 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
     AppContext
   ) as AppContextType;
 
+  const handleSaveMovie = () => {
+    if (save) {
+      setSave(false);
+      unsaveMovie();
+    } else {
+      setSave(true);
+      saveMovie();
+    }
+  };
+
   // sauvegarde le film
   const saveMovie = async () => {
     // update rapide côté frontend, pour voir les modifications casi instantannément
@@ -69,23 +79,23 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
           <Text className="text-sm text-white">{data.vote_count}</Text>
         </View>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          if (save) {
-            setSave(!save);
-            unsaveMovie();
-          } else {
-            setSave(!save);
-            saveMovie();
-          }
-        }}
-      >
+      <TouchableOpacity onPress={handleSaveMovie} testID="saveBtn">
         <View className="w-[30px] h-[30px] flex-row justify-center items-center">
           {/* si film sauvegardé, coeur plein, sinon coeur vide */}
           {save ? (
-            <FontAwesome name="heart" size={25} color="#fff" />
+            <FontAwesome
+              name="heart"
+              size={25}
+              color="#fff"
+              testID="heartIcon"
+            />
           ) : (
-            <FontAwesome name="heart-o" size={25} color="#fff" />
+            <FontAwesome
+              name="heart-o"
+              size={25}
+              color="#fff"
+              testID="emptyHeartIcon"
+            />
           )}
         </View>
       </TouchableOpacity>

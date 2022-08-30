@@ -1,13 +1,13 @@
-import { ScrollView, Text, TouchableOpacity } from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 
-import { AppContext } from "../../../contexts/AppContext";
+import { AppContext, AppContextType } from "../../../contexts/AppContext";
 
 export const Nav: React.FC = () => {
-  const { setIndex } = useContext(AppContext);
+  const { setIndex } = useContext(AppContext) as AppContextType;
 
   return (
-    <ScrollView horizontal={true} className="flex-row gap-x-10">
+    <ScrollView horizontal={true} className="flex-row gap-x-10" testID="nav">
       <TouchableOpacity onPress={() => setIndex(0)}>
         <Text className="text-white font-bold text-lg pl-10">Tendance</Text>
       </TouchableOpacity>
@@ -23,9 +23,11 @@ export const Nav: React.FC = () => {
       <TouchableOpacity onPress={() => setIndex(4)}>
         <Text className="text-white font-bold text-lg">Horreur</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setIndex(5)}>
-        <Text className="text-white font-bold text-lg">Romance</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity testID="navBtn">
+          <Text className="text-white font-bold text-lg">Romance</Text>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity onPress={() => setIndex(6)}>
         <Text className="text-white font-bold text-lg">Mystère</Text>
       </TouchableOpacity>

@@ -23,7 +23,7 @@ export const Dashboard: React.FC<Props> = ({}) => {
   }, []);
 
   return (
-    <SafeAreaView className="bg-[#151516] h-full">
+    <SafeAreaView className="bg-[#151516] h-full" testID="dashboard">
       <Header />
       <ScrollView className="bg-[#151516] mt-10">
         <Nav />

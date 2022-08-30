@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1661830287944" clover="3.2.0">
+  <project timestamp="1661830287944" name="All files">
+    <metrics statements="229" coveredstatements="177" conditionals="90" coveredconditionals="72" methods="90" coveredmethods="62" elements="409" coveredelements="311" complexity="0" loc="229" ncloc="229" packages="28" files="53" classes="53"/>
+    <package name="assets.data">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="covers.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\data\covers.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="events.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\data\events.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="movieRequests.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\data\movieRequests.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="assets.images">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="cover-1.jpg" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\cover-1.jpg">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+      </file>
+      <file name="cover-2.jpg" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\cover-2.jpg">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="cover-3.jpg" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\cover-3.jpg">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="cover-4.jpg" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\cover-4.jpg">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="header.jpg" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\header.jpg">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+      <file name="logo.png" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\logo.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+      </file>
+      <file name="logos.png" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\images\logos.png">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.Mocks">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="AppWrapper.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\Mocks\AppWrapper.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="12" count="19" type="stmt"/>
+        <line num="13" count="72" type="stmt"/>
+        <line num="14" count="72" type="stmt"/>
+        <line num="15" count="72" type="stmt"/>
+        <line num="16" count="72" type="stmt"/>
+        <line num="18" count="72" type="stmt"/>
+      </file>
+      <file name="server.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\Mocks\server.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Animations.Loader">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Loader.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Animations\Loader\Loader.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Animations\Loader\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Dashboard.Header">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Header.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Header\Header.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Header\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Dashboard.Movie.Card">
+      <metrics statements="12" coveredstatements="8" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="2"/>
+      <file name="Card.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\Card\Card.tsx">
+        <metrics statements="12" coveredstatements="8" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="2"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="23" type="stmt"/>
+        <line num="16" count="23" type="stmt"/>
+        <line num="18" count="23" type="stmt"/>
+        <line num="20" count="23" type="stmt"/>
+        <line num="22" count="23" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="30" count="23" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\Card\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Dashboard.Movie.Details">
+      <metrics statements="21" coveredstatements="18" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="4"/>
+      <file name="Details.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\Details\Details.tsx">
+        <metrics statements="21" coveredstatements="18" conditionals="10" coveredconditionals="8" methods="5" coveredmethods="4"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
+        <line num="22" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="32" count="7" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="46" count="7" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="61" count="7" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\Details\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Dashboard.Movie.List">
+      <metrics statements="6" coveredstatements="6" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
+      <file name="List.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\List\List.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="39" count="20" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Movie\List\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Dashboard.Nav">
+      <metrics statements="14" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="1"/>
+      <file name="Nav.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Nav\Nav.tsx">
+        <metrics statements="14" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="1"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Dashboard\Nav\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Home.AllTheTvYouLove">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="AllTheTvYouLove.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\AllTheTvYouLove\AllTheTvYouLove.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="28" count="12" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\AllTheTvYouLove\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Home.Cover">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Cover.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Cover\Cover.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="13" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Cover\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Home.Events">
+      <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="5"/>
+      <file name="Events.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Events\Events.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="5"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="11" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+        <line num="20" count="11" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Events\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Home.Header">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="Header.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Header\Header.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\Header\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.Home.LiveTvMakesItBetter">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="LiveTvMakesItBetter.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\LiveTvMakesItBetter\LiveTvMakesItBetter.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\Home\LiveTvMakesItBetter\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.SettingsPopUp.ChangePassword">
+      <metrics statements="17" coveredstatements="14" conditionals="14" coveredconditionals="11" methods="7" coveredmethods="6"/>
+      <file name="ChangePassword.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\SettingsPopUp\ChangePassword\ChangePassword.tsx">
+        <metrics statements="17" coveredstatements="14" conditionals="14" coveredconditionals="11" methods="7" coveredmethods="6"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="9" type="stmt"/>
+        <line num="32" count="9" type="stmt"/>
+        <line num="35" count="9" type="stmt"/>
+        <line num="39" count="9" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="9" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="9" type="stmt"/>
+        <line num="58" count="9" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="80" count="15" type="stmt"/>
+        <line num="107" count="15" type="stmt"/>
+        <line num="138" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\SettingsPopUp\ChangePassword\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.SettingsPopUp.Logout">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="Logout.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\SettingsPopUp\Logout\Logout.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\SettingsPopUp\Logout\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components.StateMessage">
+      <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <file name="StateMessage.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\StateMessage\StateMessage.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\StateMessage\index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.contexts">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="AppContext.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\contexts\AppContext.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="12" count="19" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.hooks">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="useAllMovies.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\hooks\useAllMovies.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.schemas">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="validation.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\schemas\validation.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Dashboard">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="Dashboard.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Dashboard\Dashboard.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Home">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Home.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Home\Home.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Legal">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="Legal.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Legal\Legal.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Login">
+      <metrics statements="21" coveredstatements="14" conditionals="16" coveredconditionals="12" methods="7" coveredmethods="6"/>
+      <file name="Login.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Login\Login.tsx">
+        <metrics statements="21" coveredstatements="14" conditionals="16" coveredconditionals="12" methods="7" coveredmethods="6"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="9" type="stmt"/>
+        <line num="32" count="9" type="stmt"/>
+        <line num="35" count="9" type="stmt"/>
+        <line num="39" count="9" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="9" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="73" count="9" type="stmt"/>
+        <line num="76" count="9" type="stmt"/>
+        <line num="94" count="15" type="stmt"/>
+        <line num="121" count="15" type="stmt"/>
+        <line num="157" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Register">
+      <metrics statements="22" coveredstatements="15" conditionals="20" coveredconditionals="16" methods="8" coveredmethods="7"/>
+      <file name="Register.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Register\Register.tsx">
+        <metrics statements="22" coveredstatements="15" conditionals="20" coveredconditionals="16" methods="8" coveredmethods="7"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="9" type="stmt"/>
+        <line num="31" count="9" type="stmt"/>
+        <line num="34" count="9" type="stmt"/>
+        <line num="38" count="9" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="43" count="9" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="73" count="9" type="stmt"/>
+        <line num="75" count="9" type="stmt"/>
+        <line num="94" count="15" type="stmt"/>
+        <line num="119" count="15" type="stmt"/>
+        <line num="145" count="15" type="stmt"/>
+        <line num="184" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.screens.Settings">
+      <metrics statements="10" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="3"/>
+      <file name="Settings.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Settings\Settings.tsx">
+        <metrics statements="10" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="3"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.tests">
+      <metrics statements="21" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="3"/>
+      <file name="fakeData.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\tests\fakeData.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="20" type="stmt"/>
+      </file>
+      <file name="utils.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\tests\utils.tsx">
+        <metrics statements="17" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="3"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="96" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="13" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <file name="asyncStorage.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\utils\asyncStorage.ts">
+        <metrics statements="12" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+      </file>
+      <file name="urlTemplate.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\utils\urlTemplate.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="8" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

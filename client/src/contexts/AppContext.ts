@@ -10,12 +10,3 @@ export type AppContextType = {
 };
 
 export const AppContext = createContext<AppContextType | null>(null);
-
-// export const AppContext = createContext({
-//   index: 0,
-//   userId: "",
-//   savedFilmIds: [],
-//   setIndex: (index: number) => {},
-//   setUserId: (userId: string | undefined) => {},
-//   setSavedFilmIds: (prev: any[]) => {},
-// });

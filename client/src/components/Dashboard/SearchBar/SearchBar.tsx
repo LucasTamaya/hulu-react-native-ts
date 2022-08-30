@@ -21,16 +21,16 @@ export const SearchBar: React.FC = () => {
 
   const windowHeight = Dimensions.get("window").height;
 
-  const mutation = useSearchMovie(TMDB_API_KEY, searchInput);
+  const { mutate, data, isSuccess, isLoading, isError } = useSearchMovie(
+    TMDB_API_KEY,
+    searchInput
+  );
 
   return (
     <ScrollView testID="searchBar">
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
         <View className="h-full border-r border-white p-4">
-          <TouchableOpacity
-            onPress={() => mutation.mutate()}
-            testID="search-btn"
-          >
+          <TouchableOpacity onPress={() => mutate()} testID="search-btn">
             <FontAwesome name="search" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -41,11 +41,11 @@ export const SearchBar: React.FC = () => {
           keyboardType="web-search"
           value={searchInput}
           onChangeText={(text) => setSearchInput(text)}
-          onSubmitEditing={() => mutation.mutate()}
+          onSubmitEditing={() => mutate()}
         />
       </KeyboardAvoidingView>
 
-      {mutation.isLoading && (
+      {isLoading && (
         <View
           className="absolute top-0 left-0 z-10 w-full flex flex-row justify-center items-center"
           style={{ height: windowHeight / 2 }}
@@ -54,17 +54,17 @@ export const SearchBar: React.FC = () => {
         </View>
       )}
 
-      {mutation.isSuccess && mutation.data.length === 0 && (
+      {isSuccess && data.length === 0 && (
         <Text className="text-white text-2xl mt-10">
           Nous n'avons rien trouvé à propos de {searchInput}
         </Text>
       )}
 
-      {mutation.isSuccess &&
-        mutation.data.length > 0 &&
-        mutation.data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
+      {isSuccess &&
+        data.length > 0 &&
+        data.map((x: IMovieData) => <Card key={x.id} data={x} />)}
 
-      {mutation.error && (
+      {isError && (
         <Text className="text-white text-2xl mt-10">
           Une erreur au niveau du serveur interne est survenue
         </Text>

@@ -40,7 +40,7 @@ describe("SearchBar Component", () => {
   });
 
   it("should renders a movie card when I search for an existing movie", async () => {
-    const { getByPlaceholderText, getByTestId, debug } = renderWithClient(
+    const { getByPlaceholderText, getByTestId } = renderWithClient(
       <MockComponent />
     );
     await act(async () => {
@@ -50,9 +50,9 @@ describe("SearchBar Component", () => {
       );
       fireEvent.press(getByTestId("search-btn"));
     });
-    expect(await getByTestId("movieCard")).toBeTruthy();
-    expect(await getByTestId("movieCard-img")).toBeTruthy();
-    expect(await getByTestId("movieCard-img").props.source.uri).toBe(
+    expect(getByTestId("movieCard")).toBeTruthy();
+    expect(getByTestId("movieCardImg")).toBeTruthy();
+    expect(getByTestId("movieCardImg").props.source.uri).toBe(
       "https://image.tmdb.org/t/p/original/film_poster_path.jpg"
     );
   });
@@ -80,7 +80,7 @@ describe("SearchBar Component", () => {
       fireEvent.press(getByTestId("search-btn"));
     });
     expect(
-      await getByText(`Nous n'avons rien trouvé à propos de ${SEARCH_INPUT}`)
+      getByText(`Nous n'avons rien trouvé à propos de ${SEARCH_INPUT}`)
     ).toBeTruthy();
   });
 
@@ -101,7 +101,7 @@ describe("SearchBar Component", () => {
       fireEvent.press(getByTestId("search-btn"));
     });
     expect(
-      await getByText("Une erreur au niveau du serveur interne est survenue")
+      getByText("Une erreur au niveau du serveur interne est survenue")
     ).toBeTruthy();
   });
 });

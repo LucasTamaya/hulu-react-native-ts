@@ -5,6 +5,8 @@ import * as Navigation from "@react-navigation/native";
 import { Login } from "../Login";
 import { AppWrapper } from "../../../Mocks/AppWrapper";
 import { renderWithClient } from "../../../tests/utils";
+import { server } from "../../../Mocks/server";
+import { rest } from "msw";
 
 jest.mock("@react-navigation/native", () => {
   return {
@@ -74,25 +76,6 @@ describe("Login Screen", () => {
     expect(queryByText("Ce mot de passe est trop court")).toBeFalsy();
   });
 
-  // it("should navigate to the UserLogged Screen if I submit the form with valid email and password", async () => {
-  //   const navigationMock = jest.fn();
-  //   jest
-  //     .spyOn(Navigation, "useNavigation")
-  //     .mockReturnValue({ navigate: navigationMock });
-  //   const { getByTestId, debug } = renderWithClient(<MockComponent />);
-  //   await act(async () => {
-  //     fireEvent.changeText(
-  //       getByTestId("loginEmailInput"),
-  //       "john.doe@orange.fr"
-  //     );
-  //     fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
-  //     fireEvent.press(getByTestId("loginBtn"));
-  //   });
-  //   debug();
-  //   expect(await navigationMock).toHaveBeenCalledWith("Register");
-  //   expect(await navigationMock).toHaveBeenCalledTimes(2);
-  // });
-
   it("should renders a button to navigate to the Register Screen", () => {
     const { getByTestId } = render(<MockComponent />);
     expect(getByTestId("registerNavBtn")).toBeTruthy();
@@ -110,4 +93,39 @@ describe("Login Screen", () => {
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("Register");
   });
+
+  // it("should navigate to the UserLogged Screen if I submit the form with valid email and password", async () => {
+  //   server.use(
+  //     rest.post("*", (req, res, ctx) => {
+  //       console.log(req.text());
+  //       return res(
+  //         ctx.status(200),
+  //         ctx.json({
+  //           error: false,
+  //           details: "Connexion réussie",
+  //           userId: 1,
+  //           savedFilmIds: [],
+  //         })
+  //       );
+  //     })
+  //   );
+
+  //   const navigationMock = jest.fn();
+  //   jest
+  //     .spyOn(Navigation, "useNavigation")
+  //     .mockReturnValue({ navigate: navigationMock });
+
+  //   const { getByTestId, debug } = renderWithClient(<MockComponent />);
+  //   await act(async () => {
+  //     fireEvent.changeText(
+  //       getByTestId("loginEmailInput"),
+  //       "john.doe@orange.fr"
+  //     );
+  //     fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
+  //     fireEvent.press(getByTestId("loginBtn"));
+  //   });
+  //   debug();
+  //   expect(await navigationMock).toHaveBeenCalledWith("Register");
+  //   expect(await navigationMock).toHaveBeenCalledTimes(2);
+  // });
 });
