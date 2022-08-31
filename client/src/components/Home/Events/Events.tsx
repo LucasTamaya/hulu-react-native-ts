@@ -23,7 +23,7 @@ export const Events = () => {
         source={{ uri: eventsData[index].bgUri }}
         resizeMode="cover"
         style={{ width: "100%", height: 700, position: "relative" }}
-        testID="bg-image"
+        testID="bgImage"
       >
         <View className="absolute top-0 left-0 w-full h-full flex flex-col items-center pt-8 bg-black/30">
           <View className="flex flex-row items-center gap-x-6 px-8">

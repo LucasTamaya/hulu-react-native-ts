@@ -61,10 +61,10 @@ export const Login: React.FC = () => {
       setSavedMovieIds(data.savedFilmIds);
 
       // fait une pause de 1.5 secondes pour afficher un message
-      // setTimeout(() => {
-      // redirige l'utilisateur vers le dashboard
-      navigation.navigate("UserLogged");
-      // }, 2000);
+      setTimeout(() => {
+        // redirige l'utilisateur vers le dashboard
+        navigation.navigate("UserLogged");
+      }, 2000);
     }
 
     return data;
@@ -126,7 +126,7 @@ export const Login: React.FC = () => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    testID="loginPasswordInput"
+                    testID="loginPwdInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}

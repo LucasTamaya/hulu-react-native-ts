@@ -23,10 +23,10 @@ import { AppContext, AppContextType } from "../../../contexts/AppContext";
 import Loader from "../../Animations/Loader";
 
 interface Props {
-  setChangePasswordPopUp: (state: boolean) => void;
+  setShowPwdPopUp: (state: boolean) => void;
 }
 
-export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
+export const ChangePassword: React.FC<Props> = ({ setShowPwdPopUp }) => {
   const { userId } = useContext(AppContext) as AppContextType;
 
   const windowHeight = Dimensions.get("window").height;
@@ -63,7 +63,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
       exit={{
         opacity: 0,
       }}
-      testID="changePasswordPopUp"
+      testID="changePwdPopUp"
     >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View className="bg-white w-full p-5 rounded-md">
@@ -82,7 +82,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
                     className="border-2 border-black px-4 py-2 rounded"
                     onChangeText={onChange}
                     secureTextEntry={true}
-                    testID="currentPassword-input"
+                    testID="currentPwdInput"
                   />
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
@@ -110,7 +110,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
                     onChangeText={onChange}
                     secureTextEntry={true}
                     keyboardType="web-search"
-                    testID="newPassword-input"
+                    testID="newPwdInput"
                     onSubmitEditing={handleSubmit(onSubmit)}
                   />
                   {/* Message d'erreur, si erreur il y a */}
@@ -124,10 +124,7 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
             />
           </KeyboardAvoidingView>
 
-          <TouchableOpacity
-            onPress={handleSubmit(onSubmit)}
-            testID="modify-btn"
-          >
+          <TouchableOpacity onPress={handleSubmit(onSubmit)} testID="modifyBtn">
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#01ED83] rounded-md mb-5">
               {isLoading ? (
                 <Loader size={30} color="black" />
@@ -138,8 +135,8 @@ export const ChangePassword: React.FC<Props> = ({ setChangePasswordPopUp }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setChangePasswordPopUp(false)}
-            testID="cancel-btn"
+            onPress={() => setShowPwdPopUp(false)}
+            testID="cancelBtn"
           >
             <View className="w-full h-12 flex flex-row justify-center items-center bg-[#2e2e30] rounded-md">
               <Text className="uppercase text-white font-bold">Annuler</Text>

@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TMDB_API_KEY } from "@env";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 
 import Header from "../../components/Dashboard/Header";
 import Card from "../../components/Dashboard/Movie/Card";
@@ -13,10 +11,13 @@ import { IMovieData } from "../../interfaces";
 import { useSavedMovies } from "../../hooks/useSavedMovies";
 
 export const SavedMovies: React.FC = () => {
-  const { savedMovieIds } = useContext(AppContext) as AppContextType;
+  const { userId } = useContext(AppContext) as AppContextType;
 
-  const { isLoading, isLoadingError, isError, isSuccess, data } =
-    useSavedMovies(TMDB_API_KEY, savedMovieIds);
+  const { isLoading, isError, isSuccess, data } = useSavedMovies(userId);
+
+  if (isSuccess) {
+    console.log(data);
+  }
 
   return (
     <SafeAreaView className="bg-[#151516] h-full" testID="savedFilms">
@@ -28,14 +29,21 @@ export const SavedMovies: React.FC = () => {
 
         {isLoading && <Loader size={80} color="#00ed82" />}
 
+        {isSuccess && data.length == 0 && (
+          <Text className="text-white text-2xl mt-10 px-10">
+            Aucun films sauvegardés
+          </Text>
+        )}
+
         {isSuccess &&
+          data.length > 0 &&
           data.map((savedMovie: IMovieData) => (
             <Card key={savedMovie.id} data={savedMovie} />
           ))}
 
         {isError && (
           <Text className="text-white text-2xl mt-10 px-10">
-            Une erreur est survenue
+            Une erreur est survenue, veuillez réessayer
           </Text>
         )}
       </ScrollView>

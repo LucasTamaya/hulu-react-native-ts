@@ -1,11 +1,10 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, act } from "@testing-library/react-native";
 import { AnimatePresence } from "moti";
 import * as Navigation from "@react-navigation/native";
 
 import { Logout } from "../Logout";
-import { AppWrapper } from "../../../../Mocks/AppWrapper";
-import { act } from "react-test-renderer";
+import { AppWrapper } from "../../../../tests/AppWrapper";
 
 // afin d'éviter l'erreur:
 // TypeError: Cannot redefine property: useNavigationat Function.defineProperty (<anonymous>)
@@ -51,18 +50,14 @@ describe("Logout Component", () => {
       .spyOn(Navigation, "useNavigation")
       .mockReturnValue({ navigate: navigationMock });
     const { getByTestId } = render(<MockComponent />);
-    await act(async () => {
-      fireEvent.press(getByTestId("disconnectBtn"));
-    });
+    fireEvent.press(getByTestId("disconnectBtn"));
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("Home");
   });
 
   it("should call the setLogoutPopUpMock function with false when I click on the 'Annuler' button", async () => {
     const { getByTestId } = render(<MockComponent />);
-    await act(async () => {
-      fireEvent.press(getByTestId("cancelBtn"));
-    });
+    fireEvent.press(getByTestId("cancelBtn"));
     expect(setLogoutPopUpMock).toHaveBeenCalledTimes(1);
     expect(setLogoutPopUpMock).toHaveBeenCalledWith(false);
   });

@@ -30,7 +30,7 @@ export const SearchBar: React.FC = () => {
     <ScrollView testID="searchBar">
       <KeyboardAvoidingView className="border border-white rounded flex-row mt-10">
         <View className="h-full border-r border-white p-4">
-          <TouchableOpacity onPress={() => mutate()} testID="search-btn">
+          <TouchableOpacity onPress={() => mutate()} testID="searchBtn">
             <FontAwesome name="search" size={20} color="#fff" />
           </TouchableOpacity>
         </View>

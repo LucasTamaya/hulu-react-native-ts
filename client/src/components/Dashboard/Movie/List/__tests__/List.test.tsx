@@ -1,10 +1,10 @@
 import React from "react";
 import { rest } from "msw";
 
-import { AppWrapper } from "../../../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../../../tests/AppWrapper";
 import { renderWithClient } from "../../../../../tests/utils";
 import { List } from "../List";
-import { server } from "../../../../../Mocks/server";
+import { server } from "../../../../../tests/server";
 
 beforeAll(() => server.listen());
 

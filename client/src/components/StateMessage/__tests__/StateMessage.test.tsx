@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { StateMessage } from "../StateMessage";
 
 interface Props {

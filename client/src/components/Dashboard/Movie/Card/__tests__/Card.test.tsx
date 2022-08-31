@@ -1,7 +1,7 @@
 import React from "react";
-import { act, fireEvent } from "@testing-library/react-native";
+import { fireEvent } from "@testing-library/react-native";
 
-import { AppWrapper } from "../../../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../../../tests/AppWrapper";
 import { Card, TMDB_IMG_URL } from "../Card";
 import { IMovieData } from "../../../../../interfaces";
 import { renderWithClient } from "../../../../../tests/utils";

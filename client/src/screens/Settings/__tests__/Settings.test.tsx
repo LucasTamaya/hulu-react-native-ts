@@ -3,7 +3,7 @@ import { cleanup, fireEvent, render } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 import { Linking } from "react-native";
 
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { Settings } from "../Settings";
 import { renderWithClient } from "../../../tests/utils";
 
@@ -36,7 +36,7 @@ describe("Settings Screen", () => {
   it("should renders 5 buttons", () => {
     const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("logoutBtn")).toBeTruthy();
-    expect(getByTestId("changePasswordBtn")).toBeTruthy();
+    expect(getByTestId("changePwdBtn")).toBeTruthy();
     expect(getByTestId("legalNavBtn")).toBeTruthy();
     expect(getByTestId("linkedinNavBtn")).toBeTruthy();
     expect(getByTestId("githubNavBtn")).toBeTruthy();
@@ -48,10 +48,10 @@ describe("Settings Screen", () => {
     expect(findByTestId("logoutPopUp")).toBeTruthy();
   });
 
-  it("should open the ChangePasswordPopUp if I click on the corresponding button", async () => {
+  it("should open the changePwdPopup if I click on the corresponding button", async () => {
     const { getByTestId, findByTestId } = renderWithClient(<MockComponent />);
-    fireEvent.press(getByTestId("changePasswordBtn"));
-    expect(findByTestId("changePasswordPopUp")).toBeTruthy();
+    fireEvent.press(getByTestId("changePwdBtn"));
+    expect(findByTestId("changePwdPopup")).toBeTruthy();
   });
 
   it("should navigate to the Legal Screen if I click on the corresponding button", async () => {

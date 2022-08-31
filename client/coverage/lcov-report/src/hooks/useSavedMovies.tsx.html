@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/hooks/useAllMovies.tsx</title>
+    <title>Code coverage report for src/hooks/useSavedMovies.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/hooks</a> useAllMovies.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/hooks</a> useSavedMovies.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -85,31 +85,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import axios from "axios";
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 &nbsp;
-import requests from "../../assets/data/movieRequests";
 import { IMovieData } from "../interfaces";
+import { BASE_URL } from "../utils/urlTemplate";
 &nbsp;
-// récupère l'url dans la liste des requêtes, à l'index correspondant, par défault index = 0. La navigation va nous permettre de varier l'index selon la catégorie de films qu'on souhaite afficher
-&nbsp;
-export const fetchAllMovies = async (index: number): Promise&lt;IMovieData[]&gt; =&gt; {
-  const { data } = await axios.get(requests[index]);
-  return data.results;
+const fetchSavedMovies = async (
+  userId: string | undefined
+): Promise&lt;IMovieData[]&gt; =&gt; {
+  const { data } = await axios.get(`${BASE_URL}/movies/saved/${userId}`);
+  return data.savedMovies;
 };
 &nbsp;
-export const useAllMovies = (index: number): UseQueryResult&lt;IMovieData[]&gt; =&gt; {
-  return useQuery(["allMovies"], () =&gt; fetchAllMovies(index));
+export const useSavedMovies = (userId: string | undefined) =&gt; {
+  return useQuery(["savedMovies"], () =&gt; fetchSavedMovies(userId));
 };
 &nbsp;</pre></td></tr></table></pre>
 

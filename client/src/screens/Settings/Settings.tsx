@@ -21,8 +21,7 @@ export const Settings: React.FC = ({}) => {
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   const [logoutPopUp, setLogoutPopUp] = useState<boolean>(false);
-  const [changePasswordPopUp, setChangePasswordPopUp] =
-    useState<boolean>(false);
+  const [showPwdPopUp, setShowPwdPopUp] = useState<boolean>(false);
 
   return (
     <SafeAreaView className="bg-[#151516] h-full" testID="settings">
@@ -48,8 +47,8 @@ export const Settings: React.FC = ({}) => {
 
         <View className="border-t border-b border-white">
           <TouchableOpacity
-            onPress={() => setChangePasswordPopUp(true)}
-            testID="changePasswordBtn"
+            onPress={() => setShowPwdPopUp(true)}
+            testID="changePwdBtn"
           >
             <View className="flex-row justify-between items-center p-5">
               <View className="flex-row items-center">
@@ -121,9 +120,7 @@ export const Settings: React.FC = ({}) => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {changePasswordPopUp && (
-          <ChangePassword setChangePasswordPopUp={setChangePasswordPopUp} />
-        )}
+        {showPwdPopUp && <ChangePassword setShowPwdPopUp={setShowPwdPopUp} />}
       </AnimatePresence>
     </SafeAreaView>
   );

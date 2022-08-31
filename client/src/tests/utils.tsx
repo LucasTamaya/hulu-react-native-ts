@@ -7,7 +7,6 @@ import { allMovies } from "./fakeData";
 
 export const handlers = [
   rest.get("*/trending*", (req, res, ctx) => {
-    console.log("je suis dans le premier handler");
     return res(
       ctx.status(200),
       ctx.json({
@@ -17,7 +16,6 @@ export const handlers = [
     );
   }),
   rest.get("*/search/multi*", (req, res, ctx) => {
-    console.log("je suis dans le 2eme handler");
     return res(
       ctx.status(200),
       ctx.json({
@@ -48,7 +46,6 @@ export const handlers = [
   }),
 
   rest.post("*/register", (req, res, ctx) => {
-    console.log(req.text());
     return res(
       ctx.status(200),
       ctx.json({
@@ -60,12 +57,11 @@ export const handlers = [
     );
   }),
 
-  rest.get("*/3/movie/*", (req, res, ctx) => {
-    console.log("je suis dans le 3eme handler");
+  rest.get("*/movies/saved*", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
-        results: allMovies,
+        savedMovies: allMovies,
       })
     );
   }),

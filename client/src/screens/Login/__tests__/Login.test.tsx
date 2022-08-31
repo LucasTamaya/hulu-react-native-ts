@@ -3,9 +3,9 @@ import { act, fireEvent } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 
 import { Login } from "../Login";
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { renderWithClient } from "../../../tests/utils";
-import { server } from "../../../Mocks/server";
+import { server } from "../../../tests/server";
 import { rest } from "msw";
 
 jest.useFakeTimers();
@@ -33,7 +33,7 @@ describe("Login Screen", () => {
   it("should renders 2 inputs", () => {
     const { getByTestId } = renderWithClient(<MockComponent />);
     expect(getByTestId("loginEmailInput")).toBeTruthy();
-    expect(getByTestId("loginPasswordInput")).toBeTruthy();
+    expect(getByTestId("loginPwdInput")).toBeTruthy();
   });
 
   it("should renders a 'Connexion' button", () => {
@@ -53,7 +53,7 @@ describe("Login Screen", () => {
     const { getByTestId, queryByText } = renderWithClient(<MockComponent />);
     await act(async () => {
       fireEvent.changeText(getByTestId("loginEmailInput"), "john.doe.fr12");
-      fireEvent.changeText(getByTestId("loginPasswordInput"), "123");
+      fireEvent.changeText(getByTestId("loginPwdInput"), "123");
       fireEvent.press(getByTestId("loginBtn"));
     });
     expect(queryByText("Cette adresse email est invalide")).toBeTruthy();
@@ -69,7 +69,7 @@ describe("Login Screen", () => {
         getByTestId("loginEmailInput"),
         "john.doe@orange.fr"
       );
-      fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
+      fireEvent.changeText(getByTestId("loginPwdInput"), "123456");
       fireEvent.press(getByTestId("loginBtn"));
     });
     expect(queryAllByText("Ce champ est obligatoire")).toHaveLength(0);
@@ -101,6 +101,8 @@ describe("Login Screen", () => {
       .spyOn(Navigation, "useNavigation")
       .mockReturnValue({ navigate: navigationMock });
 
+    jest.spyOn(global, "setTimeout");
+
     const { getByTestId, findByText } = renderWithClient(<MockComponent />);
 
     await act(async () => {
@@ -108,9 +110,11 @@ describe("Login Screen", () => {
         getByTestId("loginEmailInput"),
         "john.doe@orange.fr"
       );
-      fireEvent.changeText(getByTestId("loginPasswordInput"), "123456");
+      fireEvent.changeText(getByTestId("loginPwdInput"), "123456");
       fireEvent.press(getByTestId("loginBtn"));
     });
+
+    jest.runAllTimers();
 
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("UserLogged");
@@ -138,7 +142,7 @@ describe("Login Screen", () => {
         getByTestId("loginEmailInput"),
         "john.doe@orange.fr"
       );
-      fireEvent.changeText(getByTestId("loginPasswordInput"), "wrongPassword");
+      fireEvent.changeText(getByTestId("loginPwdInput"), "wrongPassword");
       fireEvent.press(getByTestId("loginBtn"));
     });
 
@@ -160,7 +164,7 @@ describe("Login Screen", () => {
         getByTestId("loginEmailInput"),
         "john.doe@orange.fr"
       );
-      fireEvent.changeText(getByTestId("loginPasswordInput"), "123abcd");
+      fireEvent.changeText(getByTestId("loginPwdInput"), "123abcd");
       fireEvent.press(getByTestId("loginBtn"));
     });
 

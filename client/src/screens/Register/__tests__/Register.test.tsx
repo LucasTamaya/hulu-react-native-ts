@@ -3,10 +3,12 @@ import { act, fireEvent } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 import { rest } from "msw";
 
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { Register } from "../Register";
 import { renderWithClient } from "../../../tests/utils";
-import { server } from "../../../Mocks/server";
+import { server } from "../../../tests/server";
+
+jest.useFakeTimers();
 
 beforeAll(() => server.listen());
 
@@ -115,6 +117,8 @@ describe("Register Screen", () => {
       fireEvent.changeText(getByTestId("registerPwdInput"), "123456");
       fireEvent.press(getByTestId("registerBtn"));
     });
+
+    jest.runAllTimers();
 
     expect(navigationMock).toHaveBeenCalledTimes(1);
     expect(navigationMock).toHaveBeenCalledWith("UserLogged");

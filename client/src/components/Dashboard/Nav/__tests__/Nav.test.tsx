@@ -1,7 +1,7 @@
 import React from "react";
 import { fireEvent, render } from "@testing-library/react-native";
 
-import { AppWrapper } from "../../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../../tests/AppWrapper";
 import { Nav } from "../Nav";
 
 const mockIndex = 0;

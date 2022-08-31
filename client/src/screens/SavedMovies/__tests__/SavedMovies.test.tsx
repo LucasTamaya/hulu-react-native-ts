@@ -1,11 +1,10 @@
 import React from "react";
-import { act } from "@testing-library/react-native";
 import { rest } from "msw";
 
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { SavedMovies } from "../SavedMovies";
 import { renderWithClient } from "../../../tests/utils";
-import { server } from "../../../Mocks/server";
+import { server } from "../../../tests/server";
 
 beforeAll(() => server.listen());
 
@@ -27,20 +26,20 @@ describe("SavedFilms Screen", () => {
     expect(getByTestId("savedFilms")).toBeTruthy();
   });
 
-  // it("should renders some movie cards if I have saved movies", async () => {
-  //   const { findAllByTestId } = renderWithClient(<MockComponent />);
-  //   expect(await findAllByTestId("movieCard")).toHaveLength(0);
-  // });
+  it("should renders some movie cards if I have saved movies", async () => {
+    const { findAllByTestId } = renderWithClient(<MockComponent />);
+    expect(await findAllByTestId("movieCard")).toHaveLength(20);
+  });
 
-  // it("should renders an error message if there is an error during the fetch request", async () => {
-  //   server.use(
-  //     rest.get("*", (req, res, ctx) => {
-  //       return res(ctx.status(500));
-  //     })
-  //   );
-  //   const { findByText, debug } = renderWithClient(<MockComponent />);
-  //   debug();
-  //   const message = await findByText("Une erreur est survenue");
-  //   expect(message).toBeTruthy();
-  // });
+  it("should renders an error message if there is an error during the fetch request", async () => {
+    server.use(
+      rest.get("*", (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+    const { findByText } = renderWithClient(<MockComponent />);
+    expect(
+      await findByText("Une erreur est survenue, veuillez réessayer")
+    ).toBeTruthy();
+  });
 });

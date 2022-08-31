@@ -2,9 +2,9 @@ import React from "react";
 import { act, fireEvent } from "@testing-library/react-native";
 import { rest } from "msw";
 
-import { AppWrapper } from "../../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../../tests/AppWrapper";
 import { SearchBar } from "../SearchBar";
-import { server } from "../../../../Mocks/server";
+import { server } from "../../../../tests/server";
 import { renderWithClient } from "../../../../tests/utils";
 
 beforeAll(() => server.listen());
@@ -29,7 +29,7 @@ describe("SearchBar Component", () => {
 
   it("should renders a search button", () => {
     const { getByTestId } = renderWithClient(<MockComponent />);
-    expect(getByTestId("search-btn")).toBeTruthy();
+    expect(getByTestId("searchBtn")).toBeTruthy();
   });
 
   it("should renders an input", () => {
@@ -48,7 +48,7 @@ describe("SearchBar Component", () => {
         getByPlaceholderText("Rechercher un film, une série..."),
         "A super film"
       );
-      fireEvent.press(getByTestId("search-btn"));
+      fireEvent.press(getByTestId("searchBtn"));
     });
     expect(getByTestId("movieCard")).toBeTruthy();
     expect(getByTestId("movieCardImg")).toBeTruthy();
@@ -77,7 +77,7 @@ describe("SearchBar Component", () => {
         getByPlaceholderText("Rechercher un film, une série..."),
         SEARCH_INPUT
       );
-      fireEvent.press(getByTestId("search-btn"));
+      fireEvent.press(getByTestId("searchBtn"));
     });
     expect(
       getByText(`Nous n'avons rien trouvé à propos de ${SEARCH_INPUT}`)
@@ -98,7 +98,7 @@ describe("SearchBar Component", () => {
         getByPlaceholderText("Rechercher un film, une série..."),
         "some query"
       );
-      fireEvent.press(getByTestId("search-btn"));
+      fireEvent.press(getByTestId("searchBtn"));
     });
     expect(
       getByText("Une erreur au niveau du serveur interne est survenue")

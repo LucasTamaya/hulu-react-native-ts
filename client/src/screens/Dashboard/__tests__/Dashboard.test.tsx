@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AppWrapper } from "../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../tests/AppWrapper";
 import { Dashboard } from "../Dashboard";
 import { renderWithClient } from "../../../tests/utils";
 

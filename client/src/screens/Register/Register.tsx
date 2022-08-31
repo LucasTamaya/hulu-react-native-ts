@@ -61,10 +61,10 @@ export const Register: React.FC = () => {
       setSavedMovieIds(data.savedFilmIds);
 
       // fait une pause de 1.5 secondes pour afficher un message
-      // setTimeout(() => {
-      // redirige l'utilisateur vers le dashboard
-      navigation.navigate("UserLogged");
-      // }, 2000);
+      setTimeout(() => {
+        // redirige l'utilisateur vers le dashboard
+        navigation.navigate("UserLogged");
+      }, 2000);
     }
 
     return data;

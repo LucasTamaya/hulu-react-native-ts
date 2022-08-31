@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react-native";
 
 import { AllTheTvYouLove } from "../AllTheTvYouLove";
-import { AppWrapper } from "../../../../Mocks/AppWrapper";
+import { AppWrapper } from "../../../../tests/AppWrapper";
 
 const MockComponent: React.FC = () => {
   return (

@@ -3,14 +3,7 @@ import { render, fireEvent, act } from "@testing-library/react-native";
 import * as Navigation from "@react-navigation/native";
 
 import { Header } from "../Header";
-import { AppWrapper } from "../../../../Mocks/AppWrapper";
-
-jest.mock("@react-navigation/native", () => {
-  return {
-    __esModule: true,
-    ...jest.requireActual("@react-navigation/native"),
-  };
-});
+import { AppWrapper } from "../../../../tests/AppWrapper";
 
 const MockComponent: React.FC = () => {
   return (
