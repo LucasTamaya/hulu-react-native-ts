@@ -87,7 +87,7 @@ export const ChangePassword: React.FC<Props> = ({ setShowPwdPopUp }) => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>
@@ -116,7 +116,7 @@ export const ChangePassword: React.FC<Props> = ({ setShowPwdPopUp }) => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>
@@ -147,7 +147,7 @@ export const ChangePassword: React.FC<Props> = ({ setShowPwdPopUp }) => {
       {/* Message d'erreur ou de succès lors de la validation du formulaire */}
       <AnimatePresence>
         <View className="mb-5">
-          {data && <StateMessage message={data?.details} error={data?.error} />}
+          {data && <StateMessage message={data.details} error={data.error} />}
           {error && (
             <StateMessage message="Erreur du serveur interne" error={true} />
           )}

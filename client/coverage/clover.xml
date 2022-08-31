@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1661930350955" clover="3.2.0">
-  <project timestamp="1661930350955" name="All files">
-    <metrics statements="236" coveredstatements="221" conditionals="108" coveredconditionals="96" methods="99" coveredmethods="90" elements="443" coveredelements="407" complexity="0" loc="236" ncloc="236" packages="28" files="55" classes="55"/>
+<coverage generated="1661932619167" clover="3.2.0">
+  <project timestamp="1661932619167" name="All files">
+    <metrics statements="234" coveredstatements="220" conditionals="108" coveredconditionals="96" methods="101" coveredmethods="92" elements="443" coveredelements="408" complexity="0" loc="234" ncloc="234" packages="28" files="55" classes="55"/>
     <package name="assets.data">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="covers.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\assets\data\covers.ts">
@@ -270,8 +270,8 @@
       <file name="StateMessage.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\StateMessage\StateMessage.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="11" count="5" type="stmt"/>
-        <line num="12" count="9" type="stmt"/>
-        <line num="14" count="9" type="stmt"/>
+        <line num="12" count="8" type="stmt"/>
+        <line num="14" count="8" type="stmt"/>
       </file>
       <file name="index.ts" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\components\StateMessage\index.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -343,9 +343,9 @@
       </file>
     </package>
     <package name="src.screens.Login">
-      <metrics statements="20" coveredstatements="20" conditionals="16" coveredconditionals="15" methods="6" coveredmethods="6"/>
+      <metrics statements="21" coveredstatements="21" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="7"/>
       <file name="Login.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Login\Login.tsx">
-        <metrics statements="20" coveredstatements="20" conditionals="16" coveredconditionals="15" methods="6" coveredmethods="6"/>
+        <metrics statements="21" coveredstatements="21" conditionals="16" coveredconditionals="15" methods="7" coveredmethods="7"/>
         <line num="29" count="1" type="stmt"/>
         <line num="30" count="17" type="stmt"/>
         <line num="32" count="17" type="stmt"/>
@@ -359,6 +359,7 @@
         <line num="55" count="2" type="stmt"/>
         <line num="58" count="2" type="stmt"/>
         <line num="61" count="2" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
         <line num="66" count="2" type="stmt"/>
         <line num="70" count="3" type="stmt"/>
         <line num="74" count="17" type="stmt"/>
@@ -369,29 +370,30 @@
       </file>
     </package>
     <package name="src.screens.Register">
-      <metrics statements="21" coveredstatements="21" conditionals="20" coveredconditionals="19" methods="7" coveredmethods="7"/>
+      <metrics statements="22" coveredstatements="22" conditionals="20" coveredconditionals="19" methods="8" coveredmethods="8"/>
       <file name="Register.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\screens\Register\Register.tsx">
-        <metrics statements="21" coveredstatements="21" conditionals="20" coveredconditionals="19" methods="7" coveredmethods="7"/>
+        <metrics statements="22" coveredstatements="22" conditionals="20" coveredconditionals="19" methods="8" coveredmethods="8"/>
         <line num="28" count="1" type="stmt"/>
-        <line num="29" count="16" type="stmt"/>
-        <line num="31" count="16" type="stmt"/>
-        <line num="34" count="16" type="stmt"/>
-        <line num="38" count="16" type="stmt"/>
+        <line num="29" count="17" type="stmt"/>
+        <line num="31" count="17" type="stmt"/>
+        <line num="34" count="17" type="stmt"/>
+        <line num="38" count="17" type="stmt"/>
         <line num="39" count="4" type="stmt"/>
         <line num="40" count="4" type="stmt"/>
-        <line num="43" count="16" type="stmt"/>
+        <line num="43" count="17" type="stmt"/>
         <line num="48" count="4" type="stmt"/>
         <line num="55" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="56" count="2" type="stmt"/>
         <line num="58" count="2" type="stmt"/>
         <line num="61" count="2" type="stmt"/>
+        <line num="64" count="2" type="stmt"/>
         <line num="66" count="2" type="stmt"/>
         <line num="70" count="3" type="stmt"/>
-        <line num="74" count="16" type="stmt"/>
-        <line num="76" count="16" type="stmt"/>
-        <line num="95" count="30" type="stmt"/>
-        <line num="120" count="30" type="stmt"/>
-        <line num="146" count="30" type="stmt"/>
+        <line num="74" count="17" type="stmt"/>
+        <line num="76" count="17" type="stmt"/>
+        <line num="95" count="29" type="stmt"/>
+        <line num="120" count="29" type="stmt"/>
+        <line num="146" count="29" type="stmt"/>
         <line num="185" count="1" type="stmt"/>
       </file>
     </package>
@@ -425,7 +427,7 @@
       </file>
     </package>
     <package name="src.tests">
-      <metrics statements="26" coveredstatements="20" conditionals="5" coveredconditionals="5" methods="15" coveredmethods="10"/>
+      <metrics statements="22" coveredstatements="17" conditionals="5" coveredconditionals="5" methods="15" coveredmethods="10"/>
       <file name="AppWrapper.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\tests\AppWrapper.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="5" coveredconditionals="5" methods="4" coveredmethods="3"/>
         <line num="17" count="20" type="stmt"/>
@@ -443,26 +445,22 @@
         <line num="5" count="4" type="stmt"/>
       </file>
       <file name="utils.tsx" path="C:\Users\lucas\OneDrive\Documents\informatique\react-native-apps\hulu-react-native-ts\client\src\tests\utils.tsx">
-        <metrics statements="19" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="7"/>
+        <metrics statements="15" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="7"/>
         <line num="8" count="8" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="74" count="8" type="stmt"/>
-        <line num="75" count="46" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="70" count="8" type="stmt"/>
+        <line num="71" count="46" type="stmt"/>
+        <line num="85" count="46" type="stmt"/>
+        <line num="86" count="46" type="stmt"/>
         <line num="89" count="46" type="stmt"/>
-        <line num="90" count="46" type="stmt"/>
-        <line num="93" count="46" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.utils">

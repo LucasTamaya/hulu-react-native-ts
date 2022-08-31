@@ -24,7 +24,6 @@ import { BASE_URL } from "../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../contexts/AppContext";
 import StateMessage from "../../components/StateMessage";
 import Loader from "../../components/Animations/Loader";
-// import { useLogin } from "../../hooks/useLogin";
 
 export const Login: React.FC = () => {
   const { setSavedMovieIds } = useContext(AppContext) as AppContextType;
@@ -73,7 +72,6 @@ export const Login: React.FC = () => {
   const { isLoading, isError, isSuccess, data, mutate } =
     useMutation(handleLogin);
 
-  // const { isLoading, error, data, mutate } = useLogin()
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
@@ -104,7 +102,7 @@ export const Login: React.FC = () => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>
@@ -132,7 +130,7 @@ export const Login: React.FC = () => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>

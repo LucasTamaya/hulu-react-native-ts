@@ -34,7 +34,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
     setSavedMovieIds([...savedMovieIds, data.id]);
     // update côté backend qui prend un peu plus de temps
     try {
-      const res = await axios.post(`${BASE_URL}/movie/save/${userId}`, {
+      await axios.post(`${BASE_URL}/movie/save/${userId}`, {
         filmId: data.id,
       });
     } catch (error: any) {}
@@ -48,7 +48,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
     });
     setSavedMovieIds([...savedFilmIdsUpdate]);
     try {
-      const res = await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
+      await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
         filmId: data.id,
       });
     } catch (error: any) {}

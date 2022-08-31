@@ -14,7 +14,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnimatePresence } from "moti";
 import axios from "axios";
-import { isError, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { setUserId } from "../../utils/asyncStorage";
 import { registerValidationSchema } from "../../schemas/validation";
@@ -102,7 +102,7 @@ export const Register: React.FC = () => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>
@@ -128,7 +128,7 @@ export const Register: React.FC = () => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>
@@ -156,7 +156,7 @@ export const Register: React.FC = () => {
                   {/* Message d'erreur, si erreur il y a */}
                   {!!error && (
                     <Text className="text-red-500 text-xs">
-                      {error?.message}
+                      {error.message}
                     </Text>
                   )}
                 </View>

@@ -1,4 +1,4 @@
-import { act, fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { AppWrapper } from "../../../../../tests/AppWrapper";
 import { IMovieData } from "../../../../../interfaces";

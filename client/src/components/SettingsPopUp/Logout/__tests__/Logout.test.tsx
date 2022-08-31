@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, act } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import { AnimatePresence } from "moti";
 import * as Navigation from "@react-navigation/native";
 

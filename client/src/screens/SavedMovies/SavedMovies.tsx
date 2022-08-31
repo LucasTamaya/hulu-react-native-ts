@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TMDB_API_KEY } from "@env";
 
 import Header from "../../components/Dashboard/Header";
 import Card from "../../components/Dashboard/Movie/Card";

@@ -12,13 +12,13 @@ export const passwordValidation = async (
 
   console.log(dbPassword);
 
+  // si mot de passe invalide
   if (!matchPasswords) {
     console.log("mot de passe invalide");
     return false;
   }
 
-  if (matchPasswords) {
-    console.log("mot de passe valide");
-    return true;
-  }
+  // si mot de passe valide
+  console.log("mot de passe valide");
+  return true;
 };

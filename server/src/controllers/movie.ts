@@ -10,7 +10,7 @@ const SaveMovieController = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const { filmId } = req.body;
 
-    const user: IUser | null = await User.findByIdAndUpdate(userId, {
+    await User.findByIdAndUpdate(userId, {
       $push: { savedFilmIds: filmId },
     });
 
@@ -27,7 +27,7 @@ const UnsaveMovieController = async (req: Request, res: Response) => {
     const { userId } = req.params;
     const { filmId } = req.body;
 
-    const user: IUser | null = await User.findByIdAndUpdate(userId, {
+    await User.findByIdAndUpdate(userId, {
       $pull: { savedFilmIds: filmId },
     });
 
@@ -52,18 +52,16 @@ const GetSavedMovies = async (req: Request, res: Response) => {
     }
 
     // si l'utilisateur a sauvegardé des films, on fetch l'api TMDB
-    if (movieIds) {
-      const savedMovies = await Promise.all(
-        movieIds.map(async (id) => {
-          const { data } = await axios.get(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
-          );
-          return data;
-        })
-      );
+    const savedMovies = await Promise.all(
+      movieIds.map(async (id) => {
+        const { data } = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
+        );
+        return data;
+      })
+    );
 
-      return res.status(200).json({ savedMovies });
-    }
+    return res.status(200).json({ savedMovies });
   } catch (error: any) {
     console.log(error.message);
     return res.json({ error: true, details: error.message });

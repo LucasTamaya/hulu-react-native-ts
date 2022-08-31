@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { ScrollView, View } from "react-native";
+import React from "react";
+import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/Dashboard/Header";
 import SearchBar from "../../components/Dashboard/SearchBar";
