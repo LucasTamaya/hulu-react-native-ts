@@ -14,10 +14,6 @@ export const SavedMovies: React.FC = () => {
 
   const { isLoading, isError, isSuccess, data } = useSavedMovies(userId);
 
-  if (isSuccess) {
-    console.log(data);
-  }
-
   return (
     <SafeAreaView className="bg-[#151516] h-full" testID="savedFilms">
       <Header />

@@ -9,6 +9,7 @@ export const passwordValidation = async (
     dbPassword,
     userPassword
   );
+  console.log(userPassword);
 
   console.log(dbPassword);
 

@@ -4,7 +4,7 @@ import {
   SaveMovieController,
   UnsaveMovieController,
   GetSavedMovies,
-} from "../controllers/movie";
+} from "../../controllers/movie";
 
 export const router: Router = express.Router();
 

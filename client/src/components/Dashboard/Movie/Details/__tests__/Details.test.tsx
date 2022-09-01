@@ -1,8 +1,9 @@
-import { fireEvent, render } from "@testing-library/react-native";
+import { act, fireEvent } from "@testing-library/react-native";
 
 import { AppWrapper } from "../../../../../tests/AppWrapper";
 import { IMovieData } from "../../../../../interfaces";
 import { Details } from "../Details";
+import { renderWithClient } from "../../../../../tests/utils";
 
 const setSaveMock = jest.fn();
 
@@ -28,7 +29,7 @@ const MockComponent: React.FC<Props> = ({ save }) => {
 
 describe("MovieDetails Component", () => {
   it("should renders the component", () => {
-    const { getByText } = render(<MockComponent save={true} />);
+    const { getByText } = renderWithClient(<MockComponent save={true} />);
     expect(getByText(/The Super Film/i)).toBeTruthy();
     expect(getByText(/This is the overview/i)).toBeTruthy();
     expect(getByText(/560/i)).toBeTruthy();
@@ -36,24 +37,28 @@ describe("MovieDetails Component", () => {
   });
 
   it("should renders a heart filled icon if the film is saved", () => {
-    const { getByTestId } = render(<MockComponent save={true} />);
+    const { getByTestId } = renderWithClient(<MockComponent save={true} />);
     expect(getByTestId("heartIcon")).toBeTruthy();
   });
 
   it("should renders an empty heart icon if the film is not saved", () => {
-    const { getByTestId } = render(<MockComponent save={false} />);
+    const { getByTestId } = renderWithClient(<MockComponent save={false} />);
     expect(getByTestId("emptyHeartIcon")).toBeTruthy();
   });
 
-  it("should save the film if it hasn't been saved yet and I click on the save button", () => {
-    const { getByTestId } = render(<MockComponent save={false} />);
-    fireEvent.press(getByTestId("saveBtn"));
+  it("should save the film if it hasn't been saved yet and I click on the save button", async () => {
+    const { getByTestId } = renderWithClient(<MockComponent save={false} />);
+    await act(async () => {
+      fireEvent.press(getByTestId("saveBtn"));
+    });
     expect(setSaveMock).toHaveBeenCalledWith(true);
   });
 
-  it("should unsave the film if it has already been saved and I click on the save button", () => {
-    const { getByTestId } = render(<MockComponent save={true} />);
-    fireEvent.press(getByTestId("saveBtn"));
+  it("should unsave the film if it has already been saved and I click on the save button", async () => {
+    const { getByTestId } = renderWithClient(<MockComponent save={true} />);
+    await act(async () => {
+      fireEvent.press(getByTestId("saveBtn"));
+    });
     expect(setSaveMock).toHaveBeenCalledWith(false);
   });
 });

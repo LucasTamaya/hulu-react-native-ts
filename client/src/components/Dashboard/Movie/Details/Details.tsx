@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import axios from "axios";
 
 import { IMovieData } from "../../../../interfaces";
-import { BASE_URL } from "../../../../utils/urlTemplate";
 import { AppContext, AppContextType } from "../../../../contexts/AppContext";
+import { useSaveMovie } from "../../../../hooks/useSaveMovie";
+import { useUnsaveMovie } from "../../../../hooks/useUnsaveMovie";
 
 interface Props {
   data: IMovieData;
@@ -17,6 +17,18 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
   const { userId, savedMovieIds, setSavedMovieIds } = useContext(
     AppContext
   ) as AppContextType;
+
+  const {
+    mutate: saveMutate,
+    isSuccess: saveSuccess,
+    isError: saveError,
+  } = useSaveMovie(userId, data.id);
+
+  const {
+    mutate: unsaveMutate,
+    isSuccess: unsaveSuccess,
+    isError: unsaveError,
+  } = useUnsaveMovie(userId, data.id);
 
   const handleSaveMovie = () => {
     if (save) {
@@ -33,11 +45,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
     // update rapide côté frontend, pour voir les modifications casi instantannément
     setSavedMovieIds([...savedMovieIds, data.id]);
     // update côté backend qui prend un peu plus de temps
-    try {
-      await axios.post(`${BASE_URL}/movie/save/${userId}`, {
-        filmId: data.id,
-      });
-    } catch (error: any) {}
+    saveMutate();
   };
 
   // supprime la sauvegarde du film
@@ -47,11 +55,7 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
       return id !== data.id;
     });
     setSavedMovieIds([...savedFilmIdsUpdate]);
-    try {
-      await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
-        filmId: data.id,
-      });
-    } catch (error: any) {}
+    unsaveMutate();
   };
 
   return (
