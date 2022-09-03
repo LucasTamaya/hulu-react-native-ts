@@ -3,62 +3,23 @@ import { Request, Response } from "express";
 
 import User from "../models/User";
 import { IUser, IChangePassword } from "../interfaces";
-import {
-  createUser,
-  searchUser,
-  passwordValidation,
-} from "../services/userService";
+import { passwordValidation } from "../helpers/passwordValidation";
+import { logUser, registerUser } from "../services/userService";
 
 const LoginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const { existingUser, user } = await searchUser(email);
+  const { response } = await logUser(email, password);
 
-  if (!existingUser) {
-    return res.json({ error: true, details: "Email ou mot de passe invalide" });
-  }
-
-  // test la correspondance des mots de passes
-  const isMatch: boolean | undefined = await passwordValidation(
-    user[0].password,
-    password
-  );
-
-  // si les mots de passes correspondent pas
-  if (!isMatch) {
-    console.log("mot de passe invalide");
-    return res.json({ error: true, details: "Email ou mot de passe invalide" });
-  }
-
-  // si les mots de passe correspondent
-  return res.json({
-    error: false,
-    details: "Connexion réussie",
-    userId: user[0]._id,
-    savedFilmIds: user[0].savedFilmIds,
-  });
+  return res.json(response);
 };
 
 const RegisterController = async (req: Request, res: Response) => {
   const { name, email, password }: IUser = req.body;
 
-  const { existingUser, user } = await searchUser(email);
+  const { response } = await registerUser(name, email, password);
 
-  // si utilisateur deja existant
-  if (existingUser) {
-    console.log("Utilisateur deja existant");
-    return res.json({ error: true, details: "Utilisateur déjà existant" });
-  }
-  // création de l'utilisateur
-  const { userId, savedFilmIds } = await createUser(name, email, password);
-
-  console.log("Nouvel utilisateur crée");
-  return res.json({
-    error: false,
-    details: "Compte crée avec succès",
-    userId,
-    savedFilmIds,
-  });
+  return res.json(response);
 };
 
 const UpdatePasswordController = async (req: Request, res: Response) => {
@@ -72,7 +33,6 @@ const UpdatePasswordController = async (req: Request, res: Response) => {
       console.log(err.message);
     }
 
-    // si aucune erreur
     // test la correspondance des mots de passes
     const isMatch: boolean | undefined = await passwordValidation(
       user.password,

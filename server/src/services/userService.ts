@@ -1,68 +1,64 @@
-import bcrypt from "bcrypt";
+import { searchUser } from "../helpers/searchUser";
+import { passwordValidation } from "../helpers/passwordValidation";
+import { createUser } from "../helpers/createUser";
 
-import { IUser, ISearchUser } from "../interfaces";
-import User from "../models/User";
-
-export const searchUser = async (email: string): Promise<ISearchUser> => {
-  console.log(email);
-  const user: IUser[] = await User.find({});
-  //   const user: IUser | any = await User.find({ email });
-  console.log(user);
-
-  // si l'utilisateur n'existe pas
-  if (user.length === 0) {
-    console.log("email invalide");
-    return { existingUser: false };
-  } else {
-    console.log("email valide");
-    return { existingUser: true, user };
-  }
-};
-
-export const createUser = async (
+export const registerUser = async (
   name: string,
   email: string,
   password: string
 ) => {
-  // hash du mot de passe
-  const hashPassword: string = await bcrypt.hash(password, 10);
+  const { existingUser } = await searchUser(email);
 
-  console.log(name, email, password);
-
-  // création du nouvel utilisateur
-  const newUser: IUser = new User({
-    name,
-    email,
-    password: hashPassword,
-    savedFilmIds: [],
-  });
-
-  // sauvegarde du nouvel utilisateur dans la BDD
-  newUser.save();
-
-  const user = await User.find({});
-
-  console.log(user);
-
-  return { userId: newUser._id, savedFilmIds: newUser.savedFilmIds };
-};
-
-export const passwordValidation = async (
-  userPassword: string,
-  dbPassword: string
-): Promise<boolean | undefined> => {
-  const matchPasswords: boolean = await bcrypt.compare(
-    dbPassword,
-    userPassword
-  );
-
-  // si mot de passe invalide
-  if (!matchPasswords) {
-    console.log("mot de passe invalide");
-    return false;
+  if (existingUser) {
+    console.log("Utilisateur deja existant");
+    return { response: { error: true, details: "Utilisateur déjà existant" } };
   }
 
-  // si mot de passe valide
-  console.log("mot de passe valide");
-  return true;
+  const { userId, savedFilmIds } = await createUser(name, email, password);
+
+  console.log("Nouvel utilisateur crée");
+  return {
+    response: {
+      error: false,
+      details: "Compte crée avec succès",
+      userId,
+      savedFilmIds,
+    },
+  };
+};
+
+export const logUser = async (email: string, password: string) => {
+  // cherche si l'utilisateur existe
+  const { existingUser, user } = await searchUser(email);
+
+  // si l'utilisateur n'existe pas
+  if (!existingUser) {
+    return {
+      response: { error: true, details: "Email ou mot de passe invalide" },
+    };
+  }
+
+  // test la correspondance des mots de passes
+  const isMatch: boolean | undefined = await passwordValidation(
+    user[0].password,
+    password
+  );
+
+  // si les mots de passes correspondent pas
+  if (!isMatch) {
+    console.log("mot de passe invalide");
+    return {
+      response: { error: true, details: "Email ou mot de passe invalide" },
+    };
+  }
+
+  // si les mots de passe correspondent
+  return {
+    response: {
+      error: false,
+      details: "Connexion réussie",
+      userId: user[0]._id,
+      savedFilmIds: user[0].savedFilmIds,
+    },
+  };
 };

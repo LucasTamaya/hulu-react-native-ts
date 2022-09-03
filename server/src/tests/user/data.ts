@@ -7,8 +7,12 @@ export const registerUserInput = {
 export const registerPayload: any = {
   error: false,
   details: "Compte crée avec succès",
-  userId: "631351289ce5241318748b45",
   savedFilmIds: [],
+};
+
+export const registerPayloadError: any = {
+  error: true,
+  details: "Utilisateur déjà existant",
 };
 
 export const loginUserInput = {
@@ -16,10 +20,20 @@ export const loginUserInput = {
   password: "P4ssword",
 };
 
+export const loginUserInputError = {
+  email: "john.doe@gmail.com",
+  password: "aWrongPassword",
+};
+
 export const loginPayload: any = {
   error: false,
   details: "Connexion réussie",
   savedFilmIds: [],
+};
+
+export const loginPayloadError: any = {
+  error: true,
+  details: "Email ou mot de passe invalide",
 };
 
 export const userPayload: any = {
