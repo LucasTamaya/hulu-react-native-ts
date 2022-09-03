@@ -1,7 +1,16 @@
 // import request from "supertest";
-// import app from "../../../index";
 
-// jest.useFakeTimers();
+// import { connectDatabase, closeDatabase, clearDatabase } from "./db-handler";
+// import app from "../index";
+
+// // Connect to a new in-memory database before running any tests.
+// beforeAll(async () => await connectDatabase());
+
+// // Clear all test data after every test.
+// afterEach(async () => await closeDatabase());
+
+// // Remove and close the db and server.
+// afterAll(async () => await clearDatabase());
 
 // describe("POST /movie/save/:userId", () => {
 //   describe("given a correct user id", () => {

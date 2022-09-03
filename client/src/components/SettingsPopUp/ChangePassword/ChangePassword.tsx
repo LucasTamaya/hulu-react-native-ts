@@ -45,7 +45,7 @@ export const ChangePassword: React.FC<Props> = ({ setShowPwdPopUp }) => {
     currentPassword,
     newPassword,
   }: IUpdatePasswordFormValues): Promise<any> => {
-    const { data } = await axios.post(`${BASE_URL}/update/password/${userId}`, {
+    const { data } = await axios.post(`${BASE_URL}/update-password/${userId}`, {
       currentPassword,
       newPassword,
     });

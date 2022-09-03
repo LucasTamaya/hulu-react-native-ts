@@ -13,4 +13,9 @@ interface IChangePassword {
   newPassword: string;
 }
 
-export { IUser, IChangePassword };
+interface ISearchUser {
+  existingUser: boolean;
+  user?: any;
+}
+
+export { IUser, IChangePassword, ISearchUser };

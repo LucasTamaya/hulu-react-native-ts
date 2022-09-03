@@ -7,7 +7,7 @@ const fetchUnsaveMovie = async (
   userId: string | undefined,
   filmId: number
 ): Promise<void> => {
-  await axios.post(`${BASE_URL}/movie/unsave/${userId}`, {
+  await axios.post(`${BASE_URL}/unsave-movie/${userId}`, {
     filmId,
   });
 };

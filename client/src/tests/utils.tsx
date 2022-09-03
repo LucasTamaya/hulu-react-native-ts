@@ -57,7 +57,7 @@ export const handlers = [
     );
   }),
 
-  rest.get("*/movies/saved*", (req, res, ctx) => {
+  rest.get("*/saved-movies*", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({

@@ -7,7 +7,7 @@ import { BASE_URL } from "../utils/urlTemplate";
 const fetchSavedMovies = async (
   userId: string | undefined
 ): Promise<IMovieData[]> => {
-  const { data } = await axios.get(`${BASE_URL}/movies/saved/${userId}`);
+  const { data } = await axios.get(`${BASE_URL}/saved-movies/${userId}`);
   return data.savedMovies;
 };
 

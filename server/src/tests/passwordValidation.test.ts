@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 
-import { passwordValidation } from "./../passwordValidation";
+import { passwordValidation } from "../helpers/passwordValidation";
 
-const mockPassword = "abcd123456";
+const mockPassword = "aSuperStrongPassword";
 
 describe("Password validation helper function", () => {
   it("should return true if the passwords match", async () => {

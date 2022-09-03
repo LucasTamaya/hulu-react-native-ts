@@ -4,10 +4,10 @@ import {
   LoginController,
   RegisterController,
   UpdatePasswordController,
-} from "../../controllers/auth";
+} from "../controllers/user";
 
 export const router: Router = express.Router();
 
 router.post("/login", LoginController);
 router.post("/register", RegisterController);
-router.post("/update/password/:userId", UpdatePasswordController);
+router.post("/update-password/:userId", UpdatePasswordController);

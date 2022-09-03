@@ -2,23 +2,21 @@ import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 
 import User from "../models/User";
-import { passwordValidation } from "../helpers/passwordValidation";
 import { IUser, IChangePassword } from "../interfaces";
+import {
+  createUser,
+  searchUser,
+  passwordValidation,
+} from "../services/userService";
 
 const LoginController = async (req: Request, res: Response) => {
-  const { email, password }: IUser = req.body;
+  const { email, password } = req.body;
 
-  console.log(email, password);
+  const { existingUser, user } = await searchUser(email);
 
-  const user: IUser[] = await User.find({ email });
-
-  // si l'utilisateur n'existe pas
-  if (user.length === 0) {
-    console.log("email invalide");
+  if (!existingUser) {
     return res.json({ error: true, details: "Email ou mot de passe invalide" });
   }
-
-  console.log(user);
 
   // test la correspondance des mots de passes
   const isMatch: boolean | undefined = await passwordValidation(
@@ -42,36 +40,24 @@ const LoginController = async (req: Request, res: Response) => {
 };
 
 const RegisterController = async (req: Request, res: Response) => {
-  console.log(req.body);
   const { name, email, password }: IUser = req.body;
 
-  const user = await User.find({ email });
+  const { existingUser, user } = await searchUser(email);
 
   // si utilisateur deja existant
-  if (user.length > 0) {
+  if (existingUser) {
     console.log("Utilisateur deja existant");
     return res.json({ error: true, details: "Utilisateur déjà existant" });
   }
+  // création de l'utilisateur
+  const { userId, savedFilmIds } = await createUser(name, email, password);
 
-  // hash du mot de passe
-  const hashPassword: string = await bcrypt.hash(password, 10);
-
-  // création du nouvel utilisateur
-  const newUser: IUser = new User({
-    name,
-    email,
-    password: hashPassword,
-    savedFilmIds: [],
-  });
-
-  // sauvegarde du nouvel utilisateur dans la BDD
-  newUser.save();
   console.log("Nouvel utilisateur crée");
   return res.json({
     error: false,
     details: "Compte crée avec succès",
-    userId: newUser._id,
-    savedFilmIds: newUser.savedFilmIds,
+    userId,
+    savedFilmIds,
   });
 };
 
