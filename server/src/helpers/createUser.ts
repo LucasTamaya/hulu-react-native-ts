@@ -16,11 +16,11 @@ export const createUser = async (
     name,
     email,
     password: hashPassword,
-    savedFilmIds: [],
+    savedMovieIds: [],
   });
 
   // sauvegarde du nouvel utilisateur dans la BDD
   newUser.save();
 
-  return { userId: newUser._id, savedFilmIds: newUser.savedFilmIds };
+  return { userId: newUser._id, savedMovieIds: newUser.savedMovieIds };
 };

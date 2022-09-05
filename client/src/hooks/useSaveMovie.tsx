@@ -5,13 +5,13 @@ import { BASE_URL } from "../utils/urlTemplate";
 
 const fetchSaveMovie = async (
   userId: string | undefined,
-  filmId: number
+  movieId: number
 ): Promise<void> => {
   await axios.post(`${BASE_URL}/save-movie/${userId}`, {
-    filmId,
+    movieId,
   });
 };
 
-export const useSaveMovie = (userId: string | undefined, filmId: number) => {
-  return useMutation(() => fetchSaveMovie(userId, filmId));
+export const useSaveMovie = (userId: string | undefined, movieId: number) => {
+  return useMutation(() => fetchSaveMovie(userId, movieId));
 };

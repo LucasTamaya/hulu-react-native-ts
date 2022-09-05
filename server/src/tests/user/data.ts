@@ -1,4 +1,4 @@
-export const registerUserInput = {
+export const registerUserInput: any = {
   name: "John",
   email: "john.doe@gmail.com",
   password: "P4ssword",
@@ -7,7 +7,7 @@ export const registerUserInput = {
 export const registerPayload: any = {
   error: false,
   details: "Compte crée avec succès",
-  savedFilmIds: [],
+  savedMovieIds: [],
 };
 
 export const registerPayloadError: any = {
@@ -15,12 +15,12 @@ export const registerPayloadError: any = {
   details: "Utilisateur déjà existant",
 };
 
-export const loginUserInput = {
+export const loginUserInput: any = {
   email: "john.doe@gmail.com",
   password: "P4ssword",
 };
 
-export const loginUserInputError = {
+export const loginUserInputError: any = {
   email: "john.doe@gmail.com",
   password: "aWrongPassword",
 };
@@ -28,7 +28,7 @@ export const loginUserInputError = {
 export const loginPayload: any = {
   error: false,
   details: "Connexion réussie",
-  savedFilmIds: [],
+  savedMovieIds: [],
 };
 
 export const loginPayloadError: any = {
@@ -36,13 +36,33 @@ export const loginPayloadError: any = {
   details: "Email ou mot de passe invalide",
 };
 
-export const userPayload: any = {
-  existingUser: true,
-  user: {
-    _id: 1,
-    name: "John",
-    email: "john.doe@gmail.com",
-    password: "aStrongPassword",
-    savedFilmIds: [],
-  },
+export const updatePasswordInput: any = {
+  currentPassword: "P4ssword",
+  newPassword: "NewP4ssword",
 };
+
+export const updatePasswordInputError: any = {
+  currentPassword: "aWrongPassword",
+  newPassword: "NewP4ssword",
+};
+
+export const updatePasswordPayload: any = {
+  error: false,
+  details: "Mot de passe correctement modifié",
+};
+
+export const updatePasswordPayloadError: any = {
+  error: true,
+  details: "Mot de passe invalide",
+};
+
+// export const userPayload: any = {
+//   existingUser: true,
+//   user: {
+//     _id: 1,
+//     name: "John",
+//     email: "john.doe@gmail.com",
+//     password: "aStrongPassword",
+//     savedMovieIds: [],
+//   },
+// };

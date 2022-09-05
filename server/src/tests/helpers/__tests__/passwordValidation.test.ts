@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-import { passwordValidation } from "../helpers/passwordValidation";
+import { passwordValidation } from "../../../helpers/passwordValidation";
 
 const mockPassword = "aSuperStrongPassword";
 

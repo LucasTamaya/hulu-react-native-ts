@@ -5,7 +5,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  savedFilmIds: number[];
+  savedMovieIds: number[];
 }
 
 interface IChangePassword {

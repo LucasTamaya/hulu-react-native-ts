@@ -1,7 +1,9 @@
 import { ISearchUser } from "../interfaces";
 import User from "../models/User";
 
-export const searchUser = async (email: string): Promise<ISearchUser> => {
+export const searchUserByEmail = async (
+  email: string
+): Promise<ISearchUser> => {
   const user = await User.find({ email });
 
   // si l'utilisateur n'existe pas

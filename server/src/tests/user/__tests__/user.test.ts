@@ -1,3 +1,4 @@
+import { updatePasswordInput, updatePasswordInputError } from "./../data";
 import supertest from "supertest";
 import { omit } from "lodash";
 
@@ -14,6 +15,8 @@ import {
   loginUserInputError,
   loginPayload,
   loginPayloadError,
+  updatePasswordPayload,
+  updatePasswordPayloadError,
 } from "../data";
 import { createServer } from "../../../app";
 import * as UserService from "../../../services/userService";
@@ -21,9 +24,7 @@ import { logUser, registerUser } from "../../../services/userService";
 
 const app = createServer();
 
-/**
- * Connect to a new in-memory database before running any tests.
- */
+// connexion à une nouvelle base de donnée in-memory avant chaque test
 beforeAll(async () => {
   await connectDatabase();
 });
@@ -32,16 +33,12 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-/**
- * Clear all test data after every test.
- */
+// réinitialise la base de donnée après chaque test
 afterEach(async () => {
   await clearDatabase();
 });
 
-// /**
-//  * Remove and close the db and server.
-//  */
+// supprime et ferme la base de donnée et le serveur
 afterAll(async () => {
   await closeDatabase();
 });
@@ -105,7 +102,6 @@ describe("User Controller", () => {
   it("should not log the user if the password is incorrect", async () => {
     jest.spyOn(UserService, "logUser");
 
-    // crée d'abord l'utilisateur
     await supertest(app).post("/register").send(registerUserInput);
 
     const { statusCode, body } = await supertest(app)
@@ -135,5 +131,47 @@ describe("User Controller", () => {
 
     expect(logUser).toHaveBeenCalledTimes(1);
     expect(logUser).toHaveBeenCalledWith(email, password);
+  });
+
+  it("should not log the user if it doesn't exists", async () => {
+    jest.spyOn(UserService, "logUser");
+
+    const { statusCode, body } = await supertest(app)
+      .post("/login")
+      .send(loginUserInputError);
+
+    const { email, password } = loginUserInputError;
+
+    expect(statusCode).toBe(200);
+    expect(omit(body, ["userId"])).toEqual(loginPayloadError);
+
+    expect(logUser).toHaveBeenCalledTimes(1);
+    expect(logUser).toHaveBeenCalledWith(email, password);
+  });
+
+  it("should updates the password of the user if the given password is correct", async () => {
+    const { body: registerBody } = await supertest(app)
+      .post("/register")
+      .send(registerUserInput);
+
+    const { statusCode, body } = await supertest(app)
+      .post(`/update-password/${registerBody.userId}`)
+      .send(updatePasswordInput);
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(updatePasswordPayload);
+  });
+
+  it("should not updates the password of the user if the given password is incorrect", async () => {
+    const { body: registerBody } = await supertest(app)
+      .post("/register")
+      .send(registerUserInput);
+
+    const { statusCode, body } = await supertest(app)
+      .post(`/update-password/${registerBody.userId}`)
+      .send(updatePasswordInputError);
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(updatePasswordPayloadError);
   });
 });
