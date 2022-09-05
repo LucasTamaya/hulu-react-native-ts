@@ -56,13 +56,8 @@ export const updatePasswordPayloadError: any = {
   details: "Mot de passe invalide",
 };
 
-// export const userPayload: any = {
-//   existingUser: true,
-//   user: {
-//     _id: 1,
-//     name: "John",
-//     email: "john.doe@gmail.com",
-//     password: "aStrongPassword",
-//     savedMovieIds: [],
-//   },
-// };
+export const updatePasswordPayloadError2: any = {
+  error: true,
+  details:
+    'Cast to ObjectId failed for value "12345" (type string) at path "_id" for model "User"',
+};

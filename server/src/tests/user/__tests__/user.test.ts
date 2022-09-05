@@ -1,4 +1,8 @@
-import { updatePasswordInput, updatePasswordInputError } from "./../data";
+import {
+  updatePasswordInput,
+  updatePasswordInputError,
+  updatePasswordPayloadError2,
+} from "./../data";
 import supertest from "supertest";
 import { omit } from "lodash";
 
@@ -173,5 +177,18 @@ describe("User Controller", () => {
 
     expect(statusCode).toBe(200);
     expect(body).toEqual(updatePasswordPayloadError);
+  });
+
+  it("should throw an error if the user doesn't exists", async () => {
+    await supertest(app).post("/register").send(registerUserInput);
+
+    const randomUserId = 12345;
+
+    const { statusCode, body } = await supertest(app)
+      .post(`/update-password/${randomUserId}`)
+      .send(updatePasswordInput);
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(updatePasswordPayloadError2);
   });
 });

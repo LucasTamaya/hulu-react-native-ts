@@ -8,6 +8,7 @@ const fetchSavedMovies = async (
   userId: string | undefined
 ): Promise<IMovieData[]> => {
   const { data } = await axios.get(`${BASE_URL}/saved-movies/${userId}`);
+
   return data.savedMovies;
 };
 

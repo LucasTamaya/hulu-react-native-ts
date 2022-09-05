@@ -1,6 +1,13 @@
 import supertest from "supertest";
 
-import { saveMoviePayload, unsaveMoviePayload } from "./../data";
+import {
+  getSavedMoviesEmptyListPayload,
+  getSavedMoviesPayload,
+  userNotFoundPayload,
+  mockSavedMovies,
+  saveMoviePayload,
+  unsaveMoviePayload,
+} from "./../data";
 import { registerUserInput } from "./../../user/data";
 import { createServer } from "./../../../app";
 import {
@@ -8,7 +15,7 @@ import {
   clearDatabase,
   connectDatabase,
 } from "./../../config/db-handler";
-import User from "../../../models/User";
+import * as FetchMovies from "../../../helpers/fetchSavedMovies";
 
 const app = createServer();
 
@@ -41,10 +48,10 @@ describe("Movie Controller", () => {
       .send(registerUserInput);
 
     // récupère le userId
-    const userId = registerBody.userId;
+    const userId: string = registerBody.userId;
 
     // crée un movieId random
-    const movieId = 5014;
+    const movieId: number = 5014;
 
     const { statusCode, body } = await supertest(app)
       .post(`/save-movie/${userId}`)
@@ -52,6 +59,21 @@ describe("Movie Controller", () => {
 
     expect(statusCode).toBe(200);
     expect(body).toEqual(saveMoviePayload);
+  });
+
+  it("should not saves a movie if the user doesn't exists", async () => {
+    // crée un user id qui n'existe pas
+    const randomUserId: number = 12345;
+
+    // crée un movieId random
+    const movieId: number = 456;
+
+    const { statusCode, body } = await supertest(app)
+      .post(`/save-movie/${randomUserId}`)
+      .send({ movieId });
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(userNotFoundPayload);
   });
 
   it("should unsaves a movie with a given ID", async () => {
@@ -75,7 +97,26 @@ describe("Movie Controller", () => {
     expect(body).toEqual(unsaveMoviePayload);
   });
 
+  it("should not unsaves a movie if the user doesn't exists", async () => {
+    // crée un user id qui n'existe pas
+    const randomUserId: number = 12345;
+
+    // crée un movieId random
+    const movieId: number = 456;
+
+    const { statusCode, body } = await supertest(app)
+      .post(`/unsave-movie/${randomUserId}`)
+      .send({ movieId });
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(userNotFoundPayload);
+  });
+
   it("should returns a list of saved movies if there are any", async () => {
+    jest
+      .spyOn(FetchMovies, "fetchSavedMovies")
+      .mockReturnValueOnce(mockSavedMovies);
+
     const { body: registerBody } = await supertest(app)
       .post("/register")
       .send(registerUserInput);
@@ -87,10 +128,13 @@ describe("Movie Controller", () => {
     // sauvegarde un film
     await supertest(app).post(`/save-movie/${userId}`).send({ movieId });
 
-    // récupère la liste de films sauvegardés de l'utilisateur crée ci-dessus
-    const { savedMovieIds } = await User.findById(userId);
+    const { statusCode, body } = await supertest(app).get(
+      `/saved-movies/${userId}`
+    );
 
-    expect(savedMovieIds).toContain(movieId);
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(getSavedMoviesPayload);
+    expect(body.savedMovies).toHaveLength(3);
   });
 
   it("should returns an empty list if there are no saved movies", async () => {
@@ -102,9 +146,19 @@ describe("Movie Controller", () => {
 
     // on ne sauvegarde aucun film
 
-    // récupère la liste de films sauvegardés de l'utilisateur crée ci-dessus
-    const { savedMovieIds } = await User.findById(userId);
+    const { statusCode, body } = await supertest(app).get(
+      `/saved-movies/${userId}`
+    );
 
-    expect(savedMovieIds).toHaveLength(0);
+    expect(statusCode).toBe(200);
+    expect(body).toEqual(getSavedMoviesEmptyListPayload);
+  });
+
+  it("should throw an error if the user doesn't exists", async () => {
+    const randomUserId = 12345;
+
+    const { body } = await supertest(app).get(`/saved-movies/${randomUserId}`);
+
+    expect(body).toEqual(userNotFoundPayload);
   });
 });

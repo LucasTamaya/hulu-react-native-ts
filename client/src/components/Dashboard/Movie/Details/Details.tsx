@@ -51,10 +51,10 @@ export const Details: React.FC<Props> = ({ data, save, setSave }) => {
   // supprime la sauvegarde du film
   const unsaveMovie = async () => {
     // crée un nouveau tableau en filtrant uniquement les ids qui sont différents du film
-    const savedFilmIdsUpdate = savedMovieIds.filter((id) => {
+    const savedMovieIdsUpdate = savedMovieIds.filter((id) => {
       return id !== data.id;
     });
-    setSavedMovieIds([...savedFilmIdsUpdate]);
+    setSavedMovieIds([...savedMovieIdsUpdate]);
     unsaveMutate();
   };
 

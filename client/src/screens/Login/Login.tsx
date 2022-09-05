@@ -57,7 +57,7 @@ export const Login: React.FC = () => {
       await setUserId(data.userId);
 
       // on enregistre la liste d'ids des films
-      setSavedMovieIds(data.savedFilmIds);
+      setSavedMovieIds(data.savedMovieIds);
 
       // fait une pause de 1.5 secondes pour afficher un message
       setTimeout(() => {
